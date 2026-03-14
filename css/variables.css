@@ -1,0 +1,92 @@
+/* ============================================
+   Design Tokens — Portfolio of Nguyen Duc Tuan Dat
+   ============================================ */
+
+:root {
+  /* ---- Base Colors ---- */
+  --bg-primary:     #050D1A;
+  --bg-secondary:   #091629;
+  --bg-tertiary:    #0D2240;
+
+  /* ---- Text ---- */
+  --text-primary:   #CCD6F6;
+  --text-secondary: #8892B0;
+  --text-heading:   #E6F1FF;
+
+  /* ---- Accent (Deep Ocean Blue Spectrum) ---- */
+  --accent-primary: #38BDF8;
+  --accent-blue:    #0EA5E9;
+  --accent-deep:    #1E40AF;
+  --accent-violet:  #6366F1;
+  --accent-glow:    rgba(56, 189, 248, 0.12);
+  --accent-glow-md: rgba(56, 189, 248, 0.22);
+
+  /* ---- Gradients ---- */
+  --grad-hero:      linear-gradient(135deg, #38BDF8 0%, #6366F1 60%, #0EA5E9 100%);
+  --grad-accent:    linear-gradient(90deg, #0EA5E9 0%, #38BDF8 50%, #6366F1 100%);
+  --grad-card:      linear-gradient(135deg, rgba(14,165,233,0.08) 0%, rgba(99,102,241,0.08) 100%);
+  --grad-button:    linear-gradient(135deg, #0EA5E9 0%, #6366F1 100%);
+
+  /* ---- Brand Colors (Certs) ---- */
+  --nvidia-green:   #76B900;
+  --microsoft-blue: #0078D4;
+
+  /* ---- Glass ---- */
+  --glass-bg:       rgba(9, 22, 41, 0.75);
+  --glass-border:   rgba(56, 189, 248, 0.12);
+  --glass-border-hover: rgba(56, 189, 248, 0.35);
+
+  /* ---- Shadows ---- */
+  --shadow-sm:      0 2px 10px rgba(0, 0, 0, 0.4);
+  --shadow-md:      0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg:      0 12px 48px rgba(0, 0, 0, 0.6);
+  --shadow-glow:    0 0 24px rgba(56, 189, 248, 0.2), 0 0 48px rgba(99, 102, 241, 0.1);
+
+  /* ---- Spacing ---- */
+  --space-xs:       0.25rem;
+  --space-sm:       0.5rem;
+  --space-md:       1rem;
+  --space-lg:       1.5rem;
+  --space-xl:       2rem;
+  --space-2xl:      3rem;
+  --space-3xl:      4rem;
+  --space-4xl:      6rem;
+
+  /* ---- Typography ---- */
+  --font-body:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:      'JetBrains Mono', 'Fira Code', monospace;
+
+  --fs-xs:          0.75rem;
+  --fs-sm:          0.875rem;
+  --fs-base:        1rem;
+  --fs-md:          1.125rem;
+  --fs-lg:          1.25rem;
+  --fs-xl:          1.5rem;
+  --fs-2xl:         2rem;
+  --fs-3xl:         2.5rem;
+  --fs-4xl:         3.5rem;
+  --fs-hero:        clamp(2.5rem, 5vw, 4.5rem);
+
+  --fw-light:       300;
+  --fw-regular:     400;
+  --fw-medium:      500;
+  --fw-semibold:    600;
+  --fw-bold:        700;
+
+  --lh-tight:       1.2;
+  --lh-normal:      1.6;
+  --lh-relaxed:     1.8;
+
+  /* ---- Layout ---- */
+  --max-width:      1200px;
+  --nav-height:     70px;
+  --radius:         12px;
+  --radius-sm:      8px;
+  --radius-lg:      16px;
+  --radius-full:    9999px;
+
+  /* ---- Transition ---- */
+  --transition:     0.3s ease;
+  --transition-slow:0.5s ease;
+  --transition-fast:0.15s ease;
+}

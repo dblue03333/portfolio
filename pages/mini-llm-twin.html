@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="mini-llm-twin — A production-grade RAG pipeline built by Nguyen Duc Tuan Dat.">
+    <title>mini-llm-twin — Project Detail | Nguyen Duc Tuan Dat</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .detail {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: calc(var(--nav-height) + var(--space-3xl)) var(--space-xl) var(--space-4xl);
+        }
+        .detail__back {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-mono);
+            font-size: var(--fs-sm);
+            color: var(--accent-primary);
+            margin-bottom: var(--space-2xl);
+            transition: gap var(--transition);
+        }
+        .detail__back:hover { gap: var(--space-md); }
+        .detail__label {
+            font-family: var(--font-mono);
+            font-size: var(--fs-xs);
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-md);
+        }
+        .detail__title {
+            font-size: var(--fs-4xl);
+            margin-bottom: var(--space-md);
+        }
+        .detail__subtitle {
+            font-size: var(--fs-md);
+            color: var(--text-secondary);
+            line-height: var(--lh-relaxed);
+            margin-bottom: var(--space-2xl);
+        }
+        .detail__section {
+            margin-bottom: var(--space-2xl);
+        }
+        .detail__section-title {
+            font-size: var(--fs-xl);
+            color: var(--text-heading);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .detail__section-title::before {
+            content: '▹';
+            color: var(--accent-primary);
+        }
+        .detail__text {
+            color: var(--text-secondary);
+            line-height: var(--lh-relaxed);
+            margin-bottom: var(--space-md);
+        }
+        .detail__arch-diagram {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: var(--space-2xl);
+            font-family: var(--font-mono);
+            font-size: var(--fs-sm);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: auto;
+            margin-bottom: var(--space-xl);
+        }
+        .detail__arch-diagram .highlight {
+            color: var(--accent-primary);
+        }
+        .detail__arch-diagram .muted {
+            color: var(--text-secondary);
+        }
+        .detail__tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+        .detail__actions {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-2xl);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Simple Nav -->
+    <nav class="nav scrolled">
+        <div class="nav__inner">
+            <a href="../index.html" class="nav__logo">&lt;NDT Dat /&gt;</a>
+            <ul class="nav__links">
+                <li><a href="../index.html#about" class="nav__link">About</a></li>
+                <li><a href="../index.html#skills" class="nav__link">Skills</a></li>
+                <li><a href="../index.html#projects" class="nav__link active">Projects</a></li>
+                <li><a href="../index.html#contact" class="nav__link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="detail">
+        <a href="../index.html#projects" class="detail__back">← Back to Portfolio</a>
+
+        <div class="detail__label">⭐ Featured Project</div>
+        <h1 class="detail__title gradient-text">mini-llm-twin</h1>
+        <p class="detail__subtitle">
+            A production-grade RAG (Retrieval-Augmented Generation) pipeline that ingests personal 
+            knowledge, generates embeddings, and retrieves contextually relevant answers using LLMs.
+        </p>
+
+        <!-- Architecture -->
+        <div class="detail__section">
+            <h2 class="detail__section-title">System Architecture</h2>
+            <div class="detail__arch-diagram">
+<span class="muted">┌──────────────────────────────────────────────────────────┐</span>
+<span class="muted">│</span>             <span class="highlight">mini-llm-twin Architecture</span>                    <span class="muted">│</span>
+<span class="muted">├──────────────────────────────────────────────────────────┤</span>
+<span class="muted">│</span>                                                          <span class="muted">│</span>
+<span class="muted">│</span>  <span class="highlight">[Data Source]</span> ──→ <span class="highlight">[Chunking]</span> ──→ <span class="highlight">[Embedding]</span>            <span class="muted">│</span>
+<span class="muted">│</span>    Notion /          Text         Google Gemini          <span class="muted">│</span>
+<span class="muted">│</span>    Documents       Splitter       text-embedding-004     <span class="muted">│</span>
+<span class="muted">│</span>                                        │                  <span class="muted">│</span>
+<span class="muted">│</span>                                        ▼                  <span class="muted">│</span>
+<span class="muted">│</span>                              <span class="highlight">[MongoDB Atlas]</span>              <span class="muted">│</span>
+<span class="muted">│</span>                               Vector Store               <span class="muted">│</span>
+<span class="muted">│</span>                                        │                  <span class="muted">│</span>
+<span class="muted">│</span>                                        ▼                  <span class="muted">│</span>
+<span class="muted">│</span>  <span class="highlight">[User Query]</span> ──→ <span class="highlight">[Retrieval]</span> ──→ <span class="highlight">[Generation]</span>          <span class="muted">│</span>
+<span class="muted">│</span>    FastAPI          Vector         Gemini LLM             <span class="muted">│</span>
+<span class="muted">│</span>    Endpoint        Similarity     Context + Answer       <span class="muted">│</span>
+<span class="muted">│</span>                                                          <span class="muted">│</span>
+<span class="muted">└──────────────────────────────────────────────────────────┘</span>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="detail__section">
+            <h2 class="detail__section-title">Key Features</h2>
+            <p class="detail__text">
+                • <strong style="color: var(--text-heading);">Feature Pipeline:</strong> 
+                Automated ingestion from data sources, intelligent text chunking, and batch embedding generation.<br><br>
+                • <strong style="color: var(--text-heading);">Vector Search:</strong> 
+                MongoDB Atlas vector indexing for semantic similarity retrieval with cosine distance.<br><br>
+                • <strong style="color: var(--text-heading);">RAG Generation:</strong> 
+                Context-augmented response generation using Google Gemini with prompt engineering.<br><br>
+                • <strong style="color: var(--text-heading);">REST API:</strong> 
+                FastAPI endpoint for real-time Q&A queries with structured response format.<br><br>
+                • <strong style="color: var(--text-heading);">Containerized:</strong> 
+                Docker-based deployment for reproducibility and portability.
+            </p>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="detail__section">
+            <h2 class="detail__section-title">Tech Stack</h2>
+            <div class="detail__tech-grid">
+                <span class="badge">Python</span>
+                <span class="badge">FastAPI</span>
+                <span class="badge">MongoDB Atlas</span>
+                <span class="badge">Google Gemini</span>
+                <span class="badge">Docker</span>
+                <span class="badge">Vector Search</span>
+                <span class="badge">RAG Pipeline</span>
+                <span class="badge">Pydantic</span>
+            </div>
+        </div>
+
+        <!-- What I Learned -->
+        <div class="detail__section">
+            <h2 class="detail__section-title">What I Learned</h2>
+            <p class="detail__text">
+                Building mini-llm-twin deepened my understanding of the full RAG lifecycle — from raw data 
+                ingestion through embedding generation to intelligent retrieval. I learned to design 
+                production-grade data pipelines, work with vector databases, implement prompt engineering 
+                strategies, and deploy AI services with Docker. This project bridges my theoretical 
+                knowledge from the NVIDIA GenAI certification with practical, hands-on engineering.
+            </p>
+        </div>
+
+        <!-- Actions -->
+        <div class="detail__actions">
+            <a href="https://github.com/dblue03333/mini-llm-twin" target="_blank" rel="noopener" class="btn btn--primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+            </a>
+            <a href="../index.html" class="btn btn--filled">
+                ← Back to Portfolio
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__copy">© 2026 Nguyen Duc Tuan Dat. Built with passion.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

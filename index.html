@@ -3,254 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dat's Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="mediaqueries.css">
+    <meta name="description" content="Portfolio of Nguyen Duc Tuan Dat — AI Engineer & Data Engineer specializing in RAG pipelines, LLMs, and scalable data infrastructure.">
+    <meta name="keywords" content="AI Engineer, Data Engineer, RAG, LLM, Python, Portfolio">
+    <meta name="author" content="Nguyen Duc Tuan Dat">
+    <title>Nguyen Duc Tuan Dat — AI Engineer & Data Engineer</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <nav id="desktop-nav">
-        <div class="logo">Nguyen Duc Tuan Dat</div>
-        <div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+
+    <!-- ============ INTRO OVERLAY ============ -->
+    <div id="intro-overlay">
+        <div class="intro__gate intro__gate--left"></div>
+        <div class="intro__gate intro__gate--right"></div>
+        <div class="intro__loader">
+            <div class="intro__load-text">Optimizing Pipeline...</div>
+            <div class="intro__progress-container">
+                <div class="intro__progress-bar"></div>
+            </div>
+            <div class="intro__progress-pct">0%</div>
+        </div>
+    </div>
+
+    <!-- ============ NAVIGATION ============ -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="#hero" class="nav__logo" title="Attention is all you need 😉">Dat_is_all_you_need</a>
+            <ul class="nav__links">
+                <li>
+                    <a href="#about" class="nav__link">
+                        <span class="nav__link-number">01.</span>About
+                    </a>
+                </li>
+                <li>
+                    <a href="#certifications" class="nav__link">
+                        <span class="nav__link-number">02.</span>Certs
+                    </a>
+                </li>
+                <li>
+                    <a href="#skills" class="nav__link">
+                        <span class="nav__link-number">03.</span>Skills
+                    </a>
+                </li>
+                <li>
+                    <a href="#projects" class="nav__link">
+                        <span class="nav__link-number">04.</span>Projects
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact" class="nav__link">
+                        <span class="nav__link-number">05.</span>Contact
+                    </a>
+                </li>
             </ul>
-        </div>
-    </nav>
-    <nav id="hamburger-nav">
-        <div class="logo">Nguyen Duc Tuan Dat</div>
-        <div class="hamburger-menu">
-            <div class="hamburger-icon" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="menu-links">
-                <li><a href="#about" onclick="toggleMenu()">About</a></li>
-                <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+
+            <!-- Hamburger (Mobile) -->
+            <div class="hamburger" id="hamburger">
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
             </div>
         </div>
     </nav>
-    <section id="profile">
-        <div class="section_pic-container">
-            <img src="./assets/profile_picture.jpg" alt="Tuan Dat picture">
-        </div>
-        <div class="section_text">
-            <p class="section_text_p1">Hello, I'm</p>
-            <h1 class="title"> Nguyen Duc Tuan Dat</h1>
-            <p class="section_text_p2">Data Analyst / Data Scientist</p>
-            <div class="btn-container">
-                <button class="btn btn-color-2" onclick="window.open('./assets/CV.pdf')">Download CV</button>
-                <button class="btn btn-color-1" onclick="location.href='./#contact'">Contact info</button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu__overlay" id="mobile-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#about" class="mobile-menu__link">About</a>
+        <a href="#certifications" class="mobile-menu__link">Certifications</a>
+        <a href="#skills" class="mobile-menu__link">Skills</a>
+        <a href="#projects" class="mobile-menu__link">Projects</a>
+        <a href="#contact" class="mobile-menu__link">Contact</a>
+    </div>
+
+    <!-- ============ HERO ============ -->
+    <section id="hero">
+        <div class="hero container">
+            <div class="hero__status">
+                <span class="hero__status-dot"></span>
+                Open to Work
             </div>
-            <div id="socials-container">
-                <img src="./assets/linkedin.png" alt="My LinkedIn profile" class="icon" onclick="location.href='https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/'">
-                <img src="./assets/github.png" alt="My Github profile" class="icon" onclick="location.href='https://github.com/DBlue04'">
+            <h1 class="hero__name gradient-text">Nguyen Duc Tuan Dat</h1>
+            <div class="hero__typing-wrapper">
+                <span class="hero__typing-prefix">&gt;</span>
+                <span class="hero__typing-text"></span>
+                <span class="hero__cursor"></span>
+            </div>
+            <p class="hero__education">B.Sc. Data Science — HCMUS &nbsp;·&nbsp; <span style="color: var(--accent-primary); font-family: var(--font-mono);">2021 – 2025</span></p>
+            <div class="hero__cta">
+                <a href="./assets/docs/CV.pdf" target="_blank" class="btn btn--primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download CV
+                </a>
+                <a href="#contact" class="btn btn--filled">
+                    Contact Me
+                </a>
+            </div>
+            <div class="hero__socials">
+                <a href="https://github.com/dblue03333" target="_blank" rel="noopener" class="hero__social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener" class="hero__social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="mailto:ndtdat.data@gmail.com" class="hero__social-link" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
             </div>
         </div>
     </section>
+
+    <!-- ============ ABOUT ============ -->
     <section id="about">
-        <p class="section_text_p1">Get to Know More</p>
-        <h1 class="title">About me</h1>
-        <div class="section-container">
-            <div class="section_pic-container">
-                <img src="./assets/about-pic.jpg" alt="Profile Picture" class="about-pic">
-            </div>
-            <div class="about-details-container">
-                <div class="about-containers">
-                    <div class="details-container">
-                        <img src="./assets/experience.png" alt="Experience icon" class="icon">
-                        <h3>Certificates</h3>
-                        <p> My Google Data Analytics<br /> 
-                            Google Data Analytics Professional<br />
-                            IBM Data Analyst Professional<br />
-                            Google Business Intelligence<br />
-                            Datacamp Professional Data Analyst<br />
-                        </p>
-                        
-                    </div>
-                    <div class="details-container">
-                        <img src="./assets/education.png" alt="Education icon" class="icon">
-                        <h3>Education</h3>
-                        <p> Major in Data Science <br/> Information Technology, HCMUS <br />
-                            Senior Student - GPA: 3.3/4</p>
-                    </div>
+        <div class="container">
+            <p class="section-label reveal">About Me</p>
+            <h2 class="section-title reveal">Get to Know Me</h2>
+            <div class="about__grid reveal">
+                <div class="about__image-wrapper">
+                    <img src="./assets/IMG_5929.jpg" alt="Nguyen Duc Tuan Dat" class="about__image">
                 </div>
-                <div class="text-container">
-                    <p> I'm passionate about the data world and always eager to grow, 
-                        continuously expanding my knowledge and skills in data and related 
-                        fields.</p>
-                </div>
-            </div>
-        </div> 
-        <img src="./assets/arrow.png" alt="Arrow icon" class = 'icon arrow' onclick="location.href='./#experience'">
-    </section>
-    <section id="experience">
-        <p class="section_text_p1"> Explore My</p>
-        <h1 class="title">Experience</h1>
-        <div class="experience-details-container">
-            <div class="about-containers">
-                <div class="details-container">
-                    <h2 class="experience-sub-title">Technical Skills</h2>
-                    <div class="article-container">
-                        <article>
-                            <img src="./assets/checkmark.png" alt="experience" class="icon">
-                            <div>
-                                <h3>Python</h3>
-                                <p>Experienced</p>
-                            </div>
-                        </article>
-
-                        <article>
-                            <img src="./assets/checkmark.png" alt="experience" class="icon">
-                            <div>
-                                <h3>SQL</h3>
-                                <p>Skillful</p>
-                            </div>
-                        </article>
-
-
-                        <!-- <article>
-                            <img src="./assets/checkmark.png" alt="experience" class="icon">
-                            <div>
-                                <h3>Javascript</h3>
-                                <p>Beginner</p>
-                            </div>
-                        </article>
-
-                        <article>
-                            <img src="./assets/checkmark.png" alt="experience" class="icon">
-                            <div>
-                                <h3>C++</h3>
-                                <p>Skillful</p>
-                            </div>
-                        </article> -->
-                    </div>
-                </div>
-                <div class="details-container">
-                    <h2 class="experience-sub-title">Tools</h2>
-                    <div class="article-container">
-                        <article>
-                            <img src="./assets/checkmark.png" alt="experience" class="icon">
-                            <div>
-                                <h3>Power BI</h3>
-                                <p>Skillful</p>
-                            </div>
-                        </article>
-
-                        <article>
-                            <img src="./assets/checkmark.png" alt="experience" class="icon">
-                            <div>
-                                <h3>Tableau</h3>
-                                <p>Skillful</p>
-                            </div>
-                        </article>
-
-                        <article>
-                            <img src="./assets/checkmark.png" alt="experience" class="icon">
-                            <div>
-                                <h3>Excel</h3>
-                                <p>Skillful</p>
-                            </div>
-                        </article>
-
-                        <article>
-                            <img src="./assets/checkmark.png" alt="experience" class="icon">
-                            <div>
-                                <h3>IBM Cognos</h3>
-                                <p>Skillful</p>
-                            </div>
-                        </article>
+                <div>
+                    <p class="about__bio">
+                        I'm passionate about building AI systems that solve real problems. Currently focused on 
+                        <strong style="color: var(--accent-primary);">RAG pipelines</strong>, 
+                        <strong style="color: var(--accent-primary);">LLM applications</strong>, and 
+                        <strong style="color: var(--accent-primary);">scalable data infrastructure</strong>. 
+                        I believe in learning by building — my flagship project, mini-llm-twin, 
+                        is a production-grade RAG system I engineered end-to-end.
+                    </p>
+                    <div class="about__cards">
+                        <div class="glass-card">
+                            <div class="glass-card__icon">🎓</div>
+                            <div class="glass-card__title">Education</div>
+                            <div class="glass-card__text">HCMUS · Data Science</div>
+                        </div>
+                        <div class="glass-card">
+                            <div class="glass-card__icon">📍</div>
+                            <div class="glass-card__title">Location</div>
+                            <div class="glass-card__text">Ho Chi Minh City, Vietnam</div>
+                        </div>
+                        <div class="glass-card">
+                            <div class="glass-card__icon">🎯</div>
+                            <div class="glass-card__title">Focus</div>
+                            <div class="glass-card__text">AI & Data Engineering</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    <img src="./assets/arrow.png" alt="Arrow icon" class = 'icon arrow' onclick="location.href='./#projects'">
     </section>
+
+    <!-- ============ CERTIFICATIONS ============ -->
+    <section id="certifications">
+        <div class="container">
+            <p class="section-label reveal">Credentials</p>
+            <h2 class="section-title reveal">Certifications</h2>
+
+            <!-- Tier 1: Spotlight -->
+            <div class="certs__spotlight reveal">
+                <div class="cert-card cert-card--nvidia">
+                    <span class="cert-card__badge cert-card__badge--active">✓ Certified</span>
+                    <h3 class="cert-card__title">Generative AI with LLMs</h3>
+                    <p class="cert-card__issuer">NVIDIA · Associate</p>
+                    <a href="#" target="_blank" rel="noopener" class="cert-card__link">
+                        Verify Credential <span>↗</span>
+                    </a>
+                </div>
+                <div class="cert-card cert-card--microsoft">
+                    <span class="cert-card__badge cert-card__badge--upcoming">⏳ Upcoming · Apr 2026</span>
+                    <h3 class="cert-card__title">DP-700: Fabric Data Engineer</h3>
+                    <p class="cert-card__issuer">Microsoft · Associate</p>
+                    <a href="https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/" target="_blank" rel="noopener" class="cert-card__link">
+                        Learn More <span>↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tier 2: Accordion -->
+            <div class="accordion reveal">
+                <button class="accordion__toggle">
+                    <span>More Certifications (5)</span>
+                    <span class="accordion__arrow">▼</span>
+                </button>
+                <div class="accordion__content">
+                    <ul class="accordion__list">
+                        <li class="accordion__item">
+                            <span class="accordion__item-name">Google Data Analytics Professional</span>
+                            <a href="#" target="_blank" rel="noopener" class="accordion__item-link">Verify ↗</a>
+                        </li>
+                        <li class="accordion__item">
+                            <span class="accordion__item-name">Google Business Intelligence</span>
+                            <a href="#" target="_blank" rel="noopener" class="accordion__item-link">Verify ↗</a>
+                        </li>
+                        <li class="accordion__item">
+                            <span class="accordion__item-name">IBM Data Analyst Professional</span>
+                            <a href="#" target="_blank" rel="noopener" class="accordion__item-link">Verify ↗</a>
+                        </li>
+                        <li class="accordion__item">
+                            <span class="accordion__item-name">Datacamp Professional Data Analyst</span>
+                            <a href="#" target="_blank" rel="noopener" class="accordion__item-link">Verify ↗</a>
+                        </li>
+                        <li class="accordion__item">
+                            <span class="accordion__item-name">Datacamp SQL Associate</span>
+                            <a href="#" target="_blank" rel="noopener" class="accordion__item-link">Verify ↗</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills">
+        <div class="container">
+            <p class="section-label reveal">Technical Expertise</p>
+            <h2 class="section-title reveal">Skills & Tools</h2>
+            <div class="skills__grid reveal-stagger">
+
+                <div class="skills__category">
+                    <h4 class="skills__category-title">Languages</h4>
+                    <div class="skills__badges">
+                        <span class="badge">Python</span>
+                        <span class="badge">SQL & KQL</span>
+                        <span class="badge">Power Query (M) & DAX</span>
+                    </div>
+                </div>
+
+                <div class="skills__category">
+                    <h4 class="skills__category-title">AI / ML</h4>
+                    <div class="skills__badges">
+                        <span class="badge">Generative Architectures</span>
+                        <span class="badge">Applied AI Techniques</span>
+                        <span class="badge">Deep Learning Optimization</span>
+                    </div>
+                </div>
+
+                <div class="skills__category">
+                    <h4 class="skills__category-title">Data Engineering</h4>
+                    <div class="skills__badges">
+                        <span class="badge">Pipeline Orchestration</span>
+                        <span class="badge">Data Architecture</span>
+                        <span class="badge">Feature Engineering</span>
+                    </div>
+                </div>
+
+                <div class="skills__category">
+                    <h4 class="skills__category-title">Databases</h4>
+                    <div class="skills__badges">
+                        <span class="badge">Relational & Warehousing</span>
+                        <span class="badge">Vector Stores</span>
+                        <span class="badge">Real-Time Storage</span>
+                    </div>
+                </div>
+
+                <div class="skills__category">
+                    <h4 class="skills__category-title">Big Data</h4>
+                    <div class="skills__badges">
+                        <span class="badge">Apache Spark</span>
+                        <span class="badge">Lakehouse & Delta Lake</span>
+                        <span class="badge">GPU-Accelerated Data Science</span>
+                    </div>
+                </div>
+
+                <div class="skills__category">
+                    <h4 class="skills__category-title">Dev & Tools</h4>
+                    <div class="skills__badges">
+                        <span class="badge">NVIDIA AI Stack</span>
+                        <span class="badge">Microsoft Fabric</span>
+                        <span class="badge">CI/CD & MLOps</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
     <section id="projects">
-        <p class="section_text_p1">Browse My Recent</p>
-        <h1 class="title">Projects</h1>
-        <div class="experience-details-containers">
-            <div class="about-containers">
-                <div class="details-container color-container">
-                    <div class="article-container">
-                        <img src="./assets/project-1.png" alt="Project 1" class="project-img">
-                    </div>
-                    <h2 class="experience-sub-title project-title">Financial Report on the Vietnamese Market</h2>
-                    <div class="btn-container">
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/DBlue04/Stock_Dashboard'">
-                            Github
-                        </button>
-                        <!-- <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/DBlue04/covid_19_dash_plotly'">
-                            Live Demo
-                        </button> -->
-                    </div>
-                </div>
-                
-                <div class="details-container color-container">
-                    <div class="article-container">
-                        <img src="./assets/IBM_DA.jpeg" alt="Project 1" class="project-img">
-                    </div>
-                    <h2 class="experience-sub-title project-title">IBM Data Analyst Capstone</h2><br></h2>
-                    <div class="btn-container">
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/DBlue04/IBM-Data-Analyst-Capstone'">
-                            Github
-                        </button>
-                        <!-- <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/DBlue04/covid_19_dash_plotly'">
-                            Live Demo
-                        </button> -->
-                    </div>
-                </div>
+        <div class="container">
+            <p class="section-label reveal">What I've Built</p>
+            <h2 class="section-title reveal">Projects</h2>
 
-                <div class="details-container color-container">
-                    <div class="article-container">
-                        <img src="./assets/datacamp_DA.jpeg" alt="Project 1" class="project-img">
-                    </div>
-                    <h2 class="experience-sub-title project-title">Datacamp Professional Data Analyst Project</h2>
-                    <div class="btn-container">
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/DBlue04/Certificates/tree/main/Datacamp%20Professional%20Data%20Analyst'">
-                            Github
-                        </button>
-                        <!-- <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/DBlue04/covid_19_dash_plotly'">
-                            Live Demo
-                        </button> -->
-                    </div>
+            <!-- Featured Project -->
+            <div class="project-featured reveal">
+                <div class="project-featured__glow"></div>
+                <div class="project-featured__label">⭐ Featured Project</div>
+                <h3 class="project-featured__title">mini-llm-twin</h3>
+                <p class="project-featured__description">
+                    A production-grade RAG pipeline that ingests personal knowledge, generates embeddings 
+                    via Google Gemini, stores them in MongoDB Atlas with vector indexing, and retrieves 
+                    contextually relevant answers. Demonstrates end-to-end AI engineering — from data 
+                    ingestion to intelligent retrieval.
+                </p>
+                <div class="project-featured__tech">
+                    <span class="badge">Python</span>
+                    <span class="badge">MongoDB</span>
+                    <span class="badge">Google Gemini</span>
+                    <span class="badge">Docker</span>
+                    <span class="badge">FastAPI</span>
+                    <span class="badge">RAG</span>
+                </div>
+                <div class="project-featured__actions">
+                    <a href="pages/mini-llm-twin.html" class="btn btn--filled">
+                        View Details →
+                    </a>
+                    <a href="https://github.com/dblue03333/mini-llm-twin" target="_blank" rel="noopener" class="btn btn--primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+
+            <!-- Previous Projects Accordion -->
+            <div class="accordion reveal" style="margin-top: var(--space-xl);">
+                <button class="accordion__toggle">
+                    <span>Previous Projects (3)</span>
+                    <span class="accordion__arrow">▼</span>
+                </button>
+                <div class="accordion__content">
+                    <ul class="accordion__list">
+                        <li class="accordion__item">
+                            <span class="accordion__item-name">Financial Report on Vietnamese Market</span>
+                            <a href="https://github.com/dblue03333/Stock_Dashboard" target="_blank" rel="noopener" class="accordion__item-link">GitHub ↗</a>
+                        </li>
+                        <li class="accordion__item">
+                            <span class="accordion__item-name">IBM Data Analyst Capstone</span>
+                            <a href="https://github.com/dblue03333/IBM-Data-Analyst-Capstone" target="_blank" rel="noopener" class="accordion__item-link">GitHub ↗</a>
+                        </li>
+                        <li class="accordion__item">
+                            <span class="accordion__item-name">Datacamp Professional Data Analyst Project</span>
+                            <a href="https://github.com/dblue03333/Certificates/tree/main/Datacamp%20Professional%20Data%20Analyst" target="_blank" rel="noopener" class="accordion__item-link">GitHub ↗</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <img src="./assets/arrow.png" alt="Arrow icon" class = 'icon arrow' onclick="location.href='./#contact'">
     </section>
+
+    <!-- ============ CONTACT ============ -->
     <section id="contact">
-        <p class="section_text_p1">Get in touch</p>
-        <h1 class="title">Contact Me</h1>
-        <div class="contact-info-upper-container">
-            <div class="contact-info-container">
-                <img src="./assets/email.png" alt="mail icon" class="icon contact-icon email-icon"/>
-                <p><a href="mailto:ndtdat.data@gmail.com">ndtdat.data@gmail.com</a></p>
-            </div>
-            <div class="contact-info-container">
-                <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon contact-icon"/>
-                <p><a href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/">LinkedIn</a></p>
+        <div class="container" style="text-align: center;">
+            <p class="section-label reveal">Get in Touch</p>
+            <h2 class="section-title reveal" style="display: inline-block;">Let's Build Something Together</h2>
+            <p class="reveal" style="max-width: 500px; margin: 0 auto var(--space-2xl); font-size: var(--fs-md);">
+                I'm currently open to AI Engineer and Data Engineer opportunities. 
+                Let's connect and discuss how I can contribute to your team.
+            </p>
+            <div class="contact__grid reveal">
+                <a href="mailto:ndtdat.data@gmail.com" class="contact-item">
+                    <div class="contact-item__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </div>
+                    <div class="contact-item__text">
+                        <span>ndtdat.data@gmail.com</span>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener" class="contact-item">
+                    <div class="contact-item__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </div>
+                    <div class="contact-item__text">
+                        <span>LinkedIn</span>
+                    </div>
+                </a>
+                <a href="https://github.com/dblue03333" target="_blank" rel="noopener" class="contact-item">
+                    <div class="contact-item__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </div>
+                    <div class="contact-item__text">
+                        <span>GitHub</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
-    <footer>
-        <nav>
-            <div class="nav-links-container">
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__links">
+                <a href="#about" class="footer__link">About</a>
+                <a href="#certifications" class="footer__link">Certs</a>
+                <a href="#skills" class="footer__link">Skills</a>
+                <a href="#projects" class="footer__link">Projects</a>
+                <a href="#contact" class="footer__link">Contact</a>
             </div>
-        </nav>
-        <p>Thanks for reviewing my Portfolio. Best wishes to you.</p>
+            <p class="footer__copy">© 2026 Nguyen Duc Tuan Dat. Built with passion.</p>
+        </div>
     </footer>
-    <script src = 'script.js'></script>
+
+    <!-- ============ CHAT WIDGET ============ -->
+    <div class="chat-fab">
+        <button class="chat-fab__btn" aria-label="Open AI Chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="chat-window" id="chat-window">
+        <div class="chat-window__header">
+            <div class="chat-window__avatar">🤖</div>
+            <div>
+                <div class="chat-window__title">Ask About Dat</div>
+                <div class="chat-window__subtitle">Powered by mini-llm-twin</div>
+            </div>
+        </div>
+        <div class="chat-window__messages">
+            <div class="chat-msg chat-msg--bot">
+                Hi! I'm Dat's AI assistant, powered by his mini-llm-twin RAG pipeline. Ask me about his skills, projects, or experience!
+            </div>
+        </div>
+        <div class="chat-window__input">
+            <input type="text" id="chat-input" placeholder="Ask me anything..." autocomplete="off">
+            <button class="chat-window__send" aria-label="Send message">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+            </button>
+        </div>
+        <div class="chat-window__footer">
+            <a href="https://github.com/dblue03333/mini-llm-twin" target="_blank" rel="noopener">Powered by mini-llm-twin ↗</a>
+        </div>
+    </div>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/accordion.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/intro.js"></script>
+
 </body>
 </html>
