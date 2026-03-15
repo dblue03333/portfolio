@@ -32,60 +32,50 @@
   let currentPieceIdx = -1;
 
   const updateLoader = () => {
-    // SNAPIER: consistent increments for better flow
-    const increment = Math.random() * 8 + 4; 
+    // FASTER: Ensure we reach 100% in ~2s
+    const increment = Math.random() * 12 + 8; 
     progress = Math.min(progress + increment, 100);
     
     bar.style.width = `${progress}%`;
     pct.textContent = `${Math.floor(progress)}%`;
 
-    // Activate pieces based on progress thresholds
     const pieceIdx = Math.floor(progress / 25.1);
-    
     if (pieceIdx > currentPieceIdx && pieceIdx < pieces.length) {
       currentPieceIdx = pieceIdx;
-      
-      // Reveal the piece in its offset position
       pieces[currentPieceIdx].classList.add('visible');
-
-      // Update technical text
       loadText.textContent = messages[Math.floor(Math.random() * messages.length)];
     }
 
     if (progress < 100) {
-      setTimeout(updateLoader, 60 + Math.random() * 40); // Faster update frequency
+      setTimeout(updateLoader, 80); // Consistent fast beats
     } else {
-      // 100% REACHED: Assemble the puzzle!
-      setTimeout(assemblePuzzle, 200);
+      setTimeout(assemblePuzzle, 100); // Snap almost immediately
     }
   };
 
   const assemblePuzzle = () => {
     overlay.classList.add('intro--merged');
     puzzle.classList.add('merged');
-    loadText.textContent = "Pipeline Optimized. Identity Confirmed.";
+    loadText.textContent = "Identity Confirmed.";
     
-    // Hold the complete picture for a moment of impact
-    setTimeout(finishIntro, 1200);
+    // Hold briefly then open the gate
+    setTimeout(finishIntro, 400); 
   };
 
   const finishIntro = () => {
-    // 1. Hide the loader
+    // 1. Trigger Gate Slide
     overlay.classList.add('intro--active');
     
-    // 2. Enable scroll after gates are fully open
+    // 2. Immediate cleanup after transition
     setTimeout(() => {
       document.body.style.overflow = '';
-      overlay.style.pointerEvents = 'none'; // Allow clicking through
+      overlay.style.pointerEvents = 'none';
       
-      // Cleanup DOM after 2s (after transitions finish)
-      setTimeout(() => {
-        overlay.remove();
-      }, 2000);
+      // Remove overlay quickly to prevent "phantom" layers
+      setTimeout(() => overlay.remove(), 800);
 
-      // Trigger reveal animations
       document.dispatchEvent(new Event('portfolioReady'));
-    }, 1200); // Matches transition duration in CSS
+    }, 600); // Faster gate slide sync
   };
 
   // Start the loading sequence
