@@ -32,8 +32,8 @@
   let currentPieceIdx = -1;
 
   const updateLoader = () => {
-    // FASTER: Ensure we reach 100% in ~2s
-    const increment = Math.random() * 12 + 8; 
+    // SLOWER: Targeted for ~3.5s loading phase
+    const increment = Math.random() * 4 + 2; 
     progress = Math.min(progress + increment, 100);
     
     bar.style.width = `${progress}%`;
@@ -47,9 +47,10 @@
     }
 
     if (progress < 100) {
-      setTimeout(updateLoader, 80); // Consistent fast beats
+      setTimeout(updateLoader, 100); 
     } else {
-      setTimeout(assemblePuzzle, 100); // Snap almost immediately
+      // 100% REACHED: Assemble the puzzle!
+      setTimeout(assemblePuzzle, 600);
     }
   };
 
@@ -58,24 +59,25 @@
     puzzle.classList.add('merged');
     loadText.textContent = "Identity Confirmed.";
     
-    // Hold briefly then open the gate
-    setTimeout(finishIntro, 400); 
+    // Hold the complete puzzle for impact
+    setTimeout(finishIntro, 1000); 
   };
 
   const finishIntro = () => {
     // 1. Trigger Gate Slide
     overlay.classList.add('intro--active');
     
-    // 2. Immediate cleanup after transition
+    // 2. DISPATCH READY IMMEDIATELY so portfolio starts animating as gates part
+    document.dispatchEvent(new Event('portfolioReady'));
+
+    // 3. Cleanup after gates finish (1.2s in CSS)
     setTimeout(() => {
       document.body.style.overflow = '';
       overlay.style.pointerEvents = 'none';
       
-      // Remove overlay quickly to prevent "phantom" layers
-      setTimeout(() => overlay.remove(), 800);
-
-      document.dispatchEvent(new Event('portfolioReady'));
-    }, 600); // Faster gate slide sync
+      // Gentle removal after gates are completely out of view
+      setTimeout(() => overlay.remove(), 1200);
+    }, 1200);
   };
 
   // Start the loading sequence
