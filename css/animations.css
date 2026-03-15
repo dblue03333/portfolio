@@ -249,3 +249,11 @@
 .contact-item {
   will-change: transform;
 }
+
+.hero__name-cursor {
+  display: inline-block;
+  color: var(--accent-primary);
+  margin-left: 8px;
+  animation: blink 1s step-end infinite;
+}
+

@@ -53,45 +53,71 @@ function initNavigation() {
   });
 }
 
-/* ---- Typing Animation ---- */
+/* ---- Multilingual Typing Animations ---- */
 function initTypingAnimation() {
-  const typingEl = document.querySelector('.hero__typing-text');
-  if (!typingEl) return;
+  // 1. Role Typing (AI / DE)
+  const typingRoleEl = document.querySelector('.hero__typing-text');
+  if (typingRoleEl) {
+    const roles = ['AI Engineer', 'Data Engineer'];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-  const roles = ['AI Engineer', 'Data Engineer'];
-  let roleIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  const typeSpeed = 100;
-  const deleteSpeed = 60;
-  const pauseTime = 2000;
+    function typeRole() {
+      const currentRole = roles[roleIndex];
+      if (isDeleting) {
+        typingRoleEl.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingRoleEl.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+      }
 
-  function type() {
-    const currentRole = roles[roleIndex];
-
-    if (isDeleting) {
-      typingEl.textContent = currentRole.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      typingEl.textContent = currentRole.substring(0, charIndex + 1);
-      charIndex++;
+      let delay = isDeleting ? 60 : 100;
+      if (!isDeleting && charIndex === currentRole.length) {
+        delay = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        delay = 400;
+      }
+      setTimeout(typeRole, delay);
     }
-
-    let delay = isDeleting ? deleteSpeed : typeSpeed;
-
-    if (!isDeleting && charIndex === currentRole.length) {
-      delay = pauseTime;
-      isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      roleIndex = (roleIndex + 1) % roles.length;
-      delay = 400;
-    }
-
-    setTimeout(type, delay);
+    setTimeout(typeRole, 1200);
   }
 
-  setTimeout(type, 1200);
+  // 2. Name Cycling (English / Vietnamese / Japanese)
+  const typingNameEl = document.querySelector('.hero__name-typing');
+  if (typingNameEl) {
+    const names = ['Kelvin Nguyen', 'Nguyễn Đức Tuấn Đạt', '阮 徳新達'];
+    let nameIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeName() {
+      const currentName = names[nameIndex];
+      if (isDeleting) {
+        typingNameEl.textContent = currentName.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingNameEl.textContent = currentName.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let delay = isDeleting ? 40 : 80; // Names type slightly faster
+      if (!isDeleting && charIndex === currentName.length) {
+        delay = 3000; // Hold Kelvin longer
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        nameIndex = (nameIndex + 1) % names.length;
+        delay = 300;
+      }
+      setTimeout(typeName, delay);
+    }
+    setTimeout(typeName, 1500);
+  }
 }
 
 /* ---- Scroll Spy ---- */
