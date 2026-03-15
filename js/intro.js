@@ -26,37 +26,46 @@
   ];
 
   // Culture Pieces defined in corners
+  const puzzle = overlay.querySelector('.intro__puzzle');
   const pieces = overlay.querySelectorAll('.intro__piece');
   const loadText = overlay.querySelector('.intro__load-text');
   let currentPieceIdx = -1;
 
   const updateLoader = () => {
-    // Variable speed for a "realistic" software load feel
-    const increment = Math.random() * 10 + 2;
+    // SNAPIER: consistent increments for better flow
+    const increment = Math.random() * 8 + 4; 
     progress = Math.min(progress + increment, 100);
     
     bar.style.width = `${progress}%`;
     pct.textContent = `${Math.floor(progress)}%`;
 
     // Activate pieces based on progress thresholds
-    // 0-25: JP, 25-50: DE, 50-75: EN, 75-100: VN
     const pieceIdx = Math.floor(progress / 25.1);
     
     if (pieceIdx > currentPieceIdx && pieceIdx < pieces.length) {
       currentPieceIdx = pieceIdx;
       
-      // Reveal the piece in the corner
+      // Reveal the piece in its offset position
       pieces[currentPieceIdx].classList.add('visible');
 
-      // Randomize technical text during the phase shift
+      // Update technical text
       loadText.textContent = messages[Math.floor(Math.random() * messages.length)];
     }
 
     if (progress < 100) {
-      setTimeout(updateLoader, 50 + Math.random() * 150);
+      setTimeout(updateLoader, 60 + Math.random() * 40); // Faster update frequency
     } else {
-      setTimeout(finishIntro, 800);
+      // 100% REACHED: Assemble the puzzle!
+      setTimeout(assemblePuzzle, 400);
     }
+  };
+
+  const assemblePuzzle = () => {
+    puzzle.classList.add('merged');
+    loadText.textContent = "Pipeline Optimized. Identity Confirmed.";
+    
+    // Hold the complete picture for a moment of impact
+    setTimeout(finishIntro, 1200);
   };
 
   const finishIntro = () => {
