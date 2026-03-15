@@ -104,8 +104,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
+  background: var(--bg-primary);
   overflow: hidden;
+}
+
+.intro__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xl);
+  z-index: 10;
+  width: 100%;
+  max-width: 600px;
+  padding: var(--space-xl);
 }
 
 .intro__gate {
@@ -136,16 +148,22 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  width: 300px;
-  transition: opacity 0.5s ease;
+  width: 280px;
+  transition: all 0.5s ease;
+}
+
+/* Hide loader when puzzle merges */
+.intro--merged .intro__loader {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
 }
 
 /* ---- Puzzle Assembly Animation ---- */
 .intro__puzzle {
-  position: absolute;
-  width: 320px;
-  height: 320px;
-  z-index: 10;
+  position: relative;
+  width: clamp(240px, 75vw, 420px);
+  height: clamp(240px, 75vw, 420px);
   display: flex;
   flex-wrap: wrap;
   transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);

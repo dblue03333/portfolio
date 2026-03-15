@@ -56,11 +56,12 @@
       setTimeout(updateLoader, 60 + Math.random() * 40); // Faster update frequency
     } else {
       // 100% REACHED: Assemble the puzzle!
-      setTimeout(assemblePuzzle, 400);
+      setTimeout(assemblePuzzle, 200);
     }
   };
 
   const assemblePuzzle = () => {
+    overlay.classList.add('intro--merged');
     puzzle.classList.add('merged');
     loadText.textContent = "Pipeline Optimized. Identity Confirmed.";
     
