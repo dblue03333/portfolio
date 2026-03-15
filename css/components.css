@@ -284,6 +284,43 @@
   color: var(--text-secondary);
 }
 
+/* Specific styling for Language cards to make them bigger */
+.languages__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.glass-card--large {
+  padding: var(--space-xl);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.glass-card--large .glass-card__icon {
+  font-size: 3.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.glass-card--large .glass-card__title {
+  font-size: var(--fs-lg);
+  color: var(--accent-primary);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.glass-card--large .glass-card__text {
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
+}
+
 /* ============ CERTIFICATIONS ============ */
 .certs__spotlight {
   display: grid;
