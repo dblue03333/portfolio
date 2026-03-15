@@ -24,44 +24,38 @@
     "Training Dat_v2.0...",
     "Deploying Datacraft..."
   ];
-  // Culturally diverse greetings
-  const greetings = [
-    { text: "こんにちは 🌸", lang: "Japanese" },
-    { text: "Willkommen 🥨", lang: "German" },
-    { text: "Hello World 🌐", lang: "English" },
-    { text: "Xin chào 👋", lang: "Vietnamese" }
-  ];
-  const greetingEl = overlay.querySelector('.intro__greeting');
-  let currentGreetingIdx = -1;
+
+  // Culture Pieces defined in corners
+  const pieces = overlay.querySelectorAll('.intro__piece');
+  const loadText = overlay.querySelector('.intro__load-text');
+  let currentPieceIdx = -1;
 
   const updateLoader = () => {
     // Variable speed for a "realistic" software load feel
-    const increment = Math.random() * 12;
+    const increment = Math.random() * 10 + 2;
     progress = Math.min(progress + increment, 100);
     
     bar.style.width = `${progress}%`;
     pct.textContent = `${Math.floor(progress)}%`;
 
-    // Cycle greetings based on progress (0-25, 25-50, 50-75, 75-100)
-    const gIdx = Math.floor(progress / 25.1);
-    if (gIdx !== currentGreetingIdx && gIdx < greetings.length) {
-      currentGreetingIdx = gIdx;
+    // Activate pieces based on progress thresholds
+    // 0-25: JP, 25-50: DE, 50-75: EN, 75-100: VN
+    const pieceIdx = Math.floor(progress / 25.1);
+    
+    if (pieceIdx > currentPieceIdx && pieceIdx < pieces.length) {
+      currentPieceIdx = pieceIdx;
       
-      // Fade out, change, fade in
-      greetingEl.classList.remove('visible');
-      setTimeout(() => {
-        greetingEl.textContent = greetings[currentGreetingIdx].text;
-        greetingEl.classList.add('visible');
-      }, 400);
+      // Reveal the piece in the corner
+      pieces[currentPieceIdx].classList.add('visible');
 
-      // Randomize technical text too
+      // Randomize technical text during the phase shift
       loadText.textContent = messages[Math.floor(Math.random() * messages.length)];
     }
 
     if (progress < 100) {
       setTimeout(updateLoader, 50 + Math.random() * 150);
     } else {
-      setTimeout(finishIntro, 500);
+      setTimeout(finishIntro, 800);
     }
   };
 
