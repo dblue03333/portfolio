@@ -24,19 +24,38 @@
     "Training Dat_v2.0...",
     "Deploying Datacraft..."
   ];
-  const loadText = overlay.querySelector('.intro__load-text');
+  // Culturally diverse greetings
+  const greetings = [
+    { text: "こんにちは 🌸", lang: "Japanese" },
+    { text: "Willkommen 🥨", lang: "German" },
+    { text: "Hello World 🌐", lang: "English" },
+    { text: "Xin chào 👋", lang: "Vietnamese" }
+  ];
+  const greetingEl = overlay.querySelector('.intro__greeting');
+  let currentGreetingIdx = -1;
 
   const updateLoader = () => {
     // Variable speed for a "realistic" software load feel
-    const increment = Math.random() * 15;
+    const increment = Math.random() * 12;
     progress = Math.min(progress + increment, 100);
     
     bar.style.width = `${progress}%`;
     pct.textContent = `${Math.floor(progress)}%`;
 
-    // Randomize text every few intervals
-    if (Math.random() > 0.8) {
-        loadText.textContent = messages[Math.floor(Math.random() * messages.length)];
+    // Cycle greetings based on progress (0-25, 25-50, 50-75, 75-100)
+    const gIdx = Math.floor(progress / 25.1);
+    if (gIdx !== currentGreetingIdx && gIdx < greetings.length) {
+      currentGreetingIdx = gIdx;
+      
+      // Fade out, change, fade in
+      greetingEl.classList.remove('visible');
+      setTimeout(() => {
+        greetingEl.textContent = greetings[currentGreetingIdx].text;
+        greetingEl.classList.add('visible');
+      }, 400);
+
+      // Randomize technical text too
+      loadText.textContent = messages[Math.floor(Math.random() * messages.length)];
     }
 
     if (progress < 100) {
