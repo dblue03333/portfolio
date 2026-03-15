@@ -12,7 +12,7 @@ const CHAT_CONFIG = {
   apiEndpoint: null, // e.g., 'https://your-app.railway.app/api/chat'
   botName: "Dat's AI",
   greeting:
-    "Hi! I'm Dat's AI assistant, powered by his mini-llm-twin RAG pipeline. Ask me about his skills, projects, or experience!",
+    "Hi! I'm Dat's AI assistant. I'm currently using a pre-configured knowledge base while Dat finishes optimizing his live mini-llm-twin RAG pipeline. Ask me anything about his skills or projects!",
 };
 
 // --- Mock responses (used when API is not configured) ---
@@ -22,7 +22,7 @@ const MOCK_RESPONSES = {
   experience: "Dat is a senior Data Science student at HCMUS (Ho Chi Minh University of Science). He's pivoting from Data Analytics into AI Engineering and Data Engineering, backed by hands-on projects and industry certifications from NVIDIA and Microsoft.",
   contact: "You can reach Dat at ndtdat.data@gmail.com or connect on LinkedIn: linkedin.com/in/dat-nguyen-duc-tuan-164293315",
   education: "Dat is pursuing a B.Sc. in Data Science at the University of Science (HCMUS), Ho Chi Minh City, Vietnam. He's a senior student currently open to AI Engineer and Data Engineer roles.",
-  default: "I can tell you about Dat's skills, projects, experience, education, or contact info. What would you like to know?"
+  default: "I can tell you about Dat's skills, projects, or experience! Note: I'm currently in 'Dev Mode'—the full mini-llm-twin RAG integration is coming in the next update. What would you like to know?"
 };
 
 function getMockResponse(message) {
