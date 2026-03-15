@@ -87,36 +87,29 @@ function initTypingAnimation() {
     setTimeout(typeRole, 1200);
   }
 
-  // 2. Name Cycling (English / Vietnamese / Japanese)
-  const typingNameEl = document.querySelector('.hero__name-typing');
-  if (typingNameEl) {
-    const names = ['Kelvin Nguyen', 'Nguyễn Đức Tuấn Đạt', '阮 徳新達'];
-    let nameIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
+  // 2. Name Rotation (English / Vietnamese / Japanese) - Slide + Fade
+  const nameItems = document.querySelectorAll('.hero__name-item');
+  if (nameItems.length > 0) {
+    let currentIdx = 0;
+    const rotateName = () => {
+      const exiting = nameItems[currentIdx];
+      currentIdx = (currentIdx + 1) % nameItems.length;
+      const entering = nameItems[currentIdx];
 
-    function typeName() {
-      const currentName = names[nameIndex];
-      if (isDeleting) {
-        typingNameEl.textContent = currentName.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typingNameEl.textContent = currentName.substring(0, charIndex + 1);
-        charIndex++;
-      }
+      // Reset states
+      nameItems.forEach(item => item.classList.remove('active', 'exit'));
 
-      let delay = isDeleting ? 40 : 80; // Names type slightly faster
-      if (!isDeleting && charIndex === currentName.length) {
-        delay = 3000; // Hold Kelvin longer
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        nameIndex = (nameIndex + 1) % names.length;
-        delay = 300;
-      }
-      setTimeout(typeName, delay);
-    }
-    setTimeout(typeName, 1500);
+      // Apply transition
+      exiting.classList.add('exit');
+      entering.classList.add('active');
+
+      // Kelvin (first item) stays longer for branding
+      const waitTime = currentIdx === 0 ? 4000 : 2500;
+      setTimeout(rotateName, waitTime);
+    };
+
+    // Initial delay after page load (gate opening)
+    setTimeout(rotateName, 3000);
   }
 }
 
