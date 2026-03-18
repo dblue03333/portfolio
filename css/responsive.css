@@ -94,8 +94,8 @@
   }
 
   .section-title::after {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .contact__grid {
