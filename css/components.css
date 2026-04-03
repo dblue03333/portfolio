@@ -676,7 +676,7 @@
 }
 
 .chat-fab__btn.open svg {
-  transform: rotate(90deg);
+  /* Disabled rotation as requested */
 }
 
 .chat-window {

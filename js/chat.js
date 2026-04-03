@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Configuration ---
 const CHAT_CONFIG = {
   // Set this to your deployed mini-llm-twin API endpoint when ready
-  apiEndpoint: null, // e.g., 'https://your-app.railway.app/api/chat'
+  apiEndpoint: 'https://lunchless-rosaria-unrepugnantly.ngrok-free.dev/rag/ask', // LIVE Ngrok Permanent Tunnel URL
   botName: "Dat's AI",
   greeting:
     "Hi! I'm Dat's AI assistant. I'm currently using a pre-configured knowledge base while Dat finishes optimizing his live mini-llm-twin RAG pipeline. Ask me anything about his skills or projects!",
@@ -111,7 +111,10 @@ function initChat() {
     try {
       const res = await fetch(CHAT_CONFIG.apiEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
+        },
         body: JSON.stringify({ query: text }),
       });
       const data = await res.json();
