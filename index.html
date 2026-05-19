@@ -23,8 +23,30 @@
     <div id="intro-overlay">
         <div class="intro__gate intro__gate--left"></div>
         <div class="intro__gate intro__gate--right"></div>
+
+        <!-- SVG Jigsaw ClipPaths -->
+        <svg width="0" height="0" style="position:absolute">
+            <defs>
+                <!-- TL: tab RIGHT + tab BOTTOM (correct as-is) -->
+                <clipPath id="jig-tl" clipPathUnits="objectBoundingBox">
+                    <path d="M0,0 L0.82,0 L0.82,0.3 C0.82,0.3 1,0.35 1,0.5 C1,0.65 0.82,0.7 0.82,0.7 L0.82,0.82 L0.7,0.82 C0.7,0.82 0.65,1 0.5,1 C0.35,1 0.3,0.82 0.3,0.82 L0,0.82 Z"/>
+                </clipPath>
+                <!-- TR: hole LEFT + tab BOTTOM -->
+                <clipPath id="jig-tr" clipPathUnits="objectBoundingBox">
+                    <path d="M0,0 L1,0 L1,0.82 L0.7,0.82 C0.7,0.82 0.65,1 0.5,1 C0.35,1 0.3,0.82 0.3,0.82 L0,0.82 L0,0.7 C0,0.7 0.18,0.65 0.18,0.5 C0.18,0.35 0,0.3 0,0.3 Z"/>
+                </clipPath>
+                <!-- BL: hole TOP + tab RIGHT -->
+                <clipPath id="jig-bl" clipPathUnits="objectBoundingBox">
+                    <path d="M0,0 L0.3,0 C0.3,0 0.35,0.18 0.5,0.18 C0.65,0.18 0.7,0 0.7,0 L0.82,0 L0.82,0.3 C0.82,0.3 1,0.35 1,0.5 C1,0.65 0.82,0.7 0.82,0.7 L0.82,1 L0,1 Z"/>
+                </clipPath>
+                <!-- BR: hole LEFT + hole TOP -->
+                <clipPath id="jig-br" clipPathUnits="objectBoundingBox">
+                    <path d="M0,0 L0.3,0 C0.3,0 0.35,0.18 0.5,0.18 C0.65,0.18 0.7,0 0.7,0 L1,0 L1,1 L0,1 L0,0.7 C0,0.7 0.18,0.65 0.18,0.5 C0.18,0.35 0,0.3 0,0.3 Z"/>
+                </clipPath>
+            </defs>
+        </svg>
+
         <div class="intro__content">
-            <!-- Puzzle Assembly Container -->
             <div class="intro__puzzle">
                 <div class="intro__piece intro__piece--tl" data-index="0">
                     <div class="intro__piece-inner">
@@ -73,23 +95,28 @@
                     </a>
                 </li>
                 <li>
+                    <a href="#experience" class="nav__link">
+                        <span class="nav__link-number">02.</span>Experience
+                    </a>
+                </li>
+                <li>
                     <a href="#certifications" class="nav__link">
-                        <span class="nav__link-number">02.</span>Certs
+                        <span class="nav__link-number">03.</span>Certs
                     </a>
                 </li>
                 <li>
                     <a href="#skills" class="nav__link">
-                        <span class="nav__link-number">03.</span>Skills
+                        <span class="nav__link-number">04.</span>Skills
                     </a>
                 </li>
                 <li>
                     <a href="#projects" class="nav__link">
-                        <span class="nav__link-number">04.</span>Projects
+                        <span class="nav__link-number">05.</span>Projects
                     </a>
                 </li>
                 <li>
                     <a href="#contact" class="nav__link">
-                        <span class="nav__link-number">05.</span>Contact
+                        <span class="nav__link-number">06.</span>Contact
                     </a>
                 </li>
             </ul>
@@ -107,6 +134,7 @@
     <div class="mobile-menu__overlay" id="mobile-overlay"></div>
     <div class="mobile-menu" id="mobile-menu">
         <a href="#about" class="mobile-menu__link">About</a>
+        <a href="#experience" class="mobile-menu__link">Experience</a>
         <a href="#certifications" class="mobile-menu__link">Certifications</a>
         <a href="#skills" class="mobile-menu__link">Skills</a>
         <a href="#projects" class="mobile-menu__link">Projects</a>
@@ -155,6 +183,9 @@
                 <a href="https://leetcode.com/u/NguyenDucTuanDat/" target="_blank" rel="noopener" class="hero__social-link" aria-label="LeetCode">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.939 5.939 0 0 0 1.271 1.541l5.967 5.68c.83.79 2.146.79 2.977 0l4.625-4.402a1.372 1.372 0 0 0-.01-1.932 1.373 1.373 0 0 0-1.94-.01l-4.143 3.945c-.3.284-.792.284-1.091 0l-5.61-5.342a3.189 3.189 0 0 1-.58-2.652c.162-.647.498-1.229.96-1.7l3.6-3.853 5.09-5.45c.3-.284.3-.746 0-1.03l-1.92-1.826A1.372 1.372 0 0 0 13.483 0zm4.568 15.65h-10.7a1.373 1.373 0 1 0 0 2.746h10.7a1.373 1.373 0 1 0 0-2.747z"/></svg>
                 </a>
+                <a href="https://www.kaggle.com/nguyenductuandat" target="_blank" rel="noopener" class="hero__social-link" aria-label="Kaggle">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.281.18.046.149.034.238-.036.27l-6.555 6.344 6.836 8.507c.095.104.117.208.07.319z"/></svg>
+                </a>
             </div>
         </div>
     </section>
@@ -170,12 +201,13 @@
                 </div>
                 <div>
                     <p class="about__bio">
-                        I'm passionate about building AI systems that solve real problems. Currently focused on 
-                        <strong style="color: var(--accent-primary);">RAG pipelines</strong>, 
-                        <strong style="color: var(--accent-primary);">LLM applications</strong>, and 
-                        <strong style="color: var(--accent-primary);">scalable data infrastructure</strong>. 
-                        I believe in learning by building — my flagship project, mini-llm-twin, 
-                        is a production-grade RAG system I engineered end-to-end.
+                        I build AI systems that solve real problems in the logistics & maritime industry. 
+                        Currently working as an <strong style="color: var(--accent-primary);">AI Consultant at Safiri Logistics</strong> (Australia), 
+                        building intelligent retrieval systems for trade compliance. My flagship projects span 
+                        <strong style="color: var(--accent-primary);">Multi-Agent AI</strong>, 
+                        <strong style="color: var(--accent-primary);">RAG pipelines</strong>, and 
+                        <strong style="color: var(--accent-primary);">scalable MLOps infrastructure</strong> 
+                        — processing 21M+ records and deploying production LLMs.
                     </p>
                     <div class="about__cards">
                         <div class="glass-card">
@@ -191,9 +223,40 @@
                         <div class="glass-card">
                             <div class="glass-card__icon">🎯</div>
                             <div class="glass-card__title">Focus</div>
-                            <div class="glass-card__text">AI & Data Engineering</div>
+                            <div class="glass-card__text">AI Engineering & MLOps</div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience">
+        <div class="container">
+            <p class="section-label reveal">Professional</p>
+            <h2 class="section-title reveal">Experience</h2>
+            <div class="project-featured reveal">
+                <div class="project-featured__glow"></div>
+                <div class="project-featured__label">🏢 Current Role · Remote</div>
+                <h3 class="project-featured__title">AI Consultant — Safiri Logistics Pty Ltd</h3>
+                <p style="color: var(--text-secondary); font-size: var(--fs-sm); margin-bottom: var(--space-md); font-family: var(--font-mono);">
+                    Sydney, Australia · May 2026 – Present (Contract)
+                </p>
+                <p class="project-featured__description">
+                    Providing independent consulting services in AI/ML development and data engineering
+                    for a unified logistics and supply-chain intelligence platform serving East African markets.
+                    Designing intelligent data retrieval systems to improve trade compliance workflows,
+                    collaborating remotely with cross-functional teams across Australia, Southeast Asia,
+                    and the United States.
+                </p>
+                <div class="project-featured__tech">
+                    <span class="badge">HS Code Classification</span>
+                    <span class="badge">Retrieval Systems</span>
+                    <span class="badge">Performance Optimization</span>
+                    <span class="badge">Docker</span>
+                    <span class="badge">Research & Experimentation</span>
+                    <span class="badge">Production</span>
                 </div>
             </div>
         </div>
@@ -213,14 +276,6 @@
                     <p class="cert-card__issuer">NVIDIA · Associate</p>
                     <a href="https://www.credly.com/badges/a2157300-8926-4712-b730-6759e0c42fc6/public_url" target="_blank" rel="noopener" class="cert-card__link">
                         Verify Credential <span>↗</span>
-                    </a>
-                </div>
-                <div class="cert-card cert-card--microsoft">
-                    <span class="cert-card__badge cert-card__badge--upcoming">⏳ Upcoming · Apr 2026</span>
-                    <h3 class="cert-card__title">DP-700: Fabric Data Engineer</h3>
-                    <p class="cert-card__issuer">Microsoft · Associate</p>
-                    <a href="https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/" target="_blank" rel="noopener" class="cert-card__link">
-                        Learn More <span>↗</span>
                     </a>
                 </div>
             </div>
@@ -267,56 +322,64 @@
             <div class="skills__grid reveal-stagger">
 
                 <div class="skills__category">
-                    <h4 class="skills__category-title">Languages</h4>
-                    <div class="skills__badges">
-                        <span class="badge">Python</span>
-                        <span class="badge">SQL & KQL</span>
-                        <span class="badge">Power Query (M) & DAX</span>
-                    </div>
-                </div>
-
-                <div class="skills__category">
                     <h4 class="skills__category-title">AI / ML</h4>
                     <div class="skills__badges">
-                        <span class="badge">Generative Architectures</span>
-                        <span class="badge">Applied AI Techniques</span>
-                        <span class="badge">Deep Learning Optimization</span>
+                        <span class="badge">RAG Pipelines</span>
+                        <span class="badge">Multi-Agent Systems</span>
+                        <span class="badge">Vector Search (FAISS, Milvus)</span>
+                        <span class="badge">LLM (Gemini, Gemma, Ollama)</span>
+                        <span class="badge">SHAP / Explainability</span>
+                        <span class="badge">Time-Series Forecasting</span>
                     </div>
                 </div>
 
                 <div class="skills__category">
-                    <h4 class="skills__category-title">Data Engineering</h4>
+                    <h4 class="skills__category-title">Languages & Frameworks</h4>
                     <div class="skills__badges">
-                        <span class="badge">Pipeline Orchestration</span>
-                        <span class="badge">Data Architecture</span>
-                        <span class="badge">Feature Engineering</span>
+                        <span class="badge">Python</span>
+                        <span class="badge">FastAPI</span>
+                        <span class="badge">Pydantic</span>
+                        <span class="badge">SQL</span>
+                        <span class="badge">PySpark</span>
+                    </div>
+                </div>
+
+                <div class="skills__category">
+                    <h4 class="skills__category-title">Data & MLOps</h4>
+                    <div class="skills__badges">
+                        <span class="badge">Medallion ETL</span>
+                        <span class="badge">MLflow</span>
+                        <span class="badge">Optuna</span>
+                        <span class="badge">LightGBM</span>
+                        <span class="badge">Quantile Regression</span>
                     </div>
                 </div>
 
                 <div class="skills__category">
                     <h4 class="skills__category-title">Databases</h4>
                     <div class="skills__badges">
-                        <span class="badge">Relational & Warehousing</span>
-                        <span class="badge">Vector Stores</span>
-                        <span class="badge">Real-Time Storage</span>
+                        <span class="badge">MongoDB Atlas</span>
+                        <span class="badge">Vector Search (HNSW)</span>
+                        <span class="badge">Delta Lake</span>
                     </div>
                 </div>
 
                 <div class="skills__category">
-                    <h4 class="skills__category-title">Big Data</h4>
+                    <h4 class="skills__category-title">Cloud & Infra</h4>
                     <div class="skills__badges">
-                        <span class="badge">Apache Spark</span>
-                        <span class="badge">Lakehouse & Delta Lake</span>
-                        <span class="badge">GPU-Accelerated Data Science</span>
-                    </div>
-                </div>
-
-                <div class="skills__category">
-                    <h4 class="skills__category-title">Dev & Tools</h4>
-                    <div class="skills__badges">
-                        <span class="badge">NVIDIA AI Stack</span>
                         <span class="badge">Microsoft Fabric</span>
-                        <span class="badge">CI/CD & MLOps</span>
+                        <span class="badge">Google Cloud Platform</span>
+                        <span class="badge">Docker</span>
+                        <span class="badge">Git/GitHub</span>
+                    </div>
+                </div>
+
+                <div class="skills__category">
+                    <h4 class="skills__category-title">Dev Practices</h4>
+                    <div class="skills__badges">
+                        <span class="badge">OOP Design Patterns</span>
+                        <span class="badge">CI/CD</span>
+                        <span class="badge">Unit Testing</span>
                     </div>
                 </div>
 
@@ -357,29 +420,69 @@
             <p class="section-label reveal">What I've Built</p>
             <h2 class="section-title reveal">Projects</h2>
 
-            <!-- Featured Project -->
+            <!-- Featured Project: HarborMind -->
             <div class="project-featured reveal">
                 <div class="project-featured__glow"></div>
-                <div class="project-featured__label">⭐ Featured Project</div>
-                <h3 class="project-featured__title">mini-llm-twin</h3>
+                <div class="project-featured__label">⭐ Featured Project · Gemma 4 Good Hackathon</div>
+                <h3 class="project-featured__title">HarborMind</h3>
                 <p class="project-featured__description">
-                    A production-grade RAG pipeline that ingests personal knowledge, generates embeddings 
-                    via Google Gemini, stores them in MongoDB Atlas with vector indexing, and retrieves 
-                    contextually relevant answers. Demonstrates end-to-end AI engineering — from data 
-                    ingestion to intelligent retrieval.
+                    A 100% on-device Multi-Agent AI system that predicts port congestion delays, 
+                    optimizes vessel approach speeds, and reduces maritime CO₂ emissions — all running 
+                    locally via Gemma 4 (Ollama). Features an "Honest AI" escalation mechanism that 
+                    refuses recommendations when prediction uncertainty is too high. Built on a 
+                    data pipeline processing 21.7M+ AIS satellite pings into actionable insights.
+                </p>
+                <div class="project-featured__tech">
+                    <span class="badge">Gemma 4</span>
+                    <span class="badge">Multi-Agent</span>
+                    <span class="badge">PySpark</span>
+                    <span class="badge">LightGBM</span>
+                    <span class="badge">MLflow</span>
+                    <span class="badge">FastAPI</span>
+                    <span class="badge">SHAP</span>
+                    <span class="badge">Ollama</span>
+                </div>
+                <div class="project-featured__actions">
+                    <a href="https://www.youtube.com/watch?v=U6FTDtmo7Jc" target="_blank" rel="noopener" class="btn btn--filled">
+                        ▶ Watch Demo
+                    </a>
+                    <a href="https://github.com/dblue03333/HarborMind" target="_blank" rel="noopener" class="btn btn--primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Agent Repo
+                    </a>
+                    <a href="https://github.com/DBlue03333/Maritime-Congestion-Predictive-Modeling" target="_blank" rel="noopener" class="btn btn--primary">
+                        ML/DE Pipeline
+                    </a>
+                    <a href="https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/harbormind" target="_blank" rel="noopener" class="btn btn--primary">
+                        Writeup
+                    </a>
+                    <a href="https://www.kaggle.com/datasets/nguyenductuandat/lalb-ais-port-congestion-62023-122025" target="_blank" rel="noopener" class="btn btn--primary">
+                        Dataset (21M+)
+                    </a>
+                </div>
+            </div>
+
+            <!-- Second Project: AITwin -->
+            <div class="project-featured reveal" style="margin-top: var(--space-xl);">
+                <div class="project-featured__glow"></div>
+                <div class="project-featured__label">🔧 Production System</div>
+                <h3 class="project-featured__title">AITwin (mini-llm-twin)</h3>
+                <p class="project-featured__description">
+                    A production-grade RAG pipeline that ingests personal knowledge via Medallion ETL 
+                    (Bronze/Silver/Gold), generates embeddings via Google Gemini, stores them in 
+                    MongoDB Atlas with HNSW vector indexing, and retrieves contextually relevant 
+                    answers. Features Strategy/Singleton patterns, SHA-256 deduplication, and 
+                    fault-tolerant ingestion of 10,000+ semantic chunks.
                 </p>
                 <div class="project-featured__tech">
                     <span class="badge">Python</span>
-                    <span class="badge">MongoDB</span>
+                    <span class="badge">MongoDB Atlas</span>
                     <span class="badge">Google Gemini</span>
-                    <span class="badge">Docker</span>
                     <span class="badge">FastAPI</span>
                     <span class="badge">RAG</span>
+                    <span class="badge">Vector Search</span>
                 </div>
                 <div class="project-featured__actions">
-                    <a href="pages/mini-llm-twin.html" class="btn btn--filled">
-                        View Details →
-                    </a>
                     <a href="https://github.com/dblue03333/mini-llm-twin" target="_blank" rel="noopener" class="btn btn--primary">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
                         GitHub
@@ -387,6 +490,7 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
             <!-- ML Logistics Project -->
             <div class="project-featured reveal" style="margin-top: var(--space-xl);">
                 <div class="project-featured__glow" style="background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);"></div>
@@ -433,6 +537,57 @@
                             <a href="https://github.com/dblue03333/Certificates/tree/main/Datacamp%20Professional%20Data%20Analyst" target="_blank" rel="noopener" class="accordion__item-link">GitHub ↗</a>
                         </li>
                     </ul>
+=======
+            <!-- Third Project: Maze Crawler Agent -->
+            <div class="project-featured reveal" style="margin-top: var(--space-xl);">
+                <div class="project-featured__glow"></div>
+                <div class="project-featured__label">🎮 In Development · Kaggle Competition</div>
+                <h3 class="project-featured__title">Maze Crawler Agent</h3>
+                <p class="project-featured__description">
+                    A multi-agent AI system for the Kaggle "Crawl" environment — navigating procedurally 
+                    generated mazes, collecting resources, and competing against adversarial agents. 
+                    Focuses on applying advanced DSA and heuristic AI in a real-time, dynamic environment 
+                    rather than abstract LeetCode-style problems.
+                </p>
+                <div class="project-featured__tech">
+                    <span class="badge">Python</span>
+                    <span class="badge">A* Pathfinding</span>
+                    <span class="badge">MAPF</span>
+                    <span class="badge">Minimax</span>
+                    <span class="badge">State Machines</span>
+                    <span class="badge">Kaggle</span>
+                </div>
+
+                <!-- Roadmap Phases -->
+                <div style="margin-top: var(--space-lg); display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--accent-primary); color: var(--bg-primary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center;">Phase 1</span>
+                        <span style="color: var(--text-secondary);">Game State Parser & Belief State Memory</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 2</span>
+                        <span style="color: var(--text-secondary);">A* Pathfinding & Navigation</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 3</span>
+                        <span style="color: var(--text-secondary);">Multi-Agent Path Finding (MAPF) & Collision Avoidance</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 4</span>
+                        <span style="color: var(--text-secondary);">Adversarial Strategy (Minimax / Evaluation Functions)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 5</span>
+                        <span style="color: var(--text-secondary);">Integration, Optimization & Kaggle Submission</span>
+                    </div>
+                </div>
+
+                <div class="project-featured__actions" style="margin-top: var(--space-lg);">
+                    <a href="https://github.com/dblue03333/maze-crawler-agent" target="_blank" rel="noopener" class="btn btn--primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+>>>>>>> 3485149 (feat: jigsaw puzzle intro + experience badges + CV update)
                 </div>
             </div>
 
@@ -482,6 +637,7 @@
         <div class="container">
             <div class="footer__links">
                 <a href="#about" class="footer__link">About</a>
+                <a href="#experience" class="footer__link">Experience</a>
                 <a href="#certifications" class="footer__link">Certs</a>
                 <a href="#skills" class="footer__link">Skills</a>
                 <a href="#projects" class="footer__link">Projects</a>

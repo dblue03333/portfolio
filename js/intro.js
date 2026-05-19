@@ -1,5 +1,5 @@
 /* ============================================
-   Intro Animation — Loader into Sliding Gates
+   Intro Animation — Jigsaw Puzzle Assembly
    ============================================ */
 
 (function () {
@@ -10,12 +10,10 @@
   const pct = overlay.querySelector('.intro__progress-pct');
   const loader = overlay.querySelector('.intro__loader');
 
-  // Disable scroll
   document.body.style.overflow = 'hidden';
 
   let progress = 0;
-  
-  // Fun DE/AI themed loading messages
+
   const messages = [
     "Initializing Neural Network...",
     "Crawling Pipeline...",
@@ -25,17 +23,15 @@
     "Deploying Datacraft..."
   ];
 
-  // Culture Pieces defined in corners
   const puzzle = overlay.querySelector('.intro__puzzle');
   const pieces = overlay.querySelectorAll('.intro__piece');
   const loadText = overlay.querySelector('.intro__load-text');
   let currentPieceIdx = -1;
 
   const updateLoader = () => {
-    // SLOWER: Targeted for ~3.5s loading phase
-    const increment = Math.random() * 4 + 2; 
+    const increment = Math.random() * 4 + 2;
     progress = Math.min(progress + increment, 100);
-    
+
     bar.style.width = `${progress}%`;
     pct.textContent = `${Math.floor(progress)}%`;
 
@@ -47,9 +43,8 @@
     }
 
     if (progress < 100) {
-      setTimeout(updateLoader, 100); 
+      setTimeout(updateLoader, 100);
     } else {
-      // 100% REACHED: Assemble the puzzle!
       setTimeout(assemblePuzzle, 600);
     }
   };
@@ -58,28 +53,20 @@
     overlay.classList.add('intro--merged');
     puzzle.classList.add('merged');
     loadText.textContent = "Identity Confirmed.";
-    
-    // Hold the complete puzzle for impact
-    setTimeout(finishIntro, 1000); 
+
+    setTimeout(finishIntro, 1000);
   };
 
   const finishIntro = () => {
-    // 1. Trigger Gate Slide
     overlay.classList.add('intro--active');
-    
-    // 2. DISPATCH READY IMMEDIATELY so portfolio starts animating as gates part
     document.dispatchEvent(new Event('portfolioReady'));
 
-    // 3. Cleanup after gates finish (1.2s in CSS)
     setTimeout(() => {
       document.body.style.overflow = '';
       overlay.style.pointerEvents = 'none';
-      
-      // Gentle removal after gates are completely out of view
       setTimeout(() => overlay.remove(), 1200);
     }, 1200);
   };
 
-  // Start the loading sequence
   updateLoader();
 })();
