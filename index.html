@@ -462,7 +462,59 @@
                 </div>
             </div>
 
-            <!-- Second Project: AITwin -->
+            <!-- Maze Crawler Agent — In Development -->
+            <div class="project-featured reveal" style="margin-top: var(--space-xl);">
+                <div class="project-featured__glow"></div>
+                <div class="project-featured__label">🎮 In Development · Kaggle Competition</div>
+                <h3 class="project-featured__title">Maze Crawler Agent</h3>
+                <p class="project-featured__description">
+                    A multi-agent AI system for the Kaggle "Crawl" environment — navigating procedurally 
+                    generated mazes, collecting resources, and competing against adversarial agents. 
+                    Focuses on applying advanced DSA and heuristic AI in a real-time, dynamic environment 
+                    rather than abstract LeetCode-style problems.
+                </p>
+                <div class="project-featured__tech">
+                    <span class="badge">Python</span>
+                    <span class="badge">A* Pathfinding</span>
+                    <span class="badge">MAPF</span>
+                    <span class="badge">Minimax</span>
+                    <span class="badge">State Machines</span>
+                    <span class="badge">Kaggle</span>
+                </div>
+
+                <!-- Roadmap Phases -->
+                <div style="margin-top: var(--space-lg); display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--accent-primary); color: var(--bg-primary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center;">Phase 1</span>
+                        <span style="color: var(--text-secondary);">Game State Parser &amp; Belief State Memory</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 2</span>
+                        <span style="color: var(--text-secondary);">A* Pathfinding &amp; Navigation</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 3</span>
+                        <span style="color: var(--text-secondary);">Multi-Agent Path Finding (MAPF) &amp; Collision Avoidance</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 4</span>
+                        <span style="color: var(--text-secondary);">Adversarial Strategy (Minimax / Evaluation Functions)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
+                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 5</span>
+                        <span style="color: var(--text-secondary);">Integration, Optimization &amp; Kaggle Submission</span>
+                    </div>
+                </div>
+
+                <div class="project-featured__actions" style="margin-top: var(--space-lg);">
+                    <a href="https://github.com/dblue03333/maze-crawler-agent" target="_blank" rel="noopener" class="btn btn--primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+
+            <!-- AITwin (mini-llm-twin) -->
             <div class="project-featured reveal" style="margin-top: var(--space-xl);">
                 <div class="project-featured__glow"></div>
                 <div class="project-featured__label">🔧 Production System</div>
@@ -489,88 +541,9 @@
                     </a>
                 </div>
             </div>
-
-
-            <!-- ML Logistics Project -->
-            <div class="project-featured reveal" style="margin-top: var(--space-xl);">
-                <div class="project-featured__glow" style="background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);"></div>
-                <div class="project-featured__label" style="color: #10b981;">⭐ Applied ML & MLOps</div>
-                <h3 class="project-featured__title">Safiri: Port Congestion Predictive Modeling</h3>
-                <p class="project-featured__description">
-                    An end-to-end Machine Learning pipeline predicting logistics bottleneck delays based on M/M/1 Queueing Theory. 
-                    Evolved from a Linear Baseline to a highly accurate <strong>Gradient Boosting (XGBoost)</strong> model capable of predicting compounding saturation effects. 
-                    Features SHAP Explanations for real-world interpretability and robust MLOps integration tracking Data and Concept Drift.
-                </p>
-                <div class="project-featured__tech">
-                    <span class="badge">Python</span>
-                    <span class="badge">XGBoost</span>
-                    <span class="badge">Scikit-learn</span>
-                    <span class="badge">Explainable AI (SHAP)</span>
-                    <span class="badge">MLOps</span>
-                </div>
-                <div class="project-featured__actions">
-                    <a href="https://github.com/dblue03333/Maritime-Congestion-Predictive-Modeling" target="_blank" rel="noopener" class="btn btn--primary" style="color: #10b981; border-color: #10b981;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                        GitHub & Docs
-                    </a>
-                </div>
-            </div>
-
-            <!-- Third Project: Maze Crawler Agent -->
-            <div class="project-featured reveal" style="margin-top: var(--space-xl);">
-                <div class="project-featured__glow"></div>
-                <div class="project-featured__label">🎮 In Development · Kaggle Competition</div>
-                <h3 class="project-featured__title">Maze Crawler Agent</h3>
-                <p class="project-featured__description">
-                    A multi-agent AI system for the Kaggle "Crawl" environment — navigating procedurally 
-                    generated mazes, collecting resources, and competing against adversarial agents. 
-                    Focuses on applying advanced DSA and heuristic AI in a real-time, dynamic environment 
-                    rather than abstract LeetCode-style problems.
-                </p>
-                <div class="project-featured__tech">
-                    <span class="badge">Python</span>
-                    <span class="badge">A* Pathfinding</span>
-                    <span class="badge">MAPF</span>
-                    <span class="badge">Minimax</span>
-                    <span class="badge">State Machines</span>
-                    <span class="badge">Kaggle</span>
-                </div>
-
-                <!-- Roadmap Phases -->
-                <div style="margin-top: var(--space-lg); display: flex; flex-direction: column; gap: 8px;">
-                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
-                        <span style="background: var(--accent-primary); color: var(--bg-primary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center;">Phase 1</span>
-                        <span style="color: var(--text-secondary);">Game State Parser & Belief State Memory</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
-                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 2</span>
-                        <span style="color: var(--text-secondary);">A* Pathfinding & Navigation</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
-                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 3</span>
-                        <span style="color: var(--text-secondary);">Multi-Agent Path Finding (MAPF) & Collision Avoidance</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
-                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 4</span>
-                        <span style="color: var(--text-secondary);">Adversarial Strategy (Minimax / Evaluation Functions)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm);">
-                        <span style="background: var(--bg-tertiary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; min-width: 60px; text-align: center; border: 1px solid var(--glass-border);">Phase 5</span>
-                        <span style="color: var(--text-secondary);">Integration, Optimization & Kaggle Submission</span>
-                    </div>
-                </div>
-
-                <div class="project-featured__actions" style="margin-top: var(--space-lg);">
-                    <a href="https://github.com/dblue03333/maze-crawler-agent" target="_blank" rel="noopener" class="btn btn--primary">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                        GitHub
-                    </a>
-
-                </div>
-            </div>
-
         </div>
-    </section>
+    </section> 
+
 
     <!-- ============ CONTACT ============ -->
     <section id="contact">
