@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="About Kelvin Nguyen — AI Engineer in Ho Chi Minh City specializing in reliable AI agents, evidence pipelines, and retrieval systems.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About — Kelvin Nguyen">
+  <meta property="og:description" content="AI Engineer in Ho Chi Minh City building reliable AI agents, evidence pipelines, and retrieval systems.">
+  <meta property="og:image" content="../assets/og-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>About — Kelvin Nguyen</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/sections.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <script>
+    (function(){
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && sessionStorage.getItem('dennis_page_transition') === '1') {
+        document.documentElement.classList.add('is-transitioning');
+        setTimeout(function(){ document.documentElement.classList.remove('is-transitioning'); }, 2200);
+      }
+    })();
+  </script>
+</head>
+<body data-page="about" data-page-title="About">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Curved Page Transition Curtain -->
+  <div class="loading-container" aria-hidden="true">
+    <div class="loading-screen">
+      <div class="rounded-div-wrap top"><div class="rounded-div"></div></div>
+      <div class="loading-words">
+        <span class="dot"></span>
+        <span data-loading-word>About</span>
+      </div>
+      <div class="rounded-div-wrap bottom"><div class="rounded-div"></div></div>
+    </div>
+  </div>
+
+  <!-- Floating Hamburger -->
+  <div class="btn-hamburger-wrap">
+    <div class="btn btn-hamburger">
+      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="42" data-strength-text="22" aria-label="Toggle navigation menu" aria-expanded="false">
+        <div class="btn-fill"></div>
+        <div class="btn-text">
+          <div class="hamburger-bars" aria-hidden="true"><span></span><span></span></div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Curved Drawer -->
+  <div class="fixed-nav-back" aria-hidden="true"></div>
+  <aside class="fixed-nav" aria-label="Full navigation">
+    <div class="fixed-nav-rounded-div" aria-hidden="true"><div class="rounded-curve"></div></div>
+    <div class="fixed-nav-inner">
+      <div class="nav-header">
+        <h5>Navigation</h5>
+        <div class="stripe"></div>
+        <nav class="fixed-nav-links" aria-label="Primary drawer navigation">
+          <a href="../index.html" data-transition-label="Home">Home</a>
+          <a href="../work/index.html" data-transition-label="Work">Work</a>
+          <a href="index.html" class="active" data-transition-label="About">About</a>
+          <a href="../contact/index.html" data-transition-label="Contact">Contact</a>
+        </nav>
+      </div>
+      <div class="fixed-nav-socials">
+        <h5>Socials</h5>
+        <ul>
+          <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a class="btn-link" href="https://leetcode.com/u/NguyenDucTuanDat/" target="_blank" rel="noopener">LeetCode</a></li>
+          <li><a class="btn-link" href="mailto:ndtdat.data@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Top Navigation -->
+  <header class="nav-bar">
+    <a href="../index.html" class="credits-top" data-transition-label="Home">
+      <span class="credit-symbol">©</span>
+      <span class="credit-copy">
+        <span class="credit-track">
+          <span>Code by</span>
+          <span>Kelvin</span>
+          <span class="credit-extra">Nguyen</span>
+        </span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <div class="nav-link-item"><a class="btn-link" href="../work/index.html" data-transition-label="Work">Work</a></div>
+      <div class="nav-link-item"><a class="btn-link active" href="index.html" data-transition-label="About">About</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../contact/index.html" data-transition-label="Contact">Contact</a></div>
+    </nav>
+    <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
+      <span class="dot"></span>
+      <span>Menu</span>
+    </button>
+  </header>
+
+  <main id="main">
+    <!-- ============ EDITORIAL HERO + SPINNING GLOBE LINE ============ -->
+    <section class="section page-header">
+      <div class="container medium">
+        <h1>Building AI systems people can trust and inspect</h1>
+
+        <div class="about-globe-divider">
+          <div class="stripe"></div>
+          <div class="about-globe-badge" aria-hidden="true">
+            <div class="globe">
+              <div class="globe-wrap">
+                <div class="globe-circle"></div>
+                <div class="globe-circle"></div>
+                <div class="globe-circle"></div>
+                <div class="globe-equator"></div>
+                <div class="globe-meridian"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-story-grid">
+          <div class="about-story-copy">
+            <span class="arrow-diag" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7v10H7"/></svg>
+            </span>
+            <p class="big">
+              I’m Kelvin Nguyen (Nguyễn Đức Tuấn Đạt), an AI Engineer based in Ho Chi Minh City. I studied Information Technology with a Data Science specialization at HCMUS.
+            </p>
+            <p class="muted">
+              My work sits where data pipelines meet LLM agents — making sure model outputs stay tied to verifiable evidence, tool calls pass strict validation, and uncertain decisions hand control back to a human reviewer.
+            </p>
+            <p class="exploring-tag">Always testing where systems fail…</p>
+          </div>
+
+          <figure class="about-portrait-frame">
+            <img src="../assets/about-portrait.webp" alt="Kelvin Nguyen outdoors in Ho Chi Minh City" width="1200" height="1200">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 01 / 02 / 03 CAPABILITIES (DENNIS STYLE) ============ -->
+    <section class="section">
+      <div class="container medium">
+        <h2 class="once-in">I can help you with …</h2>
+
+        <div class="capabilities-grid">
+          <article class="capability-col once-in">
+            <p class="cap-num">01</p>
+            <div class="stripe"></div>
+            <h4>AI Agents &amp; Guardrails</h4>
+            <p>
+              Designing tool-calling assistants with typed input/output validation, bounded retry policies, offline test suites, and explicit human approval gates before side effects run.
+            </p>
+          </article>
+
+          <article class="capability-col once-in">
+            <p class="cap-num">02</p>
+            <div class="stripe"></div>
+            <h4>Evidence &amp; Data Pipelines</h4>
+            <p>
+              Building versioned ingestion and transformation workflows that preserve original source material so editors, analysts, and models operate on traceable datasets.
+            </p>
+          </article>
+
+          <article class="capability-col once-in">
+            <p class="cap-num">03</p>
+            <div class="stripe"></div>
+            <h4>Retrieval &amp; Evaluation</h4>
+            <p>
+              Shipping production RAG services with vector indexing, rule-based output validators, bilingual prompt evaluation, and Dockerized FastAPI backends.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section" id="experience">
+      <div class="container medium">
+        <h2 class="once-in">Experience</h2>
+
+        <div class="editorial-rows">
+          <article class="editorial-row once-in">
+            <div>
+              <h4>Technical Contributor</h4>
+              <p class="row-org">HealthLab</p>
+            </div>
+            <p class="row-desc">
+              Contributing to HealthLab’s responsive Astro website and building data and editorial review tools for its supervised public health newsletter pilot on healthy ageing in Vietnam.
+            </p>
+            <p class="row-date">Oct 2026 – Present</p>
+          </article>
+
+          <article class="editorial-row once-in">
+            <div>
+              <h4>AI Engineering Consultant</h4>
+              <p class="row-org">Safiri Logistics · Remote contract</p>
+            </div>
+            <p class="row-desc">
+              Providing independent AI engineering consulting services to Safiri Logistics Pty Ltd, a logistics technology company.
+            </p>
+            <p class="row-date">May 2026 – Present</p>
+          </article>
+
+          <article class="editorial-row once-in">
+            <div>
+              <h4>AI Engineering Contributor</h4>
+              <p class="row-org">ADIMI</p>
+            </div>
+            <p class="row-desc">
+              Built a Gemini multimodal prototype helping students observe and describe drawings. Evaluated Vietnamese and English prompts, strengthened the rule-based validator filtering evaluative advice, and expanded the test suite.
+            </p>
+            <p class="row-date">Jun – Sep 2026</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CREDENTIALS, EDUCATION & LANGUAGES ============ -->
+    <section class="section">
+      <div class="container medium">
+        <h2 class="once-in">Credentials &amp; Background</h2>
+
+        <div class="creds-grid">
+          <article class="cred-card once-in">
+            <div>
+              <h5>NVIDIA · Certified Associate (NCA-GENL)</h5>
+              <h4 style="margin-top: 0.6em;">Generative AI with LLMs</h4>
+              <p class="muted small" style="margin-top: 0.5em;">Verified credential covering LLM architectures, retrieval pipelines, evaluation, and applied generative AI systems.</p>
+            </div>
+            <a class="text-underline" href="https://www.credly.com/badges/a2157300-8926-4712-b730-6759e0c42fc6/public_url" target="_blank" rel="noopener">Verify on Credly ↗</a>
+          </article>
+
+          <article class="cred-card once-in">
+            <div>
+              <h5>Google · Coursera Professional Certificate</h5>
+              <h4 style="margin-top: 0.6em;">Google Advanced Data Analytics</h4>
+              <p class="muted small" style="margin-top: 0.5em;">Statistical modeling, Python data analysis, regression, and machine learning workflows.</p>
+            </div>
+            <a class="text-underline" href="https://github.com/DBlue04/Certificates/blob/main/Google%20Advanced%20Data%20Analytics/Google_Advanced_Data_Analytics.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+          </article>
+        </div>
+
+        <div class="cert-list once-in" aria-label="Additional verified certifications">
+          <div class="cert-row">
+            <span class="cert-row-name">DataCamp Professional Data Analyst</span>
+            <span class="cert-row-issuer">DataCamp · Practical Exam</span>
+            <a class="text-underline" href="https://github.com/DBlue04/Certificates/blob/main/Datacamp%20Professional%20Data%20Analyst/Datacamp_Analyst.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+          </div>
+          <div class="cert-row">
+            <span class="cert-row-name">IBM Data Analyst Professional</span>
+            <span class="cert-row-issuer">IBM · Coursera</span>
+            <a class="text-underline" href="https://github.com/DBlue04/Certificates/blob/main/IBM%20Data%20Analyst/IBM%20Data%20Analyst.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+          </div>
+          <div class="cert-row">
+            <span class="cert-row-name">Google Data Analytics Professional</span>
+            <span class="cert-row-issuer">Google · Coursera</span>
+            <a class="text-underline" href="https://github.com/DBlue04/Certificates/blob/main/Google%20Data%20Analytics/Google_Data_Analytics.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+          </div>
+          <div class="cert-row">
+            <span class="cert-row-name">Google Business Intelligence</span>
+            <span class="cert-row-issuer">Google · Coursera</span>
+            <a class="text-underline" href="https://github.com/DBlue04/Certificates/blob/main/%20Google%20Business%20Intelligence/Foundations%20of%20Business%20Intelligence/Google_BI.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+          </div>
+          <div class="cert-row">
+            <span class="cert-row-name">DataCamp SQL Associate</span>
+            <span class="cert-row-issuer">DataCamp · Certification</span>
+            <a class="text-underline" href="https://github.com/DBlue04/Certificates/blob/main/SQL%20Associate/sql_associate.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+          </div>
+        </div>
+
+        <div style="margin-top: clamp(3em, 6vh, 4.5em);">
+          <h5>Education &amp; Languages</h5>
+          <div class="lang-strip once-in">
+            <div class="lang-item">
+              <h4>HCMUS</h4>
+              <p>B.Sc. IT &amp; Data Science · 2021–2025</p>
+            </div>
+            <div class="lang-item">
+              <h4>Vietnamese &amp; English</h4>
+              <p>Native Vietnamese · English C1</p>
+            </div>
+            <div class="lang-item">
+              <h4>Japanese</h4>
+              <p>Targeting N2 · Actively learning</p>
+            </div>
+            <div class="lang-item">
+              <h4>German</h4>
+              <p>A1 · Casually learning</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ CURVED DARK FOOTER ============ -->
+  <div class="footer-rounded-div" aria-hidden="true">
+    <div class="rounded-div-wrap"><div class="rounded-div"></div></div>
+  </div>
+  <footer class="footer-wrap">
+    <div class="container medium">
+      <div class="footer-top">
+        <h2 class="footer-headline">
+          <span class="footer-headline-line">
+            <span class="footer-avatar">
+              <img src="../assets/avatar.webp" alt="Kelvin Nguyen portrait" width="256" height="256" loading="lazy">
+            </span>
+            <span>Let’s work</span>
+          </span>
+          <span>together</span>
+        </h2>
+        <span class="arrow-diag footer-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7v10H7"/></svg>
+        </span>
+      </div>
+
+      <div class="footer-divider-row">
+        <div class="stripe"></div>
+        <div class="footer-cta-wrap">
+          <div class="btn btn-round btn-accent">
+            <a class="btn-click magnetic" href="../contact/index.html" data-strength="50" data-strength-text="24" data-transition-label="Contact">
+              <div class="btn-fill"></div>
+              <span class="btn-text">Get in touch</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-pills">
+          <div class="btn btn-light-outline">
+            <a class="btn-click magnetic" href="mailto:ndtdat.data@gmail.com" data-strength="24" data-strength-text="12">
+              <div class="btn-fill"></div>
+              <span class="btn-text">ndtdat.data@gmail.com</span>
+            </a>
+          </div>
+          <div class="btn btn-light-outline">
+            <a class="btn-click magnetic" href="https://github.com/dblue03333" target="_blank" rel="noopener" data-strength="24" data-strength-text="12">
+              <div class="btn-fill"></div>
+              <span class="btn-text">GitHub ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-meta-group">
+          <div class="footer-meta-col">
+            <h5>Version</h5>
+            <p>2026 © Edition</p>
+          </div>
+          <div class="footer-meta-col">
+            <h5>Local Time</h5>
+            <p data-local-time>09:30 PM GMT+7</p>
+          </div>
+        </div>
+        <div class="footer-socials">
+          <h5>Socials</h5>
+          <ul>
+            <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a class="btn-link" href="https://leetcode.com/u/NguyenDucTuanDat/" target="_blank" rel="noopener">LeetCode</a></li>
+            <li><a class="btn-link" href="https://www.kaggle.com/datasets/nguyenductuandat/lalb-ais-port-congestion-62023-122025" target="_blank" rel="noopener">Kaggle</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+  <script src="../js/motion.js" defer></script>
+</body>
+</html>

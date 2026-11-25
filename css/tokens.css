@@ -1,0 +1,77 @@
+/* ==========================================================================
+   SƯƠNG XANH × DENNIS SNELLENBERG — DESIGN TOKENS
+   Palette from PORTFOLIO_CONTEXT.md mapped onto Dennis Snellenberg's
+   editorial hierarchy, fluid type scale, spacing, and motion curves.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Sương xanh palette */
+  --color-paper: #F2F6FA;
+  --color-surface: #FBFDFF;
+  --color-ink: #22354A;
+  --color-muted: #52687E;
+  --color-dark: #17334D;
+  --color-dark-deep: #0F2336;
+  --color-hero-bg: #88A6BF;
+  --color-hero-deep: #6C8CA8;
+  --color-mist: #D3E6EB;
+  --color-mist-soft: #E3EDF5;
+  --color-accent: #355D85;
+  --color-accent-hover: #294B6E;
+  --color-accent-bright: #4678AA;
+  --color-line: #B7C9D8;
+  --color-slate: #8CABC4;
+
+  /* Semantic surfaces & text */
+  --color-text: var(--color-ink);
+  --color-text-light: #FBFDFF;
+  --color-text-light-muted: rgba(211, 230, 235, 0.72);
+  --color-border: rgba(34, 53, 74, 0.18);
+  --color-border-solid: #B7C9D8;
+  --color-border-light: rgba(211, 230, 235, 0.22);
+  --color-border-solid-light: #355470;
+  --color-success: #2C8A67;
+  --color-warn: #B86B2B;
+  --color-error: #C24646;
+
+  /* Typography */
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* Dennis-calibrated spacing & containers */
+  --section-padding: clamp(4.75em, 17vh, 11em);
+  --container-padding: clamp(2.5em, 8vw, 8em);
+  --gap-padding: clamp(1.5em, 4vw, 2.5em);
+
+  /* Dennis motion curves */
+  --ease-primary: cubic-bezier(0.7, 0, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --animation-fast: all 0.3s cubic-bezier(0.7, 0, 0.3, 1);
+  --animation-primary: all 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+  --animation-smooth: all 0.7s cubic-bezier(0.7, 0, 0.3, 1);
+  --animation-slow: all 0.9s cubic-bezier(0.7, 0, 0.3, 1);
+  --animation-nav: 0.8s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+@media screen and (max-width: 1200px) {
+  :root {
+    --container-padding: 6vw;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  :root {
+    --section-padding: 11vh;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  :root {
+    --section-padding: max(2.75em, 10vh);
+    --container-padding: clamp(1.25em, 5vw, 2.25em);
+    --color-border: rgba(34, 53, 74, 0.22);
+    --color-border-light: rgba(211, 230, 235, 0.26);
+  }
+}

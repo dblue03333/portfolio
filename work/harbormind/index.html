@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HarborMind — Offline vessel wait-time forecasting prototype for Port of Long Beach with uncertainty-triggered captain handoff.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="HarborMind — Kelvin Nguyen">
+  <meta property="og:description" content="Offline vessel wait-time forecasting for Port of Long Beach with uncertainty-triggered captain handoff.">
+  <meta property="og:image" content="../../assets/og-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>HarborMind — Kelvin Nguyen</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/sections.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <script>
+    (function(){
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && sessionStorage.getItem('dennis_page_transition') === '1') {
+        document.documentElement.classList.add('is-transitioning');
+        setTimeout(function(){ document.documentElement.classList.remove('is-transitioning'); }, 2200);
+      }
+    })();
+  </script>
+</head>
+<body data-page="case" data-page-title="HarborMind">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="loading-container" aria-hidden="true">
+    <div class="loading-screen">
+      <div class="rounded-div-wrap top"><div class="rounded-div"></div></div>
+      <div class="loading-words"><span class="dot"></span><span data-loading-word>HarborMind</span></div>
+      <div class="rounded-div-wrap bottom"><div class="rounded-div"></div></div>
+    </div>
+  </div>
+
+  <div class="btn-hamburger-wrap">
+    <div class="btn btn-hamburger">
+      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="42" data-strength-text="22" aria-label="Toggle navigation menu" aria-expanded="false">
+        <div class="btn-fill"></div>
+        <div class="btn-text"><div class="hamburger-bars" aria-hidden="true"><span></span><span></span></div></div>
+      </button>
+    </div>
+  </div>
+
+  <div class="fixed-nav-back" aria-hidden="true"></div>
+  <aside class="fixed-nav" aria-label="Full navigation">
+    <div class="fixed-nav-rounded-div" aria-hidden="true"><div class="rounded-curve"></div></div>
+    <div class="fixed-nav-inner">
+      <div class="nav-header">
+        <h5>Navigation</h5>
+        <div class="stripe"></div>
+        <nav class="fixed-nav-links" aria-label="Primary drawer navigation">
+          <a href="../../index.html" data-transition-label="Home">Home</a>
+          <a href="../index.html" class="active" data-transition-label="Work">Work</a>
+          <a href="../../about/index.html" data-transition-label="About">About</a>
+          <a href="../../contact/index.html" data-transition-label="Contact">Contact</a>
+        </nav>
+      </div>
+      <div class="fixed-nav-socials">
+        <h5>Socials</h5>
+        <ul>
+          <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a class="btn-link" href="https://leetcode.com/u/NguyenDucTuanDat/" target="_blank" rel="noopener">LeetCode</a></li>
+          <li><a class="btn-link" href="mailto:ndtdat.data@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <header class="nav-bar">
+    <a href="../../index.html" class="credits-top" data-transition-label="Home">
+      <span class="credit-symbol">©</span>
+      <span class="credit-copy">
+        <span class="credit-track"><span>Code by</span><span>Kelvin</span><span class="credit-extra">Nguyen</span></span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <div class="nav-link-item"><a class="btn-link active" href="../index.html" data-transition-label="Work">Work</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../../about/index.html" data-transition-label="About">About</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../../contact/index.html" data-transition-label="Contact">Contact</a></div>
+    </nav>
+    <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
+      <span class="dot"></span><span>Menu</span>
+    </button>
+  </header>
+
+  <main id="main">
+    <section class="section case-header">
+      <div class="container medium">
+        <a class="case-back-link" href="../index.html" data-transition-label="Work">← Back to Work</a>
+        <h1>HarborMind</h1>
+
+        <div class="case-meta-grid">
+          <div class="case-meta-col">
+            <h5>Role &amp; Focus</h5>
+            <p>AIS Data Pipeline, Quantile Regression, Local Gemma 4 Decision Support</p>
+          </div>
+          <div class="case-meta-col">
+            <h5>Stack &amp; Dataset</h5>
+            <p>LightGBM, Gemma 4 (Offline), NOAA MarineCadastre AIS on Kaggle</p>
+          </div>
+          <div class="case-meta-col">
+            <h5>Timeline</h5>
+            <p>Apr – May 2026 · Gemma 4 Good Hackathon</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Uncertainty & Captain Handoff Explorer -->
+    <section class="section case-showcase-wrap">
+      <div class="container">
+        <div class="case-floating-cta">
+          <div class="btn btn-round btn-accent">
+            <a class="btn-click magnetic" href="https://youtu.be/U6FTDtmo7Jc" target="_blank" rel="noopener" data-strength="48" data-strength-text="24">
+              <div class="btn-fill"></div>
+              <span class="btn-text">Watch demo ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="case-demo-stage" data-demo="harbormind">
+          <div class="demo-inner">
+            <div class="demo-top-bar">
+              <span class="demo-tag">Port of Long Beach · Quantile Forecast Simulation</span>
+              <span class="demo-tag" data-hm-badge>Handoff to Captain</span>
+            </div>
+
+            <h2 class="demo-headline">When forecast uncertainty spikes, hand the helm back to the captain.</h2>
+
+            <div class="demo-sheet dark-panel">
+              <span class="demo-sheet-label">Predicted Wait-Time Quantile Band (P10 — P50 — P90)</span>
+              <div class="forecast-bar-wrap">
+                <div class="forecast-scale">
+                  <div class="forecast-range" data-hm-range style="left: 34%; width: 58%;"></div>
+                  <div class="forecast-median" data-hm-median style="left: 60%;"></div>
+                </div>
+                <div class="forecast-labels">
+                  <span>0h</span>
+                  <span>12h</span>
+                  <span>24h</span>
+                  <span>36h</span>
+                  <span>48h+</span>
+                </div>
+              </div>
+
+              <dl class="demo-kv-list" style="border-color: var(--color-border-light); color: var(--color-text-light);">
+                <div><dt style="color: var(--color-mist);">P10 Optimistic</dt><dd data-hm-p10>11.0 h</dd></div>
+                <div><dt style="color: var(--color-mist);">P50 Median</dt><dd data-hm-p50>22.5 h</dd></div>
+                <div><dt style="color: var(--color-mist);">P90 Upper · Spread</dt><dd><span data-hm-p90>38.4 h</span> · <span data-hm-spread>27.4 h</span></dd></div>
+              </dl>
+            </div>
+
+            <div class="demo-controls-bar">
+              <p class="demo-status-text" data-hm-status role="status" aria-live="polite"></p>
+              <div class="demo-btn-group">
+                <button class="demo-btn" type="button" data-hm-scenario="clear">Clear Berth</button>
+                <button class="demo-btn" type="button" data-hm-scenario="moderate">Peak Queue</button>
+                <button class="demo-btn is-active" type="button" data-hm-scenario="storm">High Uncertainty</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-narrative">
+      <div class="container medium">
+        <div class="case-narrative-row once-in">
+          <h2>The problem</h2>
+          <div class="case-narrative-body">
+            <p>
+              Point estimates for port congestion hide risk: knowing an average wait time of 22 hours is dangerous if the realistic window spans 11 to 38 hours during berth disruptions, especially at sea where connectivity is intermittent.
+            </p>
+          </div>
+        </div>
+
+        <div class="case-narrative-row once-in">
+          <h2>What I built</h2>
+          <div class="case-narrative-body">
+            <p>
+              I processed historical NOAA MarineCadastre AIS vessel trajectories (2023–2025) for Los Angeles / Long Beach and published the resulting cleaned dataset on Kaggle. Alongside that data pipeline, HarborMind pairs LightGBM quantile regression with local offline Gemma 4 agents to explain wait advisories — and explicitly escalates back to the captain whenever prediction spread crosses the safety threshold.
+            </p>
+          </div>
+        </div>
+
+        <div class="case-narrative-row once-in">
+          <h2>Public artifacts</h2>
+          <div class="case-narrative-body">
+            <p>
+              Explore all four public deliverables separately: the recorded walkthrough demo, the agent and dashboard codebase, the AIS data &amp; ML pipeline, and the published Kaggle dataset.
+            </p>
+            <div class="case-links-row">
+              <div class="btn">
+                <a class="btn-click magnetic" href="https://youtu.be/U6FTDtmo7Jc" target="_blank" rel="noopener" data-strength="20" data-strength-text="10">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">Video Demo ↗</span>
+                </a>
+              </div>
+              <div class="btn">
+                <a class="btn-click magnetic" href="https://github.com/dblue03333/HarborMind" target="_blank" rel="noopener" data-strength="20" data-strength-text="10">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">Agent &amp; Dashboard Repo ↗</span>
+                </a>
+              </div>
+              <div class="btn">
+                <a class="btn-click magnetic" href="https://github.com/dblue03333/Maritime-Congestion-Predictive-Modeling" target="_blank" rel="noopener" data-strength="20" data-strength-text="10">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">Data &amp; ML Repo ↗</span>
+                </a>
+              </div>
+              <div class="btn">
+                <a class="btn-click magnetic" href="https://www.kaggle.com/datasets/nguyenductuandat/lalb-ais-port-congestion-62023-122025" target="_blank" rel="noopener" data-strength="20" data-strength-text="10">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">Kaggle Dataset ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer-rounded-div" aria-hidden="true">
+    <div class="rounded-div-wrap"><div class="rounded-div"></div></div>
+  </div>
+  <footer class="footer-wrap">
+    <div class="container medium">
+      <div class="next-case-band">
+        <a class="next-case-link" href="../mini-llm-twin/index.html" data-transition-label="mini-llm-twin">
+          <h5>Next Case</h5>
+          <h2>mini-llm-twin</h2>
+          <div class="next-case-preview art-bg-rag">
+            <div class="art-backdrop">
+              <div class="art-card">
+                <div class="art-card-top"><span>RAG PIPELINE</span><span class="art-pill">MongoDB Atlas</span></div>
+                <div class="art-card-title">Personal knowledge retrieval with Gemini &amp; FastAPI</div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <div class="next-case-all">
+          <div class="btn btn-light-outline">
+            <a class="btn-click magnetic" href="../index.html" data-strength="26" data-strength-text="13" data-transition-label="Work">
+              <div class="btn-fill"></div>
+              <span class="btn-text">All work <span class="count-nr">5</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-meta-group">
+          <div class="footer-meta-col"><h5>Version</h5><p>2026 © Edition</p></div>
+          <div class="footer-meta-col"><h5>Local Time</h5><p data-local-time>09:30 PM GMT+7</p></div>
+        </div>
+        <div class="footer-socials">
+          <h5>Socials</h5>
+          <ul>
+            <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a class="btn-link" href="mailto:ndtdat.data@gmail.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+  <script src="../../js/motion.js" defer></script>
+  <script src="../../js/demos.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reliable Agent Harness — Operations assistant with typed tool validation, bounded retries, and human approval before acting.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Reliable Agent Harness — Kelvin Nguyen">
+  <meta property="og:description" content="Operations assistant with typed tool validation, bounded retries, and human approval before creating an incident.">
+  <meta property="og:image" content="../../assets/og-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Reliable Agent Harness — Kelvin Nguyen</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/sections.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <script>
+    (function(){
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && sessionStorage.getItem('dennis_page_transition') === '1') {
+        document.documentElement.classList.add('is-transitioning');
+        setTimeout(function(){ document.documentElement.classList.remove('is-transitioning'); }, 2200);
+      }
+    })();
+  </script>
+</head>
+<body data-page="case" data-page-title="Reliable Agent Harness">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="loading-container" aria-hidden="true">
+    <div class="loading-screen">
+      <div class="rounded-div-wrap top"><div class="rounded-div"></div></div>
+      <div class="loading-words"><span class="dot"></span><span data-loading-word>Reliable Agent Harness</span></div>
+      <div class="rounded-div-wrap bottom"><div class="rounded-div"></div></div>
+    </div>
+  </div>
+
+  <div class="btn-hamburger-wrap">
+    <div class="btn btn-hamburger">
+      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="42" data-strength-text="22" aria-label="Toggle navigation menu" aria-expanded="false">
+        <div class="btn-fill"></div>
+        <div class="btn-text"><div class="hamburger-bars" aria-hidden="true"><span></span><span></span></div></div>
+      </button>
+    </div>
+  </div>
+
+  <div class="fixed-nav-back" aria-hidden="true"></div>
+  <aside class="fixed-nav" aria-label="Full navigation">
+    <div class="fixed-nav-rounded-div" aria-hidden="true"><div class="rounded-curve"></div></div>
+    <div class="fixed-nav-inner">
+      <div class="nav-header">
+        <h5>Navigation</h5>
+        <div class="stripe"></div>
+        <nav class="fixed-nav-links" aria-label="Primary drawer navigation">
+          <a href="../../index.html" data-transition-label="Home">Home</a>
+          <a href="../index.html" class="active" data-transition-label="Work">Work</a>
+          <a href="../../about/index.html" data-transition-label="About">About</a>
+          <a href="../../contact/index.html" data-transition-label="Contact">Contact</a>
+        </nav>
+      </div>
+      <div class="fixed-nav-socials">
+        <h5>Socials</h5>
+        <ul>
+          <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a class="btn-link" href="https://leetcode.com/u/NguyenDucTuanDat/" target="_blank" rel="noopener">LeetCode</a></li>
+          <li><a class="btn-link" href="mailto:ndtdat.data@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <header class="nav-bar">
+    <a href="../../index.html" class="credits-top" data-transition-label="Home">
+      <span class="credit-symbol">©</span>
+      <span class="credit-copy">
+        <span class="credit-track"><span>Code by</span><span>Kelvin</span><span class="credit-extra">Nguyen</span></span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <div class="nav-link-item"><a class="btn-link active" href="../index.html" data-transition-label="Work">Work</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../../about/index.html" data-transition-label="About">About</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../../contact/index.html" data-transition-label="Contact">Contact</a></div>
+    </nav>
+    <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
+      <span class="dot"></span><span>Menu</span>
+    </button>
+  </header>
+
+  <main id="main">
+    <section class="section case-header">
+      <div class="container medium">
+        <a class="case-back-link" href="../index.html" data-transition-label="Work">← Back to Work</a>
+        <h1>Reliable Agent Harness</h1>
+
+        <div class="case-meta-grid">
+          <div class="case-meta-col">
+            <h5>Role &amp; Focus</h5>
+            <p>AI Agent Architecture, Tool Validation, Human-in-the-Loop Guardrails</p>
+          </div>
+          <div class="case-meta-col">
+            <h5>Stack &amp; Verification</h5>
+            <p>Python, CLI &amp; HTTP API, 368 Offline Tests Passing</p>
+          </div>
+          <div class="case-meta-col">
+            <h5>Timeline</h5>
+            <p>Sep 2026 · Public Prototype</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Showcase with Overlapping Dennis Magnetic Circle -->
+    <section class="section case-showcase-wrap">
+      <div class="container">
+        <div class="case-floating-cta">
+          <div class="btn btn-round btn-accent">
+            <a class="btn-click magnetic" href="https://github.com/dblue03333/reliable-agent-harness#quick-start" target="_blank" rel="noopener" data-strength="48" data-strength-text="24">
+              <div class="btn-fill"></div>
+              <span class="btn-text">View repo ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="case-demo-stage" data-demo="harness">
+          <div class="demo-inner">
+            <div class="demo-top-bar">
+              <span class="demo-tag">Interactive Simulation · Human Approval Gate</span>
+              <span class="demo-tag" data-harness-badge>Pending human approval</span>
+            </div>
+
+            <h2 class="demo-headline">An agent proposes. A person approves the exact action.</h2>
+
+            <div class="demo-two-col">
+              <div class="demo-sheet">
+                <span class="demo-sheet-label">Proposed Tool Call</span>
+                <p class="claim">Open a high-severity incident for recurring checkout API timeouts?</p>
+                <dl class="demo-kv-list">
+                  <div><dt>Service</dt><dd>checkout-api</dd></div>
+                  <div><dt>Severity</dt><dd>High (SEV-2)</dd></div>
+                  <div><dt>Tool</dt><dd><code>create_incident</code></dd></div>
+                </dl>
+              </div>
+
+              <div class="demo-sheet dark-panel">
+                <span class="demo-sheet-label">Harness Execution Trace</span>
+                <div class="demo-log" data-harness-log></div>
+              </div>
+            </div>
+
+            <div class="demo-controls-bar">
+              <p class="demo-status-text" data-harness-status role="status" aria-live="polite"></p>
+              <div class="demo-btn-group">
+                <button class="demo-btn primary" type="button" data-harness-action="approve">Approve action</button>
+                <button class="demo-btn" type="button" data-harness-action="reject">Reject action</button>
+                <button class="demo-btn" type="button" data-harness-action="reset" hidden>Reset simulation</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Editorial Narrative -->
+    <section class="section case-narrative">
+      <div class="container medium">
+        <div class="case-narrative-row once-in">
+          <h2>The problem</h2>
+          <div class="case-narrative-body">
+            <p>
+              Autonomous agents can diagnose operational signals quickly, but letting an LLM execute state-changing tools without deterministic checks creates silent failure modes: malformed arguments, unbounded retry loops, and unreviewed external writes.
+            </p>
+          </div>
+        </div>
+
+        <div class="case-narrative-row once-in">
+          <h2>What I built</h2>
+          <div class="case-narrative-body">
+            <p>
+              I built a Python harness exposed through both a CLI and an HTTP API. Every tool call passes typed input/output validation, respects strict retry budgets, and pauses before side-effecting calls so a human reviewer approves or rejects the exact proposed action.
+            </p>
+            <p>
+              Every decision — approved or rejected — is bound to the exact action payload and written to an inspectable audit record.
+            </p>
+          </div>
+        </div>
+
+        <div class="case-narrative-row once-in">
+          <h2>How I verified it</h2>
+          <div class="case-narrative-body">
+            <p>
+              The proof of concept passes 368 offline tests covering schema enforcement, retry exhaustion, approval binding, and clean rejection with zero side effects. Synthetic data lets anyone run both branches locally from the repository quick start.
+            </p>
+            <div class="case-links-row">
+              <div class="btn">
+                <a class="btn-click magnetic" href="https://github.com/dblue03333/reliable-agent-harness" target="_blank" rel="noopener" data-strength="22" data-strength-text="11">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">GitHub Repository ↗</span>
+                </a>
+              </div>
+              <div class="btn">
+                <a class="btn-click magnetic" href="https://github.com/dblue03333/reliable-agent-harness#quick-start" target="_blank" rel="noopener" data-strength="22" data-strength-text="11">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">Quick Start Guide ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Curved Next Case Footer -->
+  <div class="footer-rounded-div" aria-hidden="true">
+    <div class="rounded-div-wrap"><div class="rounded-div"></div></div>
+  </div>
+  <footer class="footer-wrap">
+    <div class="container medium">
+      <div class="next-case-band">
+        <a class="next-case-link" href="../healthlab/index.html" data-transition-label="HealthLab">
+          <h5>Next Case</h5>
+          <h2>HealthLab Evidence</h2>
+          <div class="next-case-preview art-bg-healthlab">
+            <div class="art-backdrop">
+              <div class="art-card">
+                <div class="art-card-top"><span>HEALTHLAB PILOT</span><span class="art-pill">Interactive Demo</span></div>
+                <div class="art-sheet">Draft v2: available <mark>nationwide</mark></div>
+                <div class="art-sheet mist">Source: limited to <mark>one district</mark></div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <div class="next-case-all">
+          <div class="btn btn-light-outline">
+            <a class="btn-click magnetic" href="../index.html" data-strength="26" data-strength-text="13" data-transition-label="Work">
+              <div class="btn-fill"></div>
+              <span class="btn-text">All work <span class="count-nr">5</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-meta-group">
+          <div class="footer-meta-col"><h5>Version</h5><p>2026 © Edition</p></div>
+          <div class="footer-meta-col"><h5>Local Time</h5><p data-local-time>09:30 PM GMT+7</p></div>
+        </div>
+        <div class="footer-socials">
+          <h5>Socials</h5>
+          <ul>
+            <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a class="btn-link" href="mailto:ndtdat.data@gmail.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+  <script src="../../js/motion.js" defer></script>
+  <script src="../../js/demos.js" defer></script>
+</body>
+</html>
