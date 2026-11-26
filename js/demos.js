@@ -1,13 +1,15 @@
 /* ==========================================================================
-   INTERACTIVE AI ENGINEER DEMOS & CONTACT FORM INTERACTIONS
+   INTERACTIVE AI ENGINEER DEMOS & CONTACT FORM INTERACTIONS (i18n-aware)
    1. HealthLab Evidence Intelligence (Draft vs Linked Source + Walkthrough)
    2. Reliable Agent Harness (Approval Gate Approve/Reject + Action Log)
    3. HarborMind (Quantile Wait Forecast + Uncertainty Captain Handoff)
    4. mini-llm-twin (4-Stage RAG Pipeline Step Inspector)
-   5. Contact Form + Copy Email Utility
+   5. Contact Form (Netlify Forms AJAX + Validation) & Copy Email Utility
    ========================================================================== */
 
 (() => {
+  const t = (key, fallback) => (window.__i18n ? window.__i18n.t(key, fallback) : fallback);
+
   /* ---------- 1. HealthLab Editorial Evidence Review Demo ---------- */
   function initHealthLabDemo() {
     const root = document.querySelector('[data-demo="healthlab"]');
@@ -22,19 +24,26 @@
     const nextBtn = root.querySelector('[data-hl-next]');
     const playBtn = root.querySelector('[data-hl-play]');
 
-    const labels = ['Inspect linked source', 'Open revised draft v3', 'Approve v3', 'Restart simulation'];
-    const statuses = [
-      'Draft v2 is awaiting editorial review. Click to verify the highlighted claim against its source.',
-      'Mismatch flagged: the public source describes a one-district pilot, while Draft v2 claimed nationwide availability.',
-      'Draft v3 narrows the claim to match the source evidence and binds approval to version v3.',
-      'Audit recorded: Draft v3 approved for newsletter export (simulation state).',
-    ];
-
     let step = 0;
     let timer = null;
 
     function render() {
-      if (versionBadge) versionBadge.textContent = step < 2 ? 'Newsletter Draft · v2' : 'Newsletter Draft · v3';
+      const labels = [
+        t('hl.btn_step0', 'Inspect linked source'),
+        t('hl.btn_step1', 'Open revised draft v3'),
+        t('hl.btn_step2', 'Approve v3'),
+        t('hl.btn_step3', 'Restart simulation'),
+      ];
+      const statuses = [
+        t('hl.status0', 'Draft v2 is awaiting editorial review.'),
+        t('hl.status1', 'Mismatch flagged against linked public source.'),
+        t('hl.status2', 'Draft v3 matches source evidence and is ready for approval.'),
+        t('hl.status3', 'Audit recorded: Draft v3 approved (simulation state).'),
+      ];
+
+      const lang = window.__i18n?.getLang() || 'en';
+      const prefix = lang === 'vi' ? 'Bản nháp · ' : lang === 'ja' ? 'ニュースレター下書き · ' : 'Newsletter Draft · ';
+      if (versionBadge) versionBadge.textContent = step < 2 ? `${prefix}v2` : `${prefix}v3`;
       if (draftV2) draftV2.hidden = step >= 2;
       if (draftV3) draftV3.hidden = step < 2;
       if (sourcePlaceholder) sourcePlaceholder.hidden = step > 0;
@@ -43,10 +52,10 @@
       if (nextBtn) nextBtn.textContent = labels[step];
       if (playBtn) {
         playBtn.textContent = timer
-          ? 'Pause walkthrough'
+          ? t('hl.pause', 'Pause walkthrough')
           : step === 3
-          ? 'Replay walkthrough'
-          : 'Play walkthrough';
+          ? t('hl.replay', 'Replay walkthrough')
+          : t('hl.play', 'Play walkthrough');
       }
     }
 
@@ -59,7 +68,7 @@
 
     nextBtn?.addEventListener('click', () => {
       stopWalkthrough();
-      step = (step + 1) % statuses.length;
+      step = (step + 1) % 4;
       render();
     });
 
@@ -78,6 +87,7 @@
       render();
     });
 
+    window.addEventListener('portfolio:langchange', render);
     render();
   }
 
@@ -98,6 +108,8 @@
       '[02] policy.guardrail -> side_effect=true -> human_approval_required',
     ];
 
+    let currentMode = 'pending';
+
     function renderLog(extraLine) {
       if (!logEl) return;
       const lines = extraLine ? [...baseLogs, extraLine] : baseLogs;
@@ -105,19 +117,20 @@
     }
 
     function setState(mode) {
+      currentMode = mode;
       if (mode === 'pending') {
-        if (statusBadge) statusBadge.textContent = 'Pending human approval';
-        if (statusText) statusText.textContent = 'Proposed action is paused until a human reviewer approves or rejects the exact payload.';
+        if (statusBadge) statusBadge.textContent = t('hr.badge_pending', 'Pending human approval');
+        if (statusText) statusText.textContent = t('hr.status_pending', 'Proposed action is paused until a human reviewer approves or rejects the exact payload.');
         if (resetBtn) resetBtn.hidden = true;
         renderLog(null);
       } else if (mode === 'approved') {
-        if (statusBadge) statusBadge.textContent = 'Approved · Dispatched';
-        if (statusText) statusText.textContent = 'Reviewer approved exact payload hash #9f2c. Incident INC-402 created and logged offline.';
+        if (statusBadge) statusBadge.textContent = t('hr.badge_approved', 'Approved · Dispatched');
+        if (statusText) statusText.textContent = t('hr.status_approved', 'Reviewer approved exact payload hash #9f2c. Incident INC-402 created and logged offline.');
         if (resetBtn) resetBtn.hidden = false;
         renderLog('[03] reviewer.decision=APPROVE -> dispatched INC-402 (audit_id=9f2c)');
       } else if (mode === 'rejected') {
-        if (statusBadge) statusBadge.textContent = 'Rejected · Blocked';
-        if (statusText) statusText.textContent = 'Reviewer rejected create_incident. No external write occurred; agent halted cleanly.';
+        if (statusBadge) statusBadge.textContent = t('hr.badge_rejected', 'Rejected · Blocked');
+        if (statusText) statusText.textContent = t('hr.status_rejected', 'Reviewer rejected create_incident. No external write occurred; agent halted cleanly.');
         if (resetBtn) resetBtn.hidden = false;
         renderLog('[03] reviewer.decision=REJECT -> execution_aborted (zero side effects)');
       }
@@ -127,6 +140,7 @@
     rejectBtn?.addEventListener('click', () => setState('rejected'));
     resetBtn?.addEventListener('click', () => setState('pending'));
 
+    window.addEventListener('portfolio:langchange', () => setState(currentMode));
     setState('pending');
   }
 
@@ -147,7 +161,8 @@
 
     const scenarios = {
       clear: {
-        badge: 'Auto-Advisory Ready',
+        badgeKey: 'hm.badge_clear',
+        statusKey: 'hm.status_clear',
         p10: '2.1 h',
         p50: '3.4 h',
         p90: '4.8 h',
@@ -155,10 +170,10 @@
         left: 12,
         width: 24,
         median: 23,
-        status: 'Tight quantile interval at Berth 42. Local Gemma agent explains the arrival recommendation with high confidence.',
       },
       moderate: {
-        badge: 'Advisory + Caution',
+        badgeKey: 'hm.badge_mod',
+        statusKey: 'hm.status_mod',
         p10: '6.5 h',
         p50: '10.2 h',
         p90: '14.9 h',
@@ -166,30 +181,32 @@
         left: 26,
         width: 34,
         median: 42,
-        status: 'Container backlog building at San Pedro Bay. Advisory includes queue context and fuel-burn trade-off.',
       },
       storm: {
-        badge: 'Handoff to Captain',
+        badgeKey: 'hm.badge_storm',
+        statusKey: 'hm.status_storm',
         p10: '11.0 h',
         p50: '22.5 h',
         p90: '38.4 h',
-        spread: '27.4 h (Exceeds Threshold)',
+        spread: '27.4 h (High)',
         left: 34,
         width: 58,
         median: 60,
-        status: 'Quantile spread exceeds safety threshold. HarborMind suppresses automated routing and hands the decision back to the captain.',
       },
     };
 
+    let activeKey = 'storm';
+
     function apply(key) {
+      activeKey = key;
       const data = scenarios[key] || scenarios.storm;
       scenarioBtns.forEach((btn) => btn.classList.toggle('is-active', btn.dataset.hmScenario === key));
-      if (badge) badge.textContent = data.badge;
+      if (badge) badge.textContent = t(data.badgeKey, 'Handoff to Captain');
       if (p10El) p10El.textContent = data.p10;
       if (p50El) p50El.textContent = data.p50;
       if (p90El) p90El.textContent = data.p90;
       if (spreadEl) spreadEl.textContent = data.spread;
-      if (statusText) statusText.textContent = data.status;
+      if (statusText) statusText.textContent = t(data.statusKey, '');
       if (rangeBar) {
         rangeBar.style.left = `${data.left}%`;
         rangeBar.style.width = `${data.width}%`;
@@ -201,6 +218,7 @@
       btn.addEventListener('click', () => apply(btn.dataset.hmScenario));
     });
 
+    window.addEventListener('portfolio:langchange', () => apply(activeKey));
     apply('storm');
   }
 
@@ -216,36 +234,43 @@
 
     const stages = {
       ingest: {
-        title: '01 · Knowledge Ingestion & Chunking',
+        titleKey: 'rag.s1_title',
+        noteKey: 'rag.s1_note',
         code: 'source="notion_export.md" -> chunks=42 (overlap=64 tokens) -> metadata={doc_id, updated_at}',
-        note: 'Personal notes and project logs are normalized into reproducible, overlap-preserved chunks before embedding.',
       },
       embed: {
-        title: '02 · Gemini Embedding Generation',
+        titleKey: 'rag.s2_title',
+        noteKey: 'rag.s2_note',
         code: 'model="text-embedding-004" -> dim=768 -> batch_upsert(collection="twin_vectors")',
-        note: 'Each chunk is embedded via Google Gemini and written idempotently to MongoDB Atlas.',
       },
       retrieve: {
-        title: '03 · MongoDB Atlas Vector Search',
-        code: 'query="How does Kelvin test agent safety?" -> top_k=4 -> cosine_scores=[0.94, 0.89, 0.85, 0.81]',
-        note: 'FastAPI queries the Atlas vector index with cosine similarity to retrieve the highest-signal context passages.',
+        titleKey: 'rag.s3_title',
+        noteKey: 'rag.s3_note',
+        code: () =>
+          window.__i18n?.getLang() === 'vi'
+            ? 'query="Tuấn Đạt kiểm thử an toàn agent như thế nào?" -> top_k=4 -> cosine_scores=[0.94, 0.89, 0.85, 0.81]'
+            : 'query="How does Kelvin test agent safety?" -> top_k=4 -> cosine_scores=[0.94, 0.89, 0.85, 0.81]',
       },
       generate: {
-        title: '04 · Grounded Answer Synthesis',
+        titleKey: 'rag.s4_title',
+        noteKey: 'rag.s4_note',
         code: 'POST /ask -> 200 OK -> answer grounded in 3 retrieved chunks (latency=680ms, dockerized)',
-        note: 'Gemini synthesizes a concise answer strictly grounded in retrieved passages and returns structured JSON.',
       },
     };
 
+    let activeStage = 'retrieve';
+
     function apply(key) {
+      activeStage = key;
       const s = stages[key] || stages.ingest;
       stageBtns.forEach((btn) => btn.classList.toggle('is-active', btn.dataset.ragStage === key));
-      if (titleEl) titleEl.textContent = s.title;
-      if (codeEl) codeEl.textContent = s.code;
-      if (noteEl) noteEl.textContent = s.note;
+      if (titleEl) titleEl.textContent = t(s.titleKey, '');
+      if (codeEl) codeEl.textContent = typeof s.code === 'function' ? s.code() : s.code;
+      if (noteEl) noteEl.textContent = t(s.noteKey, '');
     }
 
     stageBtns.forEach((btn) => btn.addEventListener('click', () => apply(btn.dataset.ragStage)));
+    window.addEventListener('portfolio:langchange', () => apply(activeStage));
     apply('retrieve');
   }
 
@@ -254,15 +279,14 @@
     document.querySelectorAll('[data-copy-email]').forEach((btn) => {
       btn.addEventListener('click', async () => {
         const email = btn.dataset.copyEmail || 'ndtdat.data@gmail.com';
-        const original = btn.textContent;
         try {
           await navigator.clipboard.writeText(email);
-          btn.textContent = 'Copied to clipboard ✓';
+          btn.textContent = t('contact.copied', 'Copied to clipboard ✓');
         } catch {
           btn.textContent = email;
         }
         window.setTimeout(() => {
-          btn.textContent = original;
+          btn.textContent = t('contact.copy_email', 'Copy email');
         }, 2000);
       });
     });
@@ -307,24 +331,27 @@
       const message = messageField?.value.trim() || '';
 
       if (!name) {
-        setFeedback('Please enter your name.', 'error');
+        setFeedback(t('contact.err_name', 'Please enter your name.'), 'error');
         nameField?.focus();
         return;
       }
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setFeedback('Please enter a valid email address so I can reply.', 'error');
+        setFeedback(t('contact.err_email', 'Please enter a valid email address so I can reply.'), 'error');
         emailField?.focus();
         return;
       }
       if (!message) {
-        setFeedback('Please write a short message before sending.', 'error');
+        setFeedback(t('contact.err_msg', 'Please write a short message before sending.'), 'error');
         messageField?.focus();
         return;
       }
 
+      const isVi = window.__i18n?.getLang() === 'vi';
       const subject = encodeURIComponent(`[Portfolio] ${topic} — ${name}`);
       const body = encodeURIComponent(
-        `Hi Kelvin,\n\nName: ${name}\nEmail: ${email}${org ? `\nOrganization: ${org}` : ''}\nTopic: ${topic}\n\n${message}`
+        isVi
+          ? `Chào Tuấn Đạt,\n\nHọ tên: ${name}\nEmail: ${email}${org ? `\nĐơn vị: ${org}` : ''}\nChủ đề: ${topic}\n\n${message}`
+          : `Hi Kelvin,\n\nName: ${name}\nEmail: ${email}${org ? `\nOrganization: ${org}` : ''}\nTopic: ${topic}\n\n${message}`
       );
       const mailtoHref = `mailto:ndtdat.data@gmail.com?subject=${subject}&body=${body}`;
       if (fallbackLink) fallbackLink.href = mailtoHref;
@@ -332,17 +359,14 @@
       const isLocalPreview = /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname) || window.location.protocol === 'file:';
 
       if (isLocalPreview) {
-        setFeedback(
-          'Local preview mode: Netlify Forms automatically emails ndtdat.data@gmail.com once deployed. You can also send via your mail app below.',
-          'success'
-        );
+        setFeedback(t('contact.local_msg', 'Local preview mode.'), 'success');
         if (fallbackLink) fallbackLink.hidden = false;
         return;
       }
 
       if (submitBtn) submitBtn.disabled = true;
-      if (submitLabel) submitLabel.textContent = 'Sending…';
-      setFeedback('Sending your message…', null);
+      if (submitLabel) submitLabel.textContent = t('contact.sending', 'Sending…');
+      setFeedback(t('contact.sending', 'Sending…'), null);
 
       try {
         const formData = new FormData(form);
@@ -356,21 +380,18 @@
 
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-        setFeedback('Message sent — thank you! I will get back to you soon.', 'success');
-        if (submitLabel) submitLabel.textContent = 'Sent ✓';
+        setFeedback(t('contact.ok_msg', 'Message sent — thank you!'), 'success');
+        if (submitLabel) submitLabel.textContent = t('contact.sent', 'Sent ✓');
         form.reset();
         form.querySelectorAll('.form-col').forEach((col) => col.classList.remove('is-filled'));
         window.setTimeout(() => {
-          if (submitLabel) submitLabel.textContent = 'Send it!';
+          if (submitLabel) submitLabel.textContent = t('contact.send', 'Send it!');
           if (submitBtn) submitBtn.disabled = false;
         }, 3200);
       } catch {
-        setFeedback(
-          'Could not submit right now — please open the pre-filled email draft below or copy ndtdat.data@gmail.com.',
-          'error'
-        );
+        setFeedback(t('contact.fail_msg', 'Could not submit right now.'), 'error');
         if (fallbackLink) fallbackLink.hidden = false;
-        if (submitLabel) submitLabel.textContent = 'Send it!';
+        if (submitLabel) submitLabel.textContent = t('contact.send', 'Send it!');
         if (submitBtn) submitBtn.disabled = false;
       }
     });

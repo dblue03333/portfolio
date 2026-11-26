@@ -13,14 +13,20 @@
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/tokens.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/sections.css?v=3">
-  <link rel="stylesheet" href="../css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css?v=5">
+  <link rel="stylesheet" href="../css/base.css?v=5">
+  <link rel="stylesheet" href="../css/layout.css?v=6">
+  <link rel="stylesheet" href="../css/sections.css?v=6">
+  <link rel="stylesheet" href="../css/responsive.css?v=6">
   <script>
     (function(){
+      var p = new URLSearchParams(location.search).get('lang');
+      var l = (p === 'en' || p === 'vi' || p === 'ja') ? p : (localStorage.getItem('portfolio_lang') || 'en');
+      if (l !== 'en' && l !== 'vi' && l !== 'ja') l = 'en';
+      document.documentElement.dataset.lang = l;
+      document.documentElement.lang = l;
+
       var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced && sessionStorage.getItem('dennis_page_transition') === '1') {
         document.documentElement.classList.add('is-transitioning');
@@ -30,49 +36,50 @@
   </script>
 </head>
 <body data-page="work" data-page-title="Work">
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
 
-  <!-- Curved Page Transition Curtain -->
   <div class="loading-container" aria-hidden="true">
     <div class="loading-screen">
       <div class="rounded-div-wrap top"><div class="rounded-div"></div></div>
-      <div class="loading-words">
-        <span class="dot"></span>
-        <span data-loading-word>Work</span>
-      </div>
+      <div class="loading-words"><span class="dot"></span><span data-loading-word>Work</span></div>
       <div class="rounded-div-wrap bottom"><div class="rounded-div"></div></div>
     </div>
   </div>
 
-  <!-- Floating Hamburger -->
   <div class="btn-hamburger-wrap">
     <div class="btn btn-hamburger">
-      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="42" data-strength-text="22" aria-label="Toggle navigation menu" aria-expanded="false">
+      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="32" data-strength-text="16" aria-label="Toggle navigation menu" aria-expanded="false">
         <div class="btn-fill"></div>
-        <div class="btn-text">
-          <div class="hamburger-bars" aria-hidden="true"><span></span><span></span></div>
-        </div>
+        <div class="btn-text"><div class="hamburger-bars" aria-hidden="true"><span></span><span></span></div></div>
       </button>
     </div>
   </div>
 
-  <!-- Curved Drawer -->
   <div class="fixed-nav-back" aria-hidden="true"></div>
   <aside class="fixed-nav" aria-label="Full navigation">
     <div class="fixed-nav-rounded-div" aria-hidden="true"><div class="rounded-curve"></div></div>
     <div class="fixed-nav-inner">
       <div class="nav-header">
-        <h5>Navigation</h5>
+        <h5 data-i18n="nav.navigation">Navigation</h5>
         <div class="stripe"></div>
         <nav class="fixed-nav-links" aria-label="Primary drawer navigation">
-          <a href="../index.html" data-transition-label="Home">Home</a>
-          <a href="index.html" class="active" data-transition-label="Work">Work</a>
-          <a href="../about/index.html" data-transition-label="About">About</a>
-          <a href="../contact/index.html" data-transition-label="Contact">Contact</a>
+          <a href="../index.html" data-transition-label="Home" data-i18n="nav.home">Home</a>
+          <a href="index.html" class="active" data-transition-label="Work" data-i18n="nav.work">Work</a>
+          <a href="../about/index.html" data-transition-label="About" data-i18n="nav.about">About</a>
+          <a href="../contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a>
         </nav>
+
+        <div class="fixed-nav-lang">
+          <h5 data-i18n="nav.language">Language</h5>
+          <div class="lang-switch" role="group" aria-label="Switch language">
+            <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+            <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+            <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+          </div>
+        </div>
       </div>
       <div class="fixed-nav-socials">
-        <h5>Socials</h5>
+        <h5 data-i18n="nav.socials">Socials</h5>
         <ul>
           <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
           <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -86,7 +93,6 @@
   <!-- Floating Hover Preview Reel + Blue "View" Cursor -->
   <div class="mouse-pos-list-image" aria-hidden="true">
     <div class="mouse-pos-list-image-reel">
-      <!-- 0: Reliable Agent Harness -->
       <div class="mouse-pos-list-image-slide art-bg-harness">
         <div class="art-card">
           <div class="art-card-top"><span>APPROVAL GATE · #402</span><span class="art-pill">368 Tests ✓</span></div>
@@ -95,7 +101,6 @@
           <div class="art-actions-mini"><span class="approve">Approve</span><span class="reject">Reject</span></div>
         </div>
       </div>
-      <!-- 1: HealthLab Evidence Intelligence -->
       <div class="mouse-pos-list-image-slide art-bg-healthlab">
         <div class="art-card">
           <div class="art-card-top"><span>HEALTHLAB PILOT</span><span class="art-pill">Source-Linked</span></div>
@@ -103,30 +108,21 @@
           <div class="art-sheet mist">Source: Piloted in <mark>one district</mark>.</div>
         </div>
       </div>
-      <!-- 2: HarborMind -->
       <div class="mouse-pos-list-image-slide art-bg-harbormind">
         <div class="art-card dark-card">
           <div class="art-card-top"><span>LONG BEACH · AIS</span><span class="art-pill">Gemma 4</span></div>
           <div class="art-card-title">Quantile Wait Forecast · P10–P90</div>
-          <div class="art-bar-chart">
-            <div class="art-bar-track"><div class="art-bar-fill" style="left:28%;width:58%;"></div></div>
-          </div>
+          <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill" style="left:28%;width:58%;"></div></div></div>
           <div class="art-checks"><span>LightGBM</span><span>→ Captain Handoff</span></div>
         </div>
       </div>
-      <!-- 3: mini-llm-twin -->
       <div class="mouse-pos-list-image-slide art-bg-rag">
         <div class="art-card">
           <div class="art-card-top"><span>RAG PIPELINE</span><span class="art-pill">Cosine 0.94</span></div>
           <div class="art-card-title">Personal Knowledge Assistant</div>
-          <div class="art-flow">
-            <div>Gemini<br>Embed</div>
-            <div>Atlas<br>Vector</div>
-            <div>FastAPI<br>Answer</div>
-          </div>
+          <div class="art-flow"><div>Gemini<br>Embed</div><div>Atlas<br>Vector</div><div>FastAPI<br>Answer</div></div>
         </div>
       </div>
-      <!-- 4: HealthLab Website -->
       <div class="mouse-pos-list-image-slide art-bg-web">
         <div class="art-card dark-card">
           <div class="art-card-top"><span>HEALTHLAB WEB</span><span class="art-pill">Astro + Figma</span></div>
@@ -138,65 +134,69 @@
   </div>
   <div class="mouse-pos-list-btn" aria-hidden="true">View</div>
 
-  <!-- Top Navigation (Dark Ink on Light Paper) -->
   <header class="nav-bar">
     <a href="../index.html" class="credits-top" data-transition-label="Home">
       <span class="credit-symbol">©</span>
       <span class="credit-copy">
-        <span class="credit-track">
-          <span>Code by</span>
-          <span>Kelvin</span>
-          <span class="credit-extra">Nguyen</span>
-        </span>
+        <span class="credit-track" data-i18n-html="brand.credit"><span>Code by</span><span>Kelvin</span><span class="credit-extra">Nguyen</span></span>
       </span>
     </a>
     <nav class="nav-links" aria-label="Main navigation">
-      <div class="nav-link-item"><a class="btn-link active" href="index.html" data-transition-label="Work">Work</a></div>
-      <div class="nav-link-item"><a class="btn-link" href="../about/index.html" data-transition-label="About">About</a></div>
-      <div class="nav-link-item"><a class="btn-link" href="../contact/index.html" data-transition-label="Contact">Contact</a></div>
+      <div class="nav-link-item"><a class="btn-link active" href="index.html" data-transition-label="Work" data-i18n="nav.work">Work</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../about/index.html" data-transition-label="About" data-i18n="nav.about">About</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a></div>
+      <div class="lang-switch" role="group" aria-label="Switch language">
+        <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+        <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+      </div>
     </nav>
-    <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
-      <span class="dot"></span>
-      <span>Menu</span>
-    </button>
+    <div class="nav-mobile-right">
+      <div class="lang-switch" role="group" aria-label="Switch language">
+        <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+        <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+      </div>
+      <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
+        <span class="dot"></span>
+        <span data-i18n="nav.menu">Menu</span>
+      </button>
+    </div>
   </header>
 
   <main id="main">
-    <!-- ============ HEADER + FILTER & VIEW CONTROLS ============ -->
     <section class="section page-header">
       <div class="container medium">
-        <h1>Building reliable AI systems you can inspect</h1>
+        <h1 data-i18n="work.title">Building reliable AI systems you can inspect</h1>
 
         <div class="work-filters-bar">
-          <!-- Category Filter Pills -->
           <div class="filter-pills" role="group" aria-label="Filter projects by discipline">
             <div class="btn">
               <button class="btn-click magnetic active" type="button" data-filter="all" data-strength="24" data-strength-text="12" aria-pressed="true">
                 <div class="btn-fill"></div>
-                <span class="btn-text">All</span>
+                <span class="btn-text" data-i18n="work.filter.all">All</span>
               </button>
             </div>
             <div class="btn">
               <button class="btn-click magnetic" type="button" data-filter="agents" data-strength="24" data-strength-text="12" aria-pressed="false">
                 <div class="btn-fill"></div>
-                <span class="btn-text">AI Agents <span class="count-nr">2</span></span>
+                <span class="btn-text"><span data-i18n="work.filter.agents">AI Agents</span> <span class="count-nr">2</span></span>
               </button>
             </div>
             <div class="btn">
               <button class="btn-click magnetic" type="button" data-filter="data" data-strength="24" data-strength-text="12" aria-pressed="false">
                 <div class="btn-fill"></div>
-                <span class="btn-text">Data &amp; RAG <span class="count-nr">3</span></span>
+                <span class="btn-text"><span data-i18n="work.filter.data">Data &amp; RAG</span> <span class="count-nr">3</span></span>
               </button>
             </div>
             <div class="btn">
               <button class="btn-click magnetic" type="button" data-filter="web" data-strength="24" data-strength-text="12" aria-pressed="false">
                 <div class="btn-fill"></div>
-                <span class="btn-text">Web <span class="count-nr">1</span></span>
+                <span class="btn-text"><span data-i18n="work.filter.web">Web</span> <span class="count-nr">1</span></span>
               </button>
             </div>
           </div>
 
-          <!-- Sort by Timeline + List / Grid Circular Icon Toggles -->
           <div class="work-controls-right">
             <div class="btn">
               <button class="btn-click magnetic" type="button" data-sort-toggle data-strength="22" data-strength-text="11" aria-label="Toggle timeline sort order">
@@ -238,16 +238,14 @@
       </div>
     </section>
 
-    <!-- ============ WORK STAGE (LIST VIEW & 2-COLUMN GRID VIEW) ============ -->
     <section class="section work-stage">
       <div class="container">
         <div class="work-stage-inner" data-work-stage>
-          <!-- LIST VIEW (Dennis 4-Column Table — Sorted Chronologically by Default) -->
           <div class="work-list-view" data-list-view>
             <div class="work-table-head">
-              <h5>Project</h5>
-              <h5>Domain</h5>
-              <h5>Capabilities</h5>
+              <h5 data-i18n="work.col.project">Project</h5>
+              <h5 data-i18n="work.col.domain">Domain</h5>
+              <h5 data-i18n="work.col.capabilities">Capabilities</h5>
               <button class="work-table-sort-btn" type="button" data-sort-toggle aria-label="Sort projects by timeline">
                 <span data-sort-col-label>Timeline ↓</span>
               </button>
@@ -257,53 +255,51 @@
               <li class="work-list-item" data-topics="data" data-date="202610.2" data-preview-index="1" data-preview-label="Demo">
                 <a class="work-list-link" href="healthlab/index.html" data-transition-label="HealthLab">
                   <span class="col-title">HealthLab Evidence Intelligence</span>
-                  <span class="col-domain">Public Health</span>
-                  <span class="col-role">Evidence Pipeline &amp; Editorial Review</span>
-                  <span class="col-year">Oct 2026 – Present</span>
+                  <span class="col-domain" data-i18n="work.domain.health">Public Health</span>
+                  <span class="col-role" data-i18n="work.cap.health">Evidence Pipeline &amp; Editorial Review</span>
+                  <span class="col-year" data-i18n="work.date.oct_present">Oct 2026 – Present</span>
                 </a>
               </li>
 
               <li class="work-list-item" data-topics="web" data-date="202610.1" data-preview-index="4" data-preview-label="About">
                 <a class="work-list-link" href="../about/index.html#experience" data-transition-label="HealthLab Website">
                   <span class="col-title">HealthLab Website</span>
-                  <span class="col-domain">Editorial Web</span>
-                  <span class="col-role">Astro Typography &amp; Figma Components</span>
-                  <span class="col-year">Oct 2026 – Present</span>
+                  <span class="col-domain" data-i18n="work.domain.web">Editorial Web</span>
+                  <span class="col-role" data-i18n="work.cap.web">Astro Typography &amp; Figma Components</span>
+                  <span class="col-year" data-i18n="work.date.oct_present">Oct 2026 – Present</span>
                 </a>
               </li>
 
               <li class="work-list-item" data-topics="agents" data-date="202609" data-preview-index="0" data-preview-label="Demo">
                 <a class="work-list-link" href="reliable-agent-harness/index.html" data-transition-label="Reliable Agent Harness">
                   <span class="col-title">Reliable Agent Harness</span>
-                  <span class="col-domain">Operations Safety</span>
-                  <span class="col-role">Tool Validation &amp; Human Approval</span>
-                  <span class="col-year">Sep 2026</span>
+                  <span class="col-domain" data-i18n="work.domain.safety">Operations Safety</span>
+                  <span class="col-role" data-i18n="work.cap.harness">Tool Validation &amp; Human Approval</span>
+                  <span class="col-year" data-i18n="work.date.sep_2026">Sep 2026</span>
                 </a>
               </li>
 
               <li class="work-list-item" data-topics="agents data" data-date="202605" data-preview-index="2" data-preview-label="Demo">
                 <a class="work-list-link" href="harbormind/index.html" data-transition-label="HarborMind">
                   <span class="col-title">HarborMind</span>
-                  <span class="col-domain">Maritime Logistics</span>
-                  <span class="col-role">Quantile ML &amp; Local Gemma Agents</span>
-                  <span class="col-year">Apr – May 2026</span>
+                  <span class="col-domain" data-i18n="work.domain.maritime">Maritime Logistics</span>
+                  <span class="col-role" data-i18n="work.cap.harbormind">Quantile ML &amp; Local Gemma Agents</span>
+                  <span class="col-year" data-i18n="work.date.apr_may_2026">Apr – May 2026</span>
                 </a>
               </li>
 
               <li class="work-list-item" data-topics="data" data-date="202604" data-preview-index="3" data-preview-label="View">
                 <a class="work-list-link" href="mini-llm-twin/index.html" data-transition-label="mini-llm-twin">
                   <span class="col-title">mini-llm-twin</span>
-                  <span class="col-domain">Personal Knowledge</span>
-                  <span class="col-role">RAG Pipeline &amp; Vector Indexing</span>
-                  <span class="col-year">Dec 2025 – Apr 2026</span>
+                  <span class="col-domain" data-i18n="work.domain.rag">Personal Knowledge</span>
+                  <span class="col-role" data-i18n="work.cap.rag">RAG Pipeline &amp; Vector Indexing</span>
+                  <span class="col-year" data-i18n="work.date.dec_apr_2026">Dec 2025 – Apr 2026</span>
                 </a>
               </li>
             </ul>
           </div>
 
-          <!-- GRID VIEW (Dennis 2-Column Visual Tiles — Sorted Chronologically by Default) -->
           <div class="work-tiles-grid" data-grid-view data-grid-container hidden>
-            <!-- Tile 1: HealthLab Evidence Intelligence -->
             <article class="work-tile-card" data-topics="data" data-date="202610.2">
               <a href="healthlab/index.html" data-transition-label="HealthLab">
                 <div class="work-tile-media">
@@ -318,13 +314,12 @@
                 <h4>HealthLab Evidence Intelligence</h4>
                 <div class="stripe"></div>
                 <div class="work-tile-meta">
-                  <span>Evidence Pipeline &amp; Editorial Review</span>
-                  <span>Oct 2026 – Present</span>
+                  <span data-i18n="work.cap.health">Evidence Pipeline &amp; Editorial Review</span>
+                  <span data-i18n="work.date.oct_present">Oct 2026 – Present</span>
                 </div>
               </a>
             </article>
 
-            <!-- Tile 2: HealthLab Website -->
             <article class="work-tile-card" data-topics="web" data-date="202610.1">
               <a href="../about/index.html#experience" data-transition-label="HealthLab Website">
                 <div class="work-tile-media">
@@ -339,13 +334,12 @@
                 <h4>HealthLab Website</h4>
                 <div class="stripe"></div>
                 <div class="work-tile-meta">
-                  <span>Astro Typography &amp; Components</span>
-                  <span>Oct 2026 – Present</span>
+                  <span data-i18n="work.cap.web">Astro Typography &amp; Components</span>
+                  <span data-i18n="work.date.oct_present">Oct 2026 – Present</span>
                 </div>
               </a>
             </article>
 
-            <!-- Tile 3: Reliable Agent Harness -->
             <article class="work-tile-card" data-topics="agents" data-date="202609">
               <a href="reliable-agent-harness/index.html" data-transition-label="Reliable Agent Harness">
                 <div class="work-tile-media">
@@ -361,13 +355,12 @@
                 <h4>Reliable Agent Harness</h4>
                 <div class="stripe"></div>
                 <div class="work-tile-meta">
-                  <span>Tool Validation &amp; Human Approval</span>
-                  <span>Sep 2026</span>
+                  <span data-i18n="work.cap.harness">Tool Validation &amp; Human Approval</span>
+                  <span data-i18n="work.date.sep_2026">Sep 2026</span>
                 </div>
               </a>
             </article>
 
-            <!-- Tile 4: HarborMind -->
             <article class="work-tile-card" data-topics="agents data" data-date="202605">
               <a href="harbormind/index.html" data-transition-label="HarborMind">
                 <div class="work-tile-media">
@@ -375,9 +368,7 @@
                     <div class="art-card dark-card">
                       <div class="art-card-top"><span>LONG BEACH · NOAA AIS</span><span class="art-pill">Gemma 4 + LightGBM</span></div>
                       <div class="art-card-title">Offline wait-time forecast with uncertainty handoff.</div>
-                      <div class="art-bar-chart">
-                        <div class="art-bar-track"><div class="art-bar-fill" style="left:28%;width:58%;"></div></div>
-                      </div>
+                      <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill" style="left:28%;width:58%;"></div></div></div>
                       <div class="art-checks"><span>P10–P90 Band</span><span>→ Captain Review</span></div>
                     </div>
                   </div>
@@ -385,13 +376,12 @@
                 <h4>HarborMind</h4>
                 <div class="stripe"></div>
                 <div class="work-tile-meta">
-                  <span>Quantile ML &amp; Local Gemma Agents</span>
-                  <span>Apr – May 2026</span>
+                  <span data-i18n="work.cap.harbormind">Quantile ML &amp; Local Gemma Agents</span>
+                  <span data-i18n="work.date.apr_may_2026">Apr – May 2026</span>
                 </div>
               </a>
             </article>
 
-            <!-- Tile 5: mini-llm-twin -->
             <article class="work-tile-card" data-topics="data" data-date="202604">
               <a href="mini-llm-twin/index.html" data-transition-label="mini-llm-twin">
                 <div class="work-tile-media">
@@ -399,30 +389,25 @@
                     <div class="art-card">
                       <div class="art-card-top"><span>RAG PIPELINE</span><span class="art-pill">FastAPI + Docker</span></div>
                       <div class="art-card-title">Personal knowledge ingestion, embedding &amp; semantic retrieval.</div>
-                      <div class="art-flow">
-                        <div>Gemini<br>Embed</div>
-                        <div>Atlas<br>Vector</div>
-                        <div>Grounded<br>Answer</div>
-                      </div>
+                      <div class="art-flow"><div>Gemini<br>Embed</div><div>Atlas<br>Vector</div><div>Grounded<br>Answer</div></div>
                     </div>
                   </div>
                 </div>
                 <h4>mini-llm-twin</h4>
                 <div class="stripe"></div>
                 <div class="work-tile-meta">
-                  <span>RAG Pipeline &amp; Vector Indexing</span>
-                  <span>Dec 2025 – Apr 2026</span>
+                  <span data-i18n="work.cap.rag">RAG Pipeline &amp; Vector Indexing</span>
+                  <span data-i18n="work.date.dec_apr_2026">Dec 2025 – Apr 2026</span>
                 </div>
               </a>
             </article>
           </div>
 
-          <!-- Archive / GitHub CTA -->
           <div class="work-archive-row">
             <div class="btn btn-dark">
               <a class="btn-click magnetic" href="https://github.com/dblue03333" target="_blank" rel="noopener" data-strength="28" data-strength-text="14">
                 <div class="btn-fill"></div>
-                <span class="btn-text">GitHub Archive ↗</span>
+                <span class="btn-text" data-i18n="work.archive_cta">GitHub Archive ↗</span>
               </a>
             </div>
           </div>
@@ -431,7 +416,6 @@
     </section>
   </main>
 
-  <!-- ============ CURVED DARK FOOTER ============ -->
   <div class="footer-rounded-div" aria-hidden="true">
     <div class="rounded-div-wrap"><div class="rounded-div"></div></div>
   </div>
@@ -443,9 +427,9 @@
             <span class="footer-avatar">
               <img src="../assets/avatar.webp" alt="Kelvin Nguyen portrait" width="256" height="256" loading="lazy">
             </span>
-            <span>Let’s work</span>
+            <span data-i18n="footer.lets_work">Let’s work</span>
           </span>
-          <span>together</span>
+          <span data-i18n="footer.together">together</span>
         </h2>
         <span class="arrow-diag footer-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7v10H7"/></svg>
@@ -458,7 +442,7 @@
           <div class="btn btn-round btn-accent">
             <a class="btn-click magnetic" href="../contact/index.html" data-strength="50" data-strength-text="24" data-transition-label="Contact">
               <div class="btn-fill"></div>
-              <span class="btn-text">Get in touch</span>
+              <span class="btn-text" data-i18n="footer.get_in_touch">Get in touch</span>
             </a>
           </div>
         </div>
@@ -483,17 +467,11 @@
     <div class="container">
       <div class="footer-bottom">
         <div class="footer-meta-group">
-          <div class="footer-meta-col">
-            <h5>Version</h5>
-            <p>2026 © Edition</p>
-          </div>
-          <div class="footer-meta-col">
-            <h5>Local Time</h5>
-            <p data-local-time>09:30 PM GMT+7</p>
-          </div>
+          <div class="footer-meta-col"><h5 data-i18n="footer.version">Version</h5><p data-i18n="footer.edition">2026 © Edition</p></div>
+          <div class="footer-meta-col"><h5 data-i18n="footer.local_time">Local Time</h5><p data-local-time>09:30 PM GMT+7</p></div>
         </div>
         <div class="footer-socials">
-          <h5>Socials</h5>
+          <h5 data-i18n="nav.socials">Socials</h5>
           <ul>
             <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
             <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -508,7 +486,9 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
-  <script src="../js/motion.js?v=3" defer></script>
-  <script src="../js/work.js?v=3" defer></script>
+  <script src="../js/i18n.js?v=6" defer></script>
+  <script src="../js/motion.js?v=6" defer></script>
+  <script src="../js/work.js?v=6" defer></script>
+  <script src="../js/delights.js?v=6" defer></script>
 </body>
 </html>

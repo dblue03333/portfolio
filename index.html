@@ -3,25 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Kelvin Nguyen — AI Engineer building reliable AI agents, evidence-linked data pipelines, and retrieval systems you can inspect.">
+  <meta name="description" content="Kelvin Nguyen — AI Engineer building LLM applications, reliable AI agents, backend services, and evidence-linked data pipelines.">
   <meta name="author" content="Kelvin Nguyen">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kelvin Nguyen — AI Engineer">
-  <meta property="og:description" content="Building reliable AI agents, evidence-linked data pipelines, and retrieval systems you can inspect.">
+  <meta property="og:description" content="Building reliable AI systems grounded in source evidence, bounded tool execution, and clear human oversight.">
   <meta property="og:image" content="assets/og-preview.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <title>Kelvin Nguyen — AI Engineer</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/tokens.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css?v=3">
-  <link rel="stylesheet" href="css/sections.css?v=3">
-  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css?v=5">
+  <link rel="stylesheet" href="css/base.css?v=5">
+  <link rel="stylesheet" href="css/layout.css?v=6">
+  <link rel="stylesheet" href="css/sections.css?v=6">
+  <link rel="stylesheet" href="css/responsive.css?v=6">
   <script>
     (function(){
+      var p = new URLSearchParams(location.search).get('lang');
+      var l = (p === 'en' || p === 'vi' || p === 'ja') ? p : (localStorage.getItem('portfolio_lang') || 'en');
+      if (l !== 'en' && l !== 'vi' && l !== 'ja') l = 'en';
+      document.documentElement.dataset.lang = l;
+      document.documentElement.lang = l;
+
       var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduced) return;
       var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
@@ -38,20 +44,18 @@
   </script>
 </head>
 <body data-page="home" data-page-title="Home">
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
 
   <!-- Curved AI Engineer Preloader & Page Transition Curtain -->
   <div class="loading-container" aria-hidden="true">
     <div class="loading-screen">
       <div class="rounded-div-wrap top"><div class="rounded-div"></div></div>
 
-      <!-- Route transition / Multilingual greeting center text -->
       <div class="loading-words" data-loading-words>
         <span class="dot"></span>
         <span data-loading-word>Hello</span>
       </div>
 
-      <!-- AI Model Weights Boot HUD (shown on Home entry & F5 reload) -->
       <div class="loading-ai-hud" data-loading-ai-hud>
         <div class="loading-ai-center">
           <div class="loading-ai-status">
@@ -68,12 +72,10 @@
             <span data-ai-chip="guardrails">368 tests</span>
           </div>
         </div>
-
         <div class="loading-ai-meta">
-          <span>KELVIN.AI // RUNTIME</span>
+          <span data-i18n="brand.runtime">KELVIN.AI // RUNTIME</span>
           <span>HCMC · GMT+7</span>
         </div>
-
         <div class="loading-ai-counter" data-ai-percent>00%</div>
       </div>
 
@@ -84,13 +86,10 @@
   <!-- Floating Hamburger Trigger -->
   <div class="btn-hamburger-wrap">
     <div class="btn btn-hamburger">
-      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="42" data-strength-text="22" aria-label="Toggle navigation menu" aria-expanded="false">
+      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="32" data-strength-text="16" aria-label="Toggle navigation menu" aria-expanded="false">
         <div class="btn-fill"></div>
         <div class="btn-text">
-          <div class="hamburger-bars" aria-hidden="true">
-            <span></span>
-            <span></span>
-          </div>
+          <div class="hamburger-bars" aria-hidden="true"><span></span><span></span></div>
         </div>
       </button>
     </div>
@@ -99,22 +98,30 @@
   <!-- Curved Full-Height Navigation Drawer -->
   <div class="fixed-nav-back" aria-hidden="true"></div>
   <aside class="fixed-nav" aria-label="Full navigation">
-    <div class="fixed-nav-rounded-div" aria-hidden="true">
-      <div class="rounded-curve"></div>
-    </div>
+    <div class="fixed-nav-rounded-div" aria-hidden="true"><div class="rounded-curve"></div></div>
     <div class="fixed-nav-inner">
       <div class="nav-header">
-        <h5>Navigation</h5>
+        <h5 data-i18n="nav.navigation">Navigation</h5>
         <div class="stripe"></div>
         <nav class="fixed-nav-links" aria-label="Primary drawer navigation">
-          <a href="index.html" class="active" data-transition-label="Home">Home</a>
-          <a href="work/index.html" data-transition-label="Work">Work</a>
-          <a href="about/index.html" data-transition-label="About">About</a>
-          <a href="contact/index.html" data-transition-label="Contact">Contact</a>
+          <a href="index.html" class="active" data-transition-label="Home" data-i18n="nav.home">Home</a>
+          <a href="work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a>
+          <a href="about/index.html" data-transition-label="About" data-i18n="nav.about">About</a>
+          <a href="contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a>
         </nav>
+
+        <div class="fixed-nav-lang">
+          <h5 data-i18n="nav.language">Language</h5>
+          <div class="lang-switch" role="group" aria-label="Switch language">
+            <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+            <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+            <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+          </div>
+        </div>
       </div>
+
       <div class="fixed-nav-socials">
-        <h5>Socials</h5>
+        <h5 data-i18n="nav.socials">Socials</h5>
         <ul>
           <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
           <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -128,66 +135,34 @@
   <!-- Floating Hover Preview Reel + Blue "View" Cursor (Desktop) -->
   <div class="mouse-pos-list-image" aria-hidden="true">
     <div class="mouse-pos-list-image-reel">
-      <!-- 0: Reliable Agent Harness -->
       <div class="mouse-pos-list-image-slide art-bg-harness">
         <div class="art-card">
-          <div class="art-card-top">
-            <span>APPROVAL GATE · #402</span>
-            <span class="art-pill">368 Tests ✓</span>
-          </div>
+          <div class="art-card-top"><span>APPROVAL GATE · #402</span><span class="art-pill">368 Tests ✓</span></div>
           <div class="art-card-title">Propose create_incident on checkout?</div>
-          <div class="art-checks">
-            <span>schema ✓</span>
-            <span>retry 1/3</span>
-            <span>audit log</span>
-          </div>
-          <div class="art-actions-mini">
-            <span class="approve">Approve</span>
-            <span class="reject">Reject</span>
-          </div>
+          <div class="art-checks"><span>schema ✓</span><span>retry 1/3</span><span>audit log</span></div>
+          <div class="art-actions-mini"><span class="approve">Approve</span><span class="reject">Reject</span></div>
         </div>
       </div>
-      <!-- 1: HealthLab Evidence Intelligence -->
       <div class="mouse-pos-list-image-slide art-bg-healthlab">
         <div class="art-card">
-          <div class="art-card-top">
-            <span>HEALTHLAB PILOT</span>
-            <span class="art-pill">Source-Linked</span>
-          </div>
+          <div class="art-card-top"><span>HEALTHLAB PILOT</span><span class="art-pill">Source-Linked</span></div>
           <div class="art-sheet">Draft v2: Available <mark>nationwide</mark>.</div>
           <div class="art-sheet mist">Source: Piloted in <mark>one district</mark>.</div>
         </div>
       </div>
-      <!-- 2: HarborMind -->
       <div class="mouse-pos-list-image-slide art-bg-harbormind">
         <div class="art-card dark-card">
-          <div class="art-card-top">
-            <span>LONG BEACH · AIS</span>
-            <span class="art-pill">Gemma 4</span>
-          </div>
+          <div class="art-card-top"><span>LONG BEACH · AIS</span><span class="art-pill">Gemma 4</span></div>
           <div class="art-card-title">Quantile Wait Forecast · P10–P90</div>
-          <div class="art-bar-chart">
-            <div class="art-bar-track"><div class="art-bar-fill" style="left:28%;width:58%;"></div></div>
-          </div>
-          <div class="art-checks">
-            <span>High Spread</span>
-            <span>→ Captain Handoff</span>
-          </div>
+          <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill" style="left:28%;width:58%;"></div></div></div>
+          <div class="art-checks"><span>High Spread</span><span>→ Captain Handoff</span></div>
         </div>
       </div>
-      <!-- 3: mini-llm-twin -->
       <div class="mouse-pos-list-image-slide art-bg-rag">
         <div class="art-card">
-          <div class="art-card-top">
-            <span>RAG PIPELINE</span>
-            <span class="art-pill">Cosine 0.94</span>
-          </div>
+          <div class="art-card-top"><span>RAG PIPELINE</span><span class="art-pill">Cosine 0.94</span></div>
           <div class="art-card-title">Personal Knowledge Assistant</div>
-          <div class="art-flow">
-            <div>Gemini<br>Embed</div>
-            <div>Atlas<br>Vector</div>
-            <div>FastAPI<br>Answer</div>
-          </div>
+          <div class="art-flow"><div>Gemini<br>Embed</div><div>Atlas<br>Vector</div><div>FastAPI<br>Answer</div></div>
         </div>
       </div>
     </div>
@@ -199,22 +174,32 @@
     <a href="index.html" class="credits-top" data-transition-label="Home">
       <span class="credit-symbol">©</span>
       <span class="credit-copy">
-        <span class="credit-track">
-          <span>Code by</span>
-          <span>Kelvin</span>
-          <span class="credit-extra">Nguyen</span>
-        </span>
+        <span class="credit-track" data-i18n-html="brand.credit"><span>Code by</span><span>Kelvin</span><span class="credit-extra">Nguyen</span></span>
       </span>
     </a>
+
     <nav class="nav-links" aria-label="Main navigation">
-      <div class="nav-link-item"><a class="btn-link" href="work/index.html" data-transition-label="Work">Work</a></div>
-      <div class="nav-link-item"><a class="btn-link" href="about/index.html" data-transition-label="About">About</a></div>
-      <div class="nav-link-item"><a class="btn-link" href="contact/index.html" data-transition-label="Contact">Contact</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="about/index.html" data-transition-label="About" data-i18n="nav.about">About</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a></div>
+      <div class="lang-switch" role="group" aria-label="Switch language">
+        <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+        <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+      </div>
     </nav>
-    <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
-      <span class="dot"></span>
-      <span>Menu</span>
-    </button>
+
+    <div class="nav-mobile-right">
+      <div class="lang-switch" role="group" aria-label="Switch language">
+        <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+        <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+      </div>
+      <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
+        <span class="dot"></span>
+        <span data-i18n="nav.menu">Menu</span>
+      </button>
+    </div>
   </header>
 
   <main id="main">
@@ -224,38 +209,47 @@
         <img src="assets/hero-portrait.webp" alt="Kelvin Nguyen in Ho Chi Minh City" fetchpriority="high" width="1920" height="1280">
       </div>
 
-      <!-- Location Pill + Spinning Globe -->
-      <div class="hanger">
-        <p>Located in<br>Ho Chi Minh City,<br>Vietnam</p>
-        <div class="digital-ball" aria-hidden="true">
-          <div class="globe">
-            <div class="globe-wrap">
-              <div class="globe-circle"></div>
-              <div class="globe-circle"></div>
-              <div class="globe-circle"></div>
-              <div class="globe-equator"></div>
-              <div class="globe-meridian"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Interactive Location Pill + Spinning Globe -->
+      <button class="hanger" type="button" data-globe-interactive aria-label="Spin globe and toggle Ho Chi Minh City coordinates">
+        <span class="hanger-text" data-hanger-text>
+          <span class="hanger-face is-active" data-hanger-default data-i18n-html="home.hanger_default">Located in<br>Ho Chi Minh City,<br>Vietnam</span>
+          <span class="hanger-face hanger-coords" data-hanger-coords data-i18n-html="home.hanger_coords" aria-hidden="true">10.7769° N<br>106.7009° E<br>Saigon · VN</span>
+        </span>
+        <span class="digital-ball" aria-hidden="true">
+          <span class="globe-ring"></span>
+          <span class="globe">
+            <span class="globe-wrap">
+              <span class="globe-circle"></span>
+              <span class="globe-circle"></span>
+              <span class="globe-circle"></span>
+              <span class="globe-equator"></span>
+              <span class="globe-meridian"></span>
+            </span>
+          </span>
+        </span>
+      </button>
 
-      <!-- Role Column -->
+      <!-- Fixed AI Engineer + Zero-Shift Smooth Role Cycler -->
       <div class="home-hero-role">
-        <span class="arrow-diag" aria-hidden="true">
+        <span class="arrow-diag" data-hero-arrow aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7v10H7"/></svg>
         </span>
         <h2>
-          <span>AI Engineer</span>
-          <span>Agents &amp; Data Pipelines</span>
+          <span data-i18n="home.role_title">AI Engineer</span>
+          <button class="role-cycler" type="button" data-role-cycler aria-label="Switch engineering focus">
+            <span class="role-cycler-sizer" data-role-sizer aria-hidden="true">LLMs, Agents &amp; Backend</span>
+            <span class="role-cycler-slot is-active" data-i18n="home.role_1">LLMs, Agents &amp; Backend</span>
+            <span class="role-cycler-slot" data-i18n="home.role_2">Data &amp; RAG Pipelines</span>
+            <span class="role-cycler-slot" data-i18n="home.role_3">Applied AI Systems</span>
+          </button>
         </h2>
       </div>
 
-      <!-- Giant Reversing Marquee -->
+      <!-- Giant Reversing Vinyl Marquee -->
       <div class="big-name">
         <div class="name-h1">
           <div class="name-wrap">
-            <h1>Kelvin Nguyen<span class="spacer">—</span>Kelvin Nguyen<span class="spacer">—</span></h1>
+            <h1 data-i18n-html="brand.marquee">Kelvin Nguyen<span class="spacer">—</span>Kelvin Nguyen<span class="spacer">—</span></h1>
           </div>
         </div>
       </div>
@@ -265,18 +259,18 @@
     <section class="section home-intro">
       <div class="container medium">
         <div class="home-intro-grid">
-          <p class="home-intro-lead once-in">
+          <p class="home-intro-lead once-in" data-i18n="home.intro_lead">
             Building reliable AI systems grounded in source evidence, bounded tool execution, and clear human oversight.
           </p>
           <div class="home-intro-side once-in">
-            <p>
-              I’m Kelvin Nguyen — an AI Engineer based in Vietnam. I build agents, retrieval systems, and data pipelines, test where they fail, and design workflows people can actually inspect before acting.
+            <p data-i18n="home.intro_body">
+              I’m Kelvin Nguyen — an AI Engineer based in Vietnam. I build LLM applications, agents, backend services, and data pipelines — testing where they fail and designing workflows people can inspect before acting.
             </p>
             <div class="home-intro-cta">
               <div class="btn btn-round">
                 <a class="btn-click magnetic" href="about/index.html" data-strength="48" data-strength-text="24" data-transition-label="About">
                   <div class="btn-fill"></div>
-                  <span class="btn-text">About me</span>
+                  <span class="btn-text" data-i18n="home.about_me">About me</span>
                 </a>
               </div>
             </div>
@@ -285,15 +279,14 @@
       </div>
     </section>
 
-    <!-- ============ SELECTED WORK (LIST + FLOATING HOVER PREVIEW) ============ -->
+    <!-- ============ SELECTED WORK ============ -->
     <section class="section work-grid-section" aria-labelledby="recent-work-heading">
       <div class="container">
         <div class="sub-title-row">
-          <h5 id="recent-work-heading">Selected Work</h5>
+          <h5 id="recent-work-heading" data-i18n="home.selected_work">Selected Work</h5>
         </div>
 
         <ul class="work-items">
-          <!-- 01: HealthLab Evidence Intelligence -->
           <li class="work-items-row" data-preview-index="1" data-preview-label="Demo">
             <a href="work/healthlab/index.html" data-transition-label="HealthLab">
               <div class="work-mobile-thumb art-bg-healthlab">
@@ -305,11 +298,10 @@
                 </div>
               </div>
               <span class="work-row-title">HealthLab Evidence</span>
-              <span class="work-row-meta">Data Pipeline &amp; Editorial Review · Oct 2026 – Present</span>
+              <span class="work-row-meta" data-i18n="proj.healthlab.meta_home">Data Pipeline &amp; Editorial Review · Oct 2026 – Present</span>
             </a>
           </li>
 
-          <!-- 02: Reliable Agent Harness -->
           <li class="work-items-row" data-preview-index="0" data-preview-label="View">
             <a href="work/reliable-agent-harness/index.html" data-transition-label="Reliable Agent Harness">
               <div class="work-mobile-thumb art-bg-harness">
@@ -321,11 +313,10 @@
                 </div>
               </div>
               <span class="work-row-title">Reliable Agent Harness</span>
-              <span class="work-row-meta">AI Agents &amp; Guardrails · Sep 2026</span>
+              <span class="work-row-meta" data-i18n="proj.harness.meta_home">AI Agents &amp; Guardrails · Sep 2026</span>
             </a>
           </li>
 
-          <!-- 03: HarborMind -->
           <li class="work-items-row" data-preview-index="2" data-preview-label="View">
             <a href="work/harbormind/index.html" data-transition-label="HarborMind">
               <div class="work-mobile-thumb art-bg-harbormind">
@@ -337,11 +328,10 @@
                 </div>
               </div>
               <span class="work-row-title">HarborMind</span>
-              <span class="work-row-meta">Quantile ML &amp; Local Agents · Apr – May 2026</span>
+              <span class="work-row-meta" data-i18n="proj.harbormind.meta_home">Quantile ML &amp; Local Agents · Apr – May 2026</span>
             </a>
           </li>
 
-          <!-- 04: mini-llm-twin -->
           <li class="work-items-row" data-preview-index="3" data-preview-label="View">
             <a href="work/mini-llm-twin/index.html" data-transition-label="mini-llm-twin">
               <div class="work-mobile-thumb art-bg-rag">
@@ -353,7 +343,7 @@
                 </div>
               </div>
               <span class="work-row-title">mini-llm-twin</span>
-              <span class="work-row-meta">Retrieval &amp; Vector Indexing · Dec 2025 – Apr 2026</span>
+              <span class="work-row-meta" data-i18n="proj.rag.meta_home">Retrieval &amp; Vector Indexing · Dec 2025 – Apr 2026</span>
             </a>
           </li>
         </ul>
@@ -362,7 +352,7 @@
           <div class="btn btn-normal">
             <a class="btn-click magnetic" href="work/index.html" data-strength="28" data-strength-text="14" data-transition-label="Work">
               <div class="btn-fill"></div>
-              <span class="btn-text">More work <span class="count-nr">5</span></span>
+              <span class="btn-text"><span data-i18n="home.more_work">More work</span> <span class="count-nr">5</span></span>
             </a>
           </div>
         </div>
@@ -371,7 +361,6 @@
 
     <!-- ============ DUAL-ROW HORIZONTAL PARALLAX SHOWCASE ============ -->
     <section class="section horizontal-items" aria-label="Visual system highlights">
-      <!-- Row 1 -->
       <div class="horizontal-row">
         <div class="horizontal-tile art-bg-healthlab">
           <div class="art-card">
@@ -391,19 +380,13 @@
           <div class="art-card dark-card">
             <div class="art-card-top"><span>NOAA AIS DATASET</span><span class="art-pill">Kaggle Public</span></div>
             <div class="art-card-title">Long Beach vessel wait quantiles</div>
-            <div class="art-bar-chart">
-              <div class="art-bar-track"><div class="art-bar-fill" style="left:22%;width:52%;"></div></div>
-            </div>
+            <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill" style="left:22%;width:52%;"></div></div></div>
           </div>
         </div>
         <div class="horizontal-tile art-bg-rag">
           <div class="art-card">
             <div class="art-card-top"><span>VECTOR RETRIEVAL</span><span class="art-pill">Dockerized</span></div>
-            <div class="art-flow">
-              <div>Chunk</div>
-              <div>Embed</div>
-              <div>Retrieve</div>
-            </div>
+            <div class="art-flow"><div>Chunk</div><div>Embed</div><div>Retrieve</div></div>
           </div>
         </div>
         <div class="horizontal-tile art-bg-web">
@@ -414,7 +397,6 @@
         </div>
       </div>
 
-      <!-- Row 2 -->
       <div class="horizontal-row">
         <div class="horizontal-tile art-bg-adimi">
           <div class="art-card">
@@ -437,10 +419,7 @@
         <div class="horizontal-tile art-bg-harness">
           <div class="art-card">
             <div class="art-card-top"><span>EXACT ACTION HASH</span><span class="art-pill">Approve / Reject</span></div>
-            <div class="art-actions-mini">
-              <span class="approve">Approve #9f2c</span>
-              <span class="reject">Abort</span>
-            </div>
+            <div class="art-actions-mini"><span class="approve">Approve #9f2c</span><span class="reject">Abort</span></div>
           </div>
         </div>
         <div class="horizontal-tile art-bg-rag">
@@ -453,7 +432,7 @@
     </section>
   </main>
 
-  <!-- ============ CURVED DARK SƯƠNG XANH FOOTER ============ -->
+  <!-- ============ CURVED DARK FOOTER ============ -->
   <div class="footer-rounded-div" aria-hidden="true">
     <div class="rounded-div-wrap"><div class="rounded-div"></div></div>
   </div>
@@ -465,9 +444,9 @@
             <span class="footer-avatar">
               <img src="assets/avatar.webp" alt="Kelvin Nguyen portrait" width="256" height="256" loading="lazy">
             </span>
-            <span>Let’s work</span>
+            <span data-i18n="footer.lets_work">Let’s work</span>
           </span>
-          <span>together</span>
+          <span data-i18n="footer.together">together</span>
         </h2>
         <span class="arrow-diag footer-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7v10H7"/></svg>
@@ -480,7 +459,7 @@
           <div class="btn btn-round btn-accent">
             <a class="btn-click magnetic" href="contact/index.html" data-strength="50" data-strength-text="24" data-transition-label="Contact">
               <div class="btn-fill"></div>
-              <span class="btn-text">Get in touch</span>
+              <span class="btn-text" data-i18n="footer.get_in_touch">Get in touch</span>
             </a>
           </div>
         </div>
@@ -506,16 +485,16 @@
       <div class="footer-bottom">
         <div class="footer-meta-group">
           <div class="footer-meta-col">
-            <h5>Version</h5>
-            <p>2026 © Edition</p>
+            <h5 data-i18n="footer.version">Version</h5>
+            <p data-i18n="footer.edition">2026 © Edition</p>
           </div>
           <div class="footer-meta-col">
-            <h5>Local Time</h5>
+            <h5 data-i18n="footer.local_time">Local Time</h5>
             <p data-local-time>09:30 PM GMT+7</p>
           </div>
         </div>
         <div class="footer-socials">
-          <h5>Socials</h5>
+          <h5 data-i18n="nav.socials">Socials</h5>
           <ul>
             <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
             <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -527,11 +506,12 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
-  <script src="js/motion.js?v=3" defer></script>
-  <script src="js/work.js?v=3" defer></script>
+  <script src="js/i18n.js?v=6" defer></script>
+  <script src="js/motion.js?v=6" defer></script>
+  <script src="js/work.js?v=6" defer></script>
+  <script src="js/delights.js?v=6" defer></script>
 </body>
 </html>

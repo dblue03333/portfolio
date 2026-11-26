@@ -97,7 +97,9 @@
       sessionStorage.removeItem('dennis_page_transition');
       const storedLabel = sessionStorage.getItem('dennis_page_label');
       sessionStorage.removeItem('dennis_page_label');
-      const pageTitle = storedLabel || document.body.dataset.pageTitle || 'Kelvin Nguyen';
+      const activeLang = window.__i18n?.getLang() || document.documentElement.dataset.lang || 'en';
+      const defaultBrand = activeLang === 'vi' ? 'Nguyễn Đức Tuấn Đạt' : 'Kelvin Nguyen';
+      const pageTitle = storedLabel || document.body.dataset.pageTitle || defaultBrand;
       if (wordEl) wordEl.textContent = pageTitle;
 
       container.classList.add('is-active');
@@ -135,7 +137,11 @@
       if (heroImg) window.gsap.set(heroImg, { scale: 1.055 });
 
       const state = { pct: 0 };
-      const greetings = ['Hello', 'Xin chào', 'こんにちは', 'Kelvin Nguyen'];
+      const activeLang = window.__i18n?.getLang() || document.documentElement.dataset.lang || 'en';
+      const greetings =
+        activeLang === 'vi'
+          ? ['Xin chào', 'Hello', 'こんにちは', 'Nguyễn Đức Tuấn Đạt']
+          : ['Hello', 'Xin chào', 'こんにちは', 'Kelvin Nguyen'];
       if (wordEl) wordEl.textContent = greetings[0];
 
       const updateHud = () => {
@@ -144,7 +150,7 @@
         if (aiBar) aiBar.style.width = `${p}%`;
 
         if (p < 35) {
-          if (aiLog) aiLog.textContent = 'loading weights · kelvin-v26';
+          if (aiLog) aiLog.textContent = activeLang === 'vi' ? 'loading weights · tuandat-v26' : 'loading weights · kelvin-v26';
         } else if (p < 70) {
           if (aiLog) aiLog.textContent = 'grounding sources · healthlab ✓';
           chipWeights?.classList.add('is-done');
@@ -246,7 +252,8 @@
       closeDrawer();
       window.__hideWorkPreview?.();
 
-      const label = link.dataset.transitionLabel || link.textContent.trim().replace(/\s+/g, ' ').slice(0, 32) || 'Loading';
+      const localizedText = link.hasAttribute('data-i18n') ? link.textContent.trim() : '';
+      const label = localizedText || link.dataset.transitionLabel || link.textContent.trim().replace(/\s+/g, ' ').slice(0, 32) || 'Loading';
       if (wordEl) wordEl.textContent = label;
       container.classList.add('is-active');
       window.gsap.set(screen, { yPercent: 120 });
@@ -423,31 +430,69 @@
     updateBurgerVisibility();
   }
 
-  /* ---------- 4. Scroll-Direction Reversing Hero Marquee ---------- */
+  /* ---------- 4. Scroll-Direction Reversing Vinyl Marquee + Hero Delights ---------- */
 
   function initHeroMarquee() {
+    const marqueeBox = document.querySelector('.big-name');
     const track = document.querySelector('.name-h1');
     const unit = track?.querySelector('.name-wrap');
-    if (!track || !unit || prefersReduced || !hasGSAP) return;
+    if (!marqueeBox || !track || !unit || prefersReduced || !hasGSAP) return;
 
-    // Clone once for seamless loop
+    // Clone once for seamless loop (preserve data-i18n-html so EN/VI/JP marquee swaps both halves)
     const clone = unit.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
     const headingInClone = clone.querySelector('h1');
     if (headingInClone) {
       const span = document.createElement('span');
       span.className = 'marquee-text';
+      if (headingInClone.dataset.i18nHtml) {
+        span.dataset.i18nHtml = headingInClone.dataset.i18nHtml;
+      }
       span.innerHTML = headingInClone.innerHTML;
       headingInClone.replaceWith(span);
     }
     track.appendChild(clone);
 
     let direction = 1;
+    let hoverScale = 1;
+
     const tween = window.gsap.to(track, {
       xPercent: -50,
       repeat: -1,
       duration: 20,
       ease: 'none',
+    });
+
+    const syncVelocity = (dur = 0.65, ease = 'power3.out') => {
+      window.gsap.to(tween, {
+        timeScale: direction * hoverScale,
+        duration: dur,
+        ease,
+        overwrite: true,
+      });
+    };
+
+    // Vinyl-record slow-down when hovering the big name
+    if (finePointer) {
+      marqueeBox.addEventListener('pointerenter', () => {
+        hoverScale = 0.22;
+        syncVelocity(0.6, 'power3.out');
+      });
+
+      marqueeBox.addEventListener('pointerleave', () => {
+        hoverScale = 1;
+        syncVelocity(0.85, 'power2.out');
+      });
+    }
+
+    // Playful direction flip on click
+    marqueeBox.addEventListener('click', () => {
+      direction *= -1;
+      window.gsap.fromTo(
+        tween,
+        { timeScale: direction * 1.45 },
+        { timeScale: direction * hoverScale, duration: 0.9, ease: 'power3.out', overwrite: true }
+      );
     });
 
     if (hasScrollTrigger) {
@@ -458,14 +503,112 @@
         onUpdate(self) {
           if (self.direction !== direction) {
             direction = self.direction;
-            window.gsap.to(tween, {
-              timeScale: direction,
-              duration: 0.55,
-              ease: 'power2.out',
-              overwrite: true,
-            });
+            syncVelocity(0.55, 'power2.out');
           }
         },
+      });
+    }
+  }
+
+  function initHeroPlayfulDelights() {
+    // 1. Role Cycler (AI Engineer -> LLMs, Agents & Backend / Data & RAG Pipelines / Applied AI Systems)
+    const cycler = document.querySelector('[data-role-cycler]');
+    const heroArrow = document.querySelector('[data-hero-arrow]');
+    if (cycler) {
+      const slots = [...cycler.querySelectorAll('.role-cycler-slot')];
+      let current = 0;
+      let cycleTimer = null;
+
+      function advanceRole() {
+        if (slots.length < 2) return;
+        const prev = slots[current];
+        current = (current + 1) % slots.length;
+        const next = slots[current];
+
+        slots.forEach((s) => s.classList.remove('is-leaving'));
+        prev.classList.remove('is-active');
+        prev.classList.add('is-leaving');
+        next.classList.add('is-active');
+
+        if (heroArrow && hasGSAP && !prefersReduced) {
+          window.gsap.fromTo(
+            heroArrow,
+            { x: 0, y: 0 },
+            { x: 4, y: 4, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.out' }
+          );
+        }
+      }
+
+      function startTimer() {
+        if (prefersReduced || cycleTimer) return;
+        cycleTimer = window.setInterval(advanceRole, 3000);
+      }
+
+      function stopTimer() {
+        if (cycleTimer) {
+          clearInterval(cycleTimer);
+          cycleTimer = null;
+        }
+      }
+
+      cycler.addEventListener('click', () => {
+        stopTimer();
+        advanceRole();
+        startTimer();
+      });
+
+      if (finePointer) {
+        cycler.addEventListener('mouseenter', stopTimer);
+        cycler.addEventListener('mouseleave', startTimer);
+      }
+
+      startTimer();
+    }
+
+    // 2. Interactive Globe (click -> turbo spin impulse + Saigon coordinates flip)
+    const hanger = document.querySelector('[data-globe-interactive]');
+    if (hanger) {
+      const globe = hanger.querySelector('.globe');
+      const faceDefault = hanger.querySelector('[data-hanger-default]');
+      const faceCoords = hanger.querySelector('[data-hanger-coords]');
+      let showingCoords = false;
+      let revertTimer = null;
+      let boostTimer = null;
+      let spinAngle = -16;
+
+      function setFace(showCoords) {
+        showingCoords = showCoords;
+        faceDefault?.classList.toggle('is-active', !showCoords);
+        faceCoords?.classList.toggle('is-active', showCoords);
+        faceDefault?.setAttribute('aria-hidden', String(showCoords));
+        faceCoords?.setAttribute('aria-hidden', String(!showCoords));
+      }
+
+      hanger.addEventListener('click', () => {
+        setFace(!showingCoords);
+
+        clearTimeout(revertTimer);
+        if (showingCoords) {
+          revertTimer = window.setTimeout(() => setFace(false), 3800);
+        }
+
+        if (!prefersReduced) {
+          hanger.classList.remove('is-boosting');
+          void hanger.offsetWidth; // restart pulse ring cleanly
+          hanger.classList.add('is-boosting');
+          clearTimeout(boostTimer);
+          boostTimer = window.setTimeout(() => hanger.classList.remove('is-boosting'), 1150);
+
+          if (globe && hasGSAP) {
+            spinAngle += 360;
+            window.gsap.to(globe, {
+              rotation: spinAngle,
+              duration: 1.15,
+              ease: 'power3.out',
+              overwrite: 'auto',
+            });
+          }
+        }
       });
     }
   }
@@ -632,6 +775,7 @@
     initMagneticButtons();
     initNavigationDrawer();
     initHeroMarquee();
+    initHeroPlayfulDelights();
     initScrollChoreography();
     initLocalClock();
   });

@@ -299,6 +299,10 @@ html.is-intro-boot .loading-words,
   transform: translateX(-3.65em);
 }
 
+html[data-lang="vi"] .credits-top:hover .credit-track {
+  transform: none;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -312,6 +316,68 @@ html.is-intro-boot .loading-words,
 .nav-links .btn-link {
   font-size: 0.96em;
   font-weight: 450;
+}
+
+/* Minimal Dennis-style EN / VI / JP Language Switcher */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  padding: 0.22em 0.35em;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.nav-bar.nav-light .lang-switch,
+.theme-dark .lang-switch,
+.fixed-nav .lang-switch {
+  border-color: var(--color-border-light);
+}
+
+.lang-switch button {
+  padding: 0.38em 0.58em;
+  border-radius: 999px;
+  opacity: 0.58;
+  transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.lang-switch button:hover {
+  opacity: 1;
+}
+
+.lang-switch button.is-active {
+  opacity: 1;
+  background-color: var(--color-dark);
+  color: var(--color-text-light);
+}
+
+.nav-bar.nav-light .lang-switch button.is-active,
+.theme-dark .lang-switch button.is-active,
+.fixed-nav .lang-switch button.is-active {
+  background-color: var(--color-mist);
+  color: var(--color-dark);
+}
+
+.fixed-nav-lang {
+  margin-top: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.fixed-nav-lang h5 {
+  margin: 0;
+}
+
+.nav-mobile-right {
+  display: none;
+  align-items: center;
+  gap: 0.8em;
 }
 
 .nav-mobile-trigger {

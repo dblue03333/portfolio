@@ -39,6 +39,17 @@
   /* Typography */
   --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+html[data-lang="vi"] {
+  --font-sans: "Be Vietnam Pro", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html[data-lang="ja"] {
+  --font-sans: "Noto Sans JP", "DM Sans", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+:root {
 
   /* Dennis-calibrated spacing & containers */
   --section-padding: clamp(4.75em, 17vh, 11em);

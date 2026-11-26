@@ -13,14 +13,20 @@
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/tokens.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/sections.css">
-  <link rel="stylesheet" href="../css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css?v=5">
+  <link rel="stylesheet" href="../css/base.css?v=5">
+  <link rel="stylesheet" href="../css/layout.css?v=6">
+  <link rel="stylesheet" href="../css/sections.css?v=6">
+  <link rel="stylesheet" href="../css/responsive.css?v=6">
   <script>
     (function(){
+      var p = new URLSearchParams(location.search).get('lang');
+      var l = (p === 'en' || p === 'vi' || p === 'ja') ? p : (localStorage.getItem('portfolio_lang') || 'en');
+      if (l !== 'en' && l !== 'vi' && l !== 'ja') l = 'en';
+      document.documentElement.dataset.lang = l;
+      document.documentElement.lang = l;
+
       var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced && sessionStorage.getItem('dennis_page_transition') === '1') {
         document.documentElement.classList.add('is-transitioning');
@@ -30,49 +36,50 @@
   </script>
 </head>
 <body class="theme-dark" data-page="contact" data-page-title="Contact">
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
 
-  <!-- Curved Page Transition Curtain -->
   <div class="loading-container" aria-hidden="true">
     <div class="loading-screen">
       <div class="rounded-div-wrap top"><div class="rounded-div"></div></div>
-      <div class="loading-words">
-        <span class="dot"></span>
-        <span data-loading-word>Contact</span>
-      </div>
+      <div class="loading-words"><span class="dot"></span><span data-loading-word>Contact</span></div>
       <div class="rounded-div-wrap bottom"><div class="rounded-div"></div></div>
     </div>
   </div>
 
-  <!-- Floating Hamburger -->
   <div class="btn-hamburger-wrap">
     <div class="btn btn-hamburger">
-      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="42" data-strength-text="22" aria-label="Toggle navigation menu" aria-expanded="false">
+      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="32" data-strength-text="16" aria-label="Toggle navigation menu" aria-expanded="false">
         <div class="btn-fill"></div>
-        <div class="btn-text">
-          <div class="hamburger-bars" aria-hidden="true"><span></span><span></span></div>
-        </div>
+        <div class="btn-text"><div class="hamburger-bars" aria-hidden="true"><span></span><span></span></div></div>
       </button>
     </div>
   </div>
 
-  <!-- Curved Drawer -->
   <div class="fixed-nav-back" aria-hidden="true"></div>
   <aside class="fixed-nav" aria-label="Full navigation">
     <div class="fixed-nav-rounded-div" aria-hidden="true"><div class="rounded-curve"></div></div>
     <div class="fixed-nav-inner">
       <div class="nav-header">
-        <h5>Navigation</h5>
+        <h5 data-i18n="nav.navigation">Navigation</h5>
         <div class="stripe"></div>
         <nav class="fixed-nav-links" aria-label="Primary drawer navigation">
-          <a href="../index.html" data-transition-label="Home">Home</a>
-          <a href="../work/index.html" data-transition-label="Work">Work</a>
-          <a href="../about/index.html" data-transition-label="About">About</a>
-          <a href="index.html" class="active" data-transition-label="Contact">Contact</a>
+          <a href="../index.html" data-transition-label="Home" data-i18n="nav.home">Home</a>
+          <a href="../work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a>
+          <a href="../about/index.html" data-transition-label="About" data-i18n="nav.about">About</a>
+          <a href="index.html" class="active" data-transition-label="Contact" data-i18n="nav.contact">Contact</a>
         </nav>
+
+        <div class="fixed-nav-lang">
+          <h5 data-i18n="nav.language">Language</h5>
+          <div class="lang-switch" role="group" aria-label="Switch language">
+            <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+            <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+            <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+          </div>
+        </div>
       </div>
       <div class="fixed-nav-socials">
-        <h5>Socials</h5>
+        <h5 data-i18n="nav.socials">Socials</h5>
         <ul>
           <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
           <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -83,34 +90,41 @@
     </div>
   </aside>
 
-  <!-- Top Navigation (Light Text on Deep Navy) -->
   <header class="nav-bar nav-light">
     <a href="../index.html" class="credits-top" data-transition-label="Home">
       <span class="credit-symbol">©</span>
       <span class="credit-copy">
-        <span class="credit-track">
-          <span>Code by</span>
-          <span>Kelvin</span>
-          <span class="credit-extra">Nguyen</span>
-        </span>
+        <span class="credit-track" data-i18n-html="brand.credit"><span>Code by</span><span>Kelvin</span><span class="credit-extra">Nguyen</span></span>
       </span>
     </a>
     <nav class="nav-links" aria-label="Main navigation">
-      <div class="nav-link-item"><a class="btn-link" href="../work/index.html" data-transition-label="Work">Work</a></div>
-      <div class="nav-link-item"><a class="btn-link" href="../about/index.html" data-transition-label="About">About</a></div>
-      <div class="nav-link-item"><a class="btn-link active" href="index.html" data-transition-label="Contact">Contact</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../about/index.html" data-transition-label="About" data-i18n="nav.about">About</a></div>
+      <div class="nav-link-item"><a class="btn-link active" href="index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a></div>
+      <div class="lang-switch" role="group" aria-label="Switch language">
+        <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+        <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+      </div>
     </nav>
-    <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
-      <span class="dot"></span>
-      <span>Menu</span>
-    </button>
+    <div class="nav-mobile-right">
+      <div class="lang-switch" role="group" aria-label="Switch language">
+        <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+        <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+      </div>
+      <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
+        <span class="dot"></span>
+        <span data-i18n="nav.menu">Menu</span>
+      </button>
+    </div>
   </header>
 
   <main id="main">
     <section class="section theme-dark-section contact-header">
       <div class="container medium">
         <div class="contact-top-grid">
-          <h1>Let’s build something reliable together</h1>
+          <h1 data-i18n="contact.title">Let’s build something reliable together</h1>
           <div class="contact-avatar-col">
             <div class="contact-avatar-circle">
               <img src="../assets/avatar.webp" alt="Kelvin Nguyen portrait" width="256" height="256">
@@ -126,7 +140,6 @@
     <section class="section theme-dark-section" style="padding-top: 1em;">
       <div class="container medium">
         <div class="contact-body-grid">
-          <!-- Numbered Dennis-style Minimal Form (Netlify Forms Ready) -->
           <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-contact-form novalidate>
             <input type="hidden" name="form-name" value="contact">
             <p hidden aria-hidden="true">
@@ -135,79 +148,78 @@
             <div class="form-col">
               <span class="form-num">01</span>
               <div>
-                <label for="c-name">What’s your name?</label>
-                <input id="c-name" name="name" type="text" placeholder="Alex Tran *" required autocomplete="name">
+                <label for="c-name" data-i18n="contact.q1">What’s your name?</label>
+                <input id="c-name" name="name" type="text" placeholder="Alex Tran *" data-i18n-placeholder="contact.p1" required autocomplete="name">
               </div>
             </div>
 
             <div class="form-col">
               <span class="form-num">02</span>
               <div>
-                <label for="c-email">What’s your email?</label>
-                <input id="c-email" name="email" type="email" placeholder="alex@company.com *" required autocomplete="email">
+                <label for="c-email" data-i18n="contact.q2">What’s your email?</label>
+                <input id="c-email" name="email" type="email" placeholder="alex@company.com *" data-i18n-placeholder="contact.p2" required autocomplete="email">
               </div>
             </div>
 
             <div class="form-col">
               <span class="form-num">03</span>
               <div>
-                <label for="c-org">What’s the name of your team or company?</label>
-                <input id="c-org" name="organization" type="text" placeholder="Company / Research Lab" autocomplete="organization">
+                <label for="c-org" data-i18n="contact.q3">What’s the name of your team or company?</label>
+                <input id="c-org" name="organization" type="text" placeholder="Company / Research Lab" data-i18n-placeholder="contact.p3" autocomplete="organization">
               </div>
             </div>
 
             <div class="form-col">
               <span class="form-num">04</span>
               <div>
-                <label for="c-topic">What would you like to discuss?</label>
-                <input id="c-topic" name="topic" type="text" placeholder="AI Engineer role, Agent Systems, Data Pipelines...">
+                <label for="c-topic" data-i18n="contact.q4">What would you like to discuss?</label>
+                <input id="c-topic" name="topic" type="text" placeholder="AI Engineer role, LLMs, Backend..." data-i18n-placeholder="contact.p4">
               </div>
             </div>
 
             <div class="form-col">
               <span class="form-num">05</span>
               <div>
-                <label for="c-message">Your message</label>
-                <textarea id="c-message" name="message" rows="4" placeholder="Hello Kelvin, I’d like to talk about... *" required></textarea>
+                <label for="c-message" data-i18n="contact.q5">Your message</label>
+                <textarea id="c-message" name="message" rows="4" placeholder="Hello Kelvin, I’d like to talk about... *" data-i18n-placeholder="contact.p5" required></textarea>
               </div>
             </div>
 
             <div class="form-submit-row">
               <div class="form-feedback-wrap">
                 <p class="form-feedback" data-form-feedback role="status" aria-live="polite"></p>
-                <a class="copy-pill" data-mailto-fallback hidden href="mailto:ndtdat.data@gmail.com">Open email draft ↗</a>
+                <a class="copy-pill" data-mailto-fallback hidden href="mailto:ndtdat.data@gmail.com" data-i18n="contact.open_draft">Open email draft ↗</a>
               </div>
               <div class="btn btn-round btn-accent">
                 <button class="btn-click magnetic" type="submit" data-submit-btn data-strength="50" data-strength-text="24">
                   <div class="btn-fill"></div>
-                  <span class="btn-text" data-submit-label>Send it!</span>
+                  <span class="btn-text" data-submit-label data-i18n="contact.send">Send it!</span>
                 </button>
               </div>
             </div>
           </form>
 
-          <!-- Contact Details Sidebar -->
           <aside class="contact-sidebar" aria-label="Direct contact details">
             <div class="contact-sidebar-block">
-              <h5>Contact Details</h5>
+              <h5 data-i18n="contact.details">Contact Details</h5>
               <ul>
                 <li><a class="btn-link" href="mailto:ndtdat.data@gmail.com">ndtdat.data@gmail.com</a></li>
               </ul>
-              <button class="copy-pill" type="button" data-copy-email="ndtdat.data@gmail.com">Copy email</button>
+              <button class="copy-pill" type="button" data-copy-email="ndtdat.data@gmail.com" data-i18n="contact.copy_email">Copy email</button>
             </div>
 
             <div class="contact-sidebar-block">
-              <h5>Details</h5>
+              <h5 data-i18n="contact.info">Details</h5>
               <ul>
-                <li><p>Kelvin Nguyen (Nguyễn Đức Tuấn Đạt)</p></li>
-                <li><p>AI Engineer</p></li>
-                <li><p>Ho Chi Minh City, Vietnam</p></li>
+                <li><p data-i18n="brand.full_name">Kelvin Nguyen (Nguyen Duc Tuan Dat)</p></li>
+                <li><p data-i18n="home.role_title">AI Engineer</p></li>
+                <li><p data-i18n="contact.location">Ho Chi Minh City, Vietnam</p></li>
                 <li><p data-local-time>09:30 PM GMT+7</p></li>
               </ul>
             </div>
 
             <div class="contact-sidebar-block">
-              <h5>Socials</h5>
+              <h5 data-i18n="nav.socials">Socials</h5>
               <ul>
                 <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
                 <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -226,21 +238,15 @@
       <div class="stripe"></div>
       <div class="footer-bottom" style="padding-top: 2.2em;">
         <div class="footer-meta-group">
-          <div class="footer-meta-col">
-            <h5>Version</h5>
-            <p>2026 © Edition</p>
-          </div>
-          <div class="footer-meta-col">
-            <h5>Local Time</h5>
-            <p data-local-time>09:30 PM GMT+7</p>
-          </div>
+          <div class="footer-meta-col"><h5 data-i18n="footer.version">Version</h5><p data-i18n="footer.edition">2026 © Edition</p></div>
+          <div class="footer-meta-col"><h5 data-i18n="footer.local_time">Local Time</h5><p data-local-time>09:30 PM GMT+7</p></div>
         </div>
         <div class="footer-socials">
-          <h5>Navigation</h5>
+          <h5 data-i18n="nav.navigation">Navigation</h5>
           <ul>
-            <li><a class="btn-link" href="../index.html" data-transition-label="Home">Home</a></li>
-            <li><a class="btn-link" href="../work/index.html" data-transition-label="Work">Work</a></li>
-            <li><a class="btn-link" href="../about/index.html" data-transition-label="About">About</a></li>
+            <li><a class="btn-link" href="../index.html" data-transition-label="Home" data-i18n="nav.home">Home</a></li>
+            <li><a class="btn-link" href="../work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a></li>
+            <li><a class="btn-link" href="../about/index.html" data-transition-label="About" data-i18n="nav.about">About</a></li>
           </ul>
         </div>
       </div>
@@ -250,7 +256,9 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
-  <script src="../js/motion.js?v=2" defer></script>
-  <script src="../js/demos.js?v=2" defer></script>
+  <script src="../js/i18n.js?v=6" defer></script>
+  <script src="../js/motion.js?v=6" defer></script>
+  <script src="../js/demos.js?v=6" defer></script>
+  <script src="../js/delights.js?v=6" defer></script>
 </body>
 </html>

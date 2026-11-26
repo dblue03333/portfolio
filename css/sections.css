@@ -42,7 +42,7 @@
   pointer-events: none;
 }
 
-/* Left Floating Location Pill (.hanger) */
+/* Left Floating Interactive Location Pill (.hanger) */
 .hanger {
   position: absolute;
   left: 0;
@@ -57,15 +57,46 @@
   padding: 0.72em 0.75em 0.72em clamp(1.5em, 2.8vw, 2.6em);
   border-radius: 0 5em 5em 0;
   box-shadow: 0 16px 40px rgba(15, 35, 54, 0.28);
+  text-align: left;
+  cursor: pointer;
+  transition: padding-left 0.45s var(--ease-primary), background-color 0.35s ease;
 }
 
-.hanger p {
+.hanger:hover {
+  padding-left: clamp(1.85em, 3.2vw, 3em);
+}
+
+.hanger-text {
+  position: relative;
+  display: grid;
+  min-width: 8.8em;
+}
+
+.hanger-face {
+  grid-area: 1 / 1;
   font-size: 0.88em;
   line-height: 1.3;
   font-weight: 450;
+  opacity: 0;
+  transform: translateY(0.45em);
+  transition: opacity 0.36s var(--ease-smooth), transform 0.42s var(--ease-smooth);
+}
+
+.hanger-face.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hanger-coords {
+  font-family: var(--font-mono);
+  font-size: 0.76em;
+  line-height: 1.48;
+  color: var(--color-mist);
+  letter-spacing: 0.01em;
 }
 
 .digital-ball {
+  position: relative;
   width: 3.7em;
   height: 3.7em;
   border-radius: 50%;
@@ -73,21 +104,49 @@
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid rgba(211, 230, 235, 0.25);
+  transition: transform 0.45s var(--ease-primary), background-color 0.35s ease;
+}
+
+.hanger:hover .digital-ball {
+  transform: scale(1.06);
+  background-color: var(--color-accent-bright);
+}
+
+.globe-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(211, 230, 235, 0.65);
+  opacity: 0;
+  transform: scale(0.92);
+  pointer-events: none;
+}
+
+.hanger.is-boosting .globe-ring {
+  animation: globePulseRing 0.85s var(--ease-smooth) forwards;
+}
+
+@keyframes globePulseRing {
+  0% { opacity: 0.85; transform: scale(0.96); }
+  100% { opacity: 0; transform: scale(1.55); }
 }
 
 /* Pure CSS 3D Spinning Wireframe Globe */
 .globe {
   position: relative;
+  display: block;
   width: 2.15em;
   height: 2.15em;
   border-radius: 50%;
   transform: rotate(-16deg);
+  will-change: transform;
 }
 
 .globe-wrap {
   position: relative;
+  display: block;
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -105,6 +164,10 @@
   border: 1.3px solid rgba(251, 253, 255, 0.82);
   transform: translate(-50%, -50%);
   animation: globeSpin 3.6s linear infinite;
+}
+
+.hanger.is-boosting .globe-circle {
+  animation-duration: 0.65s;
 }
 
 .globe-circle:nth-child(2) {
@@ -151,10 +214,10 @@
   }
 }
 
-/* Right Role Block */
+/* Right Role Block with Smooth Role Cycler */
 .home-hero-role {
   position: absolute;
-  right: clamp(2em, 8vw, 9em);
+  right: clamp(2em, 7.5vw, 8.5em);
   top: 42%;
   transform: translateY(-50%);
   z-index: 6;
@@ -175,11 +238,60 @@
   letter-spacing: -0.02em;
 }
 
-.home-hero-role span {
+.home-hero-role h2 > span {
   display: block;
 }
 
-/* Bottom Giant Reversing Marquee */
+.role-cycler {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 1.34em;
+  text-align: left;
+  cursor: pointer;
+  color: rgba(251, 253, 255, 0.92);
+  transition: color 0.25s ease;
+}
+
+.role-cycler:hover {
+  color: var(--color-mist);
+}
+
+html[data-lang="vi"] .role-cycler {
+  height: 1.44em;
+}
+
+/* Invisible width lock so "AI Engineer" and arrow NEVER shift horizontally */
+.role-cycler-sizer {
+  display: block;
+  visibility: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.role-cycler-slot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  transform: translateY(115%);
+  opacity: 0;
+  transition: transform 0.62s var(--ease-primary), opacity 0.45s ease;
+  will-change: transform, opacity;
+}
+
+.role-cycler-slot.is-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.role-cycler-slot.is-leaving {
+  transform: translateY(-115%);
+  opacity: 0;
+}
+
+/* Bottom Giant Reversing Vinyl Marquee */
 .big-name {
   position: relative;
   z-index: 6;
@@ -187,6 +299,7 @@
   padding-bottom: clamp(1.4em, 3.8vh, 3.2em);
   overflow: hidden;
   user-select: none;
+  cursor: pointer;
 }
 
 .name-h1 {
@@ -211,6 +324,15 @@
   color: var(--color-text-light);
   margin: 0;
   padding-right: 0.25em;
+}
+
+html[data-lang="vi"] .big-name {
+  padding-top: 0.16em;
+}
+
+html[data-lang="vi"] .big-name h1,
+html[data-lang="vi"] .big-name .marquee-text {
+  line-height: 1.08;
 }
 
 .big-name .spacer {
@@ -1540,4 +1662,563 @@
   display: flex;
   justify-content: center;
   margin-top: 2.8em;
+}
+
+/* ==========================================================================
+   8. AI ENGINEER DELIGHTS — ⌘K MINI RAG, GUARDRAIL EASTER EGG, SAIGON STATUS
+   ========================================================================== */
+
+/* Subtle ⌘K trigger pill in navbar & drawer */
+.cmdk-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42em;
+  padding: 0.42em 0.72em;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.78;
+  transition: opacity 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, transform 0.25s var(--ease-primary);
+}
+
+.cmdk-nav-btn:hover {
+  opacity: 1;
+  background-color: rgba(23, 51, 77, 0.08);
+  transform: translateY(-1px);
+}
+
+.nav-bar.nav-light .cmdk-nav-btn,
+.theme-dark .cmdk-nav-btn,
+.fixed-nav .cmdk-nav-btn {
+  border-color: var(--color-border-light);
+}
+
+.nav-bar.nav-light .cmdk-nav-btn:hover,
+.theme-dark .cmdk-nav-btn:hover,
+.fixed-nav .cmdk-nav-btn:hover {
+  background-color: rgba(211, 230, 235, 0.14);
+}
+
+.cmdk-nav-dot {
+  width: 0.46em;
+  height: 0.46em;
+  border-radius: 50%;
+  background: #7FE2B8;
+  box-shadow: 0 0 8px rgba(127, 226, 184, 0.65);
+}
+
+/* Footer Live Saigon Status & Console Pills */
+.saigon-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  margin-top: 0.48em;
+  font-size: 0.82em;
+  line-height: 1.35;
+  color: rgba(211, 230, 235, 0.82);
+}
+
+.saigon-dot {
+  width: 0.48em;
+  height: 0.48em;
+  border-radius: 50%;
+  background: #7FE2B8;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(127, 226, 184, 0.55);
+  animation: saigonPulse 2.4s ease-out infinite;
+}
+
+@keyframes saigonPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(127, 226, 184, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(127, 226, 184, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(127, 226, 184, 0);
+  }
+}
+
+.footer-console-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 0.1em;
+}
+
+.footer-console-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.42em 0.82em;
+  border-radius: 999px;
+  border: 1px solid rgba(211, 230, 235, 0.24);
+  background: rgba(211, 230, 235, 0.05);
+  color: rgba(242, 246, 250, 0.9);
+  font-family: var(--font-mono);
+  font-size: 0.74em;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s var(--ease-primary), color 0.25s ease;
+}
+
+.footer-console-pill:hover {
+  background: rgba(211, 230, 235, 0.16);
+  border-color: rgba(211, 230, 235, 0.55);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.footer-console-pill.is-guardrail:hover {
+  border-color: rgba(255, 198, 122, 0.65);
+  background: rgba(255, 198, 122, 0.14);
+}
+
+/* ⌘K Mini RAG Terminal Modal */
+.cmdk-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(3.5em, 9vh, 7em) 1em 2em;
+  background: rgba(11, 24, 38, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.26s var(--ease-primary);
+}
+
+.cmdk-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cmdk-dialog {
+  width: min(640px, 100%);
+  max-height: min(78vh, 660px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1.1em;
+  background: rgba(18, 38, 58, 0.96);
+  border: 1px solid rgba(211, 230, 235, 0.22);
+  box-shadow: 0 32px 84px rgba(5, 14, 24, 0.58), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: var(--color-text-light);
+  transform: translateY(14px) scale(0.985);
+  transition: transform 0.32s var(--ease-primary);
+}
+
+.cmdk-backdrop.is-open .cmdk-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.cmdk-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  padding: 1.05em 1.25em;
+  border-bottom: 1px solid rgba(211, 230, 235, 0.14);
+}
+
+.cmdk-prompt-icon {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  font-weight: 600;
+  color: #7FE2B8;
+  flex-shrink: 0;
+}
+
+.cmdk-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #F2F6FA;
+  font-family: var(--font-sans);
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+.cmdk-input::placeholder {
+  color: rgba(183, 201, 216, 0.62);
+}
+
+.cmdk-esc {
+  padding: 0.28em 0.55em;
+  border-radius: 0.45em;
+  border: 1px solid rgba(211, 230, 235, 0.2);
+  font-family: var(--font-mono);
+  font-size: 0.68em;
+  color: rgba(211, 230, 235, 0.72);
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cmdk-esc:hover {
+  background: rgba(211, 230, 235, 0.14);
+  color: #FFFFFF;
+}
+
+.cmdk-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+  padding: 0.78em 1.25em;
+  border-bottom: 1px solid rgba(211, 230, 235, 0.1);
+  background: rgba(11, 25, 39, 0.34);
+}
+
+.cmdk-chip {
+  padding: 0.36em 0.74em;
+  border-radius: 999px;
+  border: 1px solid rgba(211, 230, 235, 0.18);
+  background: rgba(211, 230, 235, 0.06);
+  color: rgba(211, 230, 235, 0.9);
+  font-size: 0.76em;
+  line-height: 1.2;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.cmdk-chip:hover {
+  background: rgba(211, 230, 235, 0.18);
+  border-color: rgba(211, 230, 235, 0.42);
+  color: #FFFFFF;
+}
+
+.cmdk-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.85em 0.95em 1em;
+  overscroll-behavior: contain;
+}
+
+/* Streaming RAG Answer Card */
+.cmdk-rag-card {
+  margin-bottom: 0.9em;
+  padding: 0.95em 1.05em;
+  border-radius: 0.8em;
+  background: rgba(11, 24, 38, 0.62);
+  border: 1px solid rgba(127, 226, 184, 0.26);
+}
+
+.cmdk-rag-card[hidden] {
+  display: none !important;
+}
+
+.cmdk-rag-card.is-abstained {
+  border-color: rgba(255, 198, 122, 0.36);
+}
+
+.cmdk-rag-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75em;
+  margin-bottom: 0.55em;
+  font-family: var(--font-mono);
+  font-size: 0.69em;
+  letter-spacing: 0.03em;
+  color: #7FE2B8;
+}
+
+.cmdk-rag-card.is-abstained .cmdk-rag-meta {
+  color: #FFC67A;
+}
+
+.cmdk-rag-clear {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  color: rgba(211, 230, 235, 0.58);
+  transition: color 0.2s ease;
+}
+
+.cmdk-rag-clear:hover {
+  color: #FFFFFF;
+}
+
+.cmdk-rag-text {
+  font-size: 0.9em;
+  line-height: 1.62;
+  color: rgba(242, 246, 250, 0.95);
+  margin: 0;
+}
+
+.cmdk-rag-cursor {
+  display: inline-block;
+  margin-left: 0.14em;
+  color: #7FE2B8;
+  animation: cmdkBlink 0.75s step-end infinite;
+}
+
+@keyframes cmdkBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cmdk-rag-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+  margin-top: 0.75em;
+}
+
+.cmdk-source-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.3em 0.68em;
+  border-radius: 999px;
+  border: 1px solid rgba(211, 230, 235, 0.24);
+  background: rgba(53, 93, 133, 0.35);
+  color: #D3E6EB;
+  font-family: var(--font-mono);
+  font-size: 0.7em;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.cmdk-source-pill:hover {
+  background: rgba(211, 230, 235, 0.2);
+  border-color: rgba(211, 230, 235, 0.55);
+  color: #FFFFFF;
+}
+
+/* Command Groups & Rows */
+.cmdk-group-label {
+  padding: 0.45em 0.65em 0.35em;
+  font-family: var(--font-mono);
+  font-size: 0.68em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(183, 201, 216, 0.6);
+}
+
+.cmdk-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8em;
+  padding: 0.68em 0.78em;
+  border-radius: 0.6em;
+  text-align: left;
+  color: rgba(242, 246, 250, 0.9);
+  transition: background-color 0.16s ease, color 0.16s ease;
+}
+
+.cmdk-item:hover,
+.cmdk-item.is-selected {
+  background: rgba(211, 230, 235, 0.12);
+  color: #FFFFFF;
+}
+
+.cmdk-item-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.68em;
+  min-width: 0;
+}
+
+.cmdk-item-icon {
+  width: 1.55em;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--color-mist);
+  flex-shrink: 0;
+}
+
+.cmdk-item-title {
+  font-size: 0.9em;
+  font-weight: 450;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmdk-item-hint {
+  font-family: var(--font-mono);
+  font-size: 0.7em;
+  color: rgba(183, 201, 216, 0.65);
+  flex-shrink: 0;
+}
+
+.cmdk-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75em;
+  padding: 0.68em 1.25em;
+  border-top: 1px solid rgba(211, 230, 235, 0.12);
+  background: rgba(11, 24, 38, 0.45);
+  font-family: var(--font-mono);
+  font-size: 0.68em;
+  color: rgba(183, 201, 216, 0.65);
+}
+
+/* Hallucination Glitch & Guardrail Intercept HUD */
+.hallucination-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 1150;
+  pointer-events: none;
+  opacity: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 198, 122, 0.04) 0px,
+    rgba(255, 198, 122, 0.04) 2px,
+    transparent 2px,
+    transparent 5px
+  );
+  transition: opacity 0.25s ease;
+}
+
+.hallucination-veil.is-active {
+  opacity: 1;
+}
+
+.is-hallucinating {
+  animation: hallucinateJitter 0.16s steps(2, end) infinite;
+  text-shadow: 2px 0 rgba(255, 180, 92, 0.8), -2px 0 rgba(127, 226, 184, 0.78);
+}
+
+@keyframes hallucinateJitter {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1.5px, 0.6px); }
+  50% { transform: translate(1.5px, -0.6px); }
+  75% { transform: translate(-0.8px, -0.5px); }
+  100% { transform: translate(0.8px, 0.5px); }
+}
+
+.guardrail-hud {
+  position: fixed;
+  top: 1.15em;
+  left: 50%;
+  z-index: 1200;
+  width: min(560px, calc(100vw - 2em));
+  padding: 0.95em 1.15em;
+  border-radius: 0.85em;
+  background: rgba(18, 36, 54, 0.96);
+  border: 1px solid rgba(255, 198, 122, 0.55);
+  box-shadow: 0 22px 60px rgba(6, 15, 26, 0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #F2F6FA;
+  transform: translate(-50%, -140%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.46s var(--ease-primary), opacity 0.3s ease, border-color 0.35s ease;
+}
+
+.guardrail-hud.is-visible {
+  transform: translate(-50%, 0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.guardrail-hud.is-resolved {
+  border-color: rgba(127, 226, 184, 0.62);
+}
+
+.guardrail-hud-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75em;
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #FFC67A;
+}
+
+.guardrail-hud.is-resolved .guardrail-hud-top {
+  color: #7FE2B8;
+}
+
+.guardrail-hud-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.guardrail-hud-dot {
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.guardrail-hud-close {
+  font-family: var(--font-mono);
+  font-size: 1.25em;
+  line-height: 1;
+  color: rgba(211, 230, 235, 0.65);
+  padding: 0.1em 0.3em;
+}
+
+.guardrail-hud-close:hover {
+  color: #FFFFFF;
+}
+
+.guardrail-hud-msg {
+  margin: 0.45em 0 0.65em;
+  font-size: 0.86em;
+  line-height: 1.48;
+  color: rgba(242, 246, 250, 0.92);
+}
+
+.guardrail-progress {
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(211, 230, 235, 0.16);
+  overflow: hidden;
+}
+
+.guardrail-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FFC67A, #D3E6EB);
+  transition: width 0.55s var(--ease-primary), background 0.35s ease;
+}
+
+.guardrail-hud.is-resolved .guardrail-progress-fill {
+  width: 100%;
+  background: linear-gradient(90deg, #7FE2B8, #D3E6EB);
+}
+
+/* Subtle Easter Egg whisper tooltip near Saigon globe */
+.globe-whisper {
+  position: fixed;
+  bottom: 1.5em;
+  left: 50%;
+  z-index: 1180;
+  padding: 0.5em 0.95em;
+  border-radius: 999px;
+  background: rgba(23, 51, 77, 0.92);
+  border: 1px solid rgba(211, 230, 235, 0.28);
+  color: #D3E6EB;
+  font-family: var(--font-mono);
+  font-size: 0.74em;
+  letter-spacing: 0.02em;
+  box-shadow: 0 12px 30px rgba(7, 17, 29, 0.35);
+  transform: translate(-50%, 16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s var(--ease-primary), opacity 0.25s ease;
+}
+
+.globe-whisper.is-visible {
+  transform: translate(-50%, 0);
+  opacity: 1;
 }

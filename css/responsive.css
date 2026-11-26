@@ -72,6 +72,10 @@
     display: none;
   }
 
+  .nav-mobile-right {
+    display: inline-flex;
+  }
+
   .nav-mobile-trigger {
     display: inline-flex;
   }
@@ -91,7 +95,7 @@
   }
 
   .home-hero-role h2 {
-    font-size: clamp(1.2em, 5.2vw, 1.55em);
+    font-size: clamp(1.12em, 4.9vw, 1.48em);
   }
 
   .hanger {
@@ -102,8 +106,16 @@
     gap: 0.75em;
   }
 
-  .hanger p {
+  .hanger:hover {
+    padding-left: 1.15em;
+  }
+
+  .hanger-face {
     font-size: 0.78em;
+  }
+
+  .hanger-coords {
+    font-size: 0.7em;
   }
 
   .digital-ball {
@@ -228,6 +240,17 @@
     align-items: flex-start;
   }
 
+  .footer-meta-group {
+    flex-wrap: wrap;
+    gap: 1.5em 2.2em;
+  }
+
+  .cmdk-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25em;
+  }
+
   .view-toggles {
     display: none;
   }
@@ -238,6 +261,29 @@
 }
 
 @media screen and (max-width: 540px) {
+  .nav-bar {
+    padding-left: 1.15em;
+    padding-right: 1.15em;
+  }
+
+  .nav-mobile-right {
+    gap: 0.6em;
+  }
+
+  .nav-mobile-right .lang-switch {
+    font-size: 0.66em;
+    padding: 0.18em 0.28em;
+  }
+
+  .nav-mobile-right .lang-switch button {
+    padding: 0.34em 0.48em;
+  }
+
+  html[data-lang="vi"] .credits-top {
+    font-size: 0.78em;
+    gap: 0.25em;
+  }
+
   .fixed-nav {
     width: 100vw;
   }

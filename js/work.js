@@ -198,11 +198,15 @@
       if (listView) listView.hidden = view !== 'list';
       if (gridView) gridView.hidden = view !== 'grid';
 
+      const t = (key, fallback) => (window.__i18n ? window.__i18n.t(key, fallback) : fallback);
+
       if (sortLabel) {
-        sortLabel.textContent = sort === 'newest' ? 'Timeline: Newest ↓' : 'Timeline: Oldest ↑';
+        sortLabel.textContent =
+          sort === 'newest' ? t('work.sort.newest', 'Timeline: Newest ↓') : t('work.sort.oldest', 'Timeline: Oldest ↑');
       }
       if (sortColLabel) {
-        sortColLabel.textContent = sort === 'newest' ? 'Timeline ↓' : 'Timeline ↑';
+        sortColLabel.textContent =
+          sort === 'newest' ? t('work.sort.col_newest', 'Timeline ↓') : t('work.sort.col_oldest', 'Timeline ↑');
       }
 
       filterBtns.forEach((btn) => {
@@ -290,6 +294,10 @@
         const nextSort = currentSort === 'newest' ? 'oldest' : 'newest';
         transitionStage(currentFilter, currentView, nextSort);
       });
+    });
+
+    window.addEventListener('portfolio:langchange', () => {
+      syncUI(currentFilter, currentView, currentSort);
     });
 
     syncUI(currentFilter, currentView, currentSort);
