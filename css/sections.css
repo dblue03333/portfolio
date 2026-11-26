@@ -269,15 +269,19 @@
   pointer-events: none;
   overflow: hidden;
   border-radius: 0.25em;
-  transform: translate(-50%, -50%) scale(0);
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-z: 0deg;
+  transform: translate(-50%, -50%) perspective(950px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(var(--tilt-z));
+  scale: 0;
   opacity: 0;
-  transition: transform 0.42s var(--ease-primary), opacity 0.3s ease;
+  transition: scale 0.4s var(--ease-primary), opacity 0.28s ease;
   box-shadow: 0 28px 65px rgba(15, 35, 54, 0.24);
-  will-change: left, top, transform;
+  will-change: left, top, transform, scale;
 }
 
 .mouse-pos-list-image.is-active {
-  transform: translate(-50%, -50%) scale(1);
+  scale: 1;
   opacity: 1;
 }
 

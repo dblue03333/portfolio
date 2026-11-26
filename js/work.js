@@ -24,17 +24,42 @@
     let modalY = mouseY;
     let badgeX = mouseX;
     let badgeY = mouseY;
+    let tiltX = 0;
+    let tiltY = 0;
+    let tiltZ = 0;
     let isActive = false;
     let rafId = null;
+
+    const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
 
     function tick() {
       const easeModal = prefersReduced ? 1 : 0.11;
       const easeBadge = prefersReduced ? 1 : 0.19;
 
+      const prevModalX = modalX;
+      const prevModalY = modalY;
+
       modalX += (mouseX - modalX) * easeModal;
       modalY += (mouseY - modalY) * easeModal;
       badgeX += (mouseX - badgeX) * easeBadge;
       badgeY += (mouseY - badgeY) * easeBadge;
+
+      // Velocity-based physical tilt (smooth spring-like lean + natural settle back to 0deg)
+      if (!prefersReduced) {
+        const vx = modalX - prevModalX;
+        const vy = modalY - prevModalY;
+        const targetZ = clamp(vx * 0.48, -9.5, 9.5);
+        const targetY = clamp(vx * 0.65, -13, 13);
+        const targetX = clamp(-vy * 0.55, -11, 11);
+
+        tiltZ += (targetZ - tiltZ) * 0.2;
+        tiltY += (targetY - tiltY) * 0.2;
+        tiltX += (targetX - tiltX) * 0.2;
+
+        modal.style.setProperty('--tilt-z', `${tiltZ.toFixed(2)}deg`);
+        modal.style.setProperty('--tilt-y', `${tiltY.toFixed(2)}deg`);
+        modal.style.setProperty('--tilt-x', `${tiltX.toFixed(2)}deg`);
+      }
 
       modal.style.left = `${modalX.toFixed(1)}px`;
       modal.style.top = `${modalY.toFixed(1)}px`;
@@ -60,6 +85,12 @@
         modalY = mouseY;
         badgeX = mouseX;
         badgeY = mouseY;
+        tiltX = 0;
+        tiltY = 0;
+        tiltZ = 0;
+        modal.style.setProperty('--tilt-x', '0deg');
+        modal.style.setProperty('--tilt-y', '0deg');
+        modal.style.setProperty('--tilt-z', '0deg');
         modal.classList.add('is-active');
         badge?.classList.add('is-active');
         if (!rafId) rafId = requestAnimationFrame(tick);
@@ -69,6 +100,9 @@
     function hidePreview() {
       if (!isActive) return;
       isActive = false;
+      modal.style.setProperty('--tilt-x', '0deg');
+      modal.style.setProperty('--tilt-y', '0deg');
+      modal.style.setProperty('--tilt-z', '0deg');
       modal.classList.remove('is-active');
       badge?.classList.remove('is-active');
     }

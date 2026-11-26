@@ -52,12 +52,12 @@
   function initCurtainTransitions() {
     const container = document.querySelector('.loading-container');
     const clearPrePaintClass = () => {
-      document.documentElement.classList.remove('is-transitioning');
+      document.documentElement.classList.remove('is-transitioning', 'is-intro-boot');
     };
 
     if (!container || prefersReduced || !hasGSAP) {
       clearPrePaintClass();
-      if (container) container.classList.remove('is-active');
+      if (container) container.classList.remove('is-active', 'is-boot-mode', 'is-greeting-phase');
       sessionStorage.removeItem('dennis_page_transition');
       return;
     }
@@ -66,15 +66,25 @@
     const topCurve = container.querySelector('.rounded-div-wrap.top');
     const bottomCurve = container.querySelector('.rounded-div-wrap.bottom');
     const wordEl = container.querySelector('[data-loading-word]');
+    const aiHud = container.querySelector('[data-loading-ai-hud]');
+    const aiLog = container.querySelector('[data-ai-log]');
+    const aiBar = container.querySelector('[data-ai-bar]');
+    const aiPercent = container.querySelector('[data-ai-percent]');
+    const chipWeights = container.querySelector('[data-ai-chip="weights"]');
+    const chipSources = container.querySelector('[data-ai-chip="sources"]');
+    const chipGuardrails = container.querySelector('[data-ai-chip="guardrails"]');
+
     const isHome = document.body.dataset.page === 'home';
+    const navEntries = performance.getEntriesByType?.('navigation');
+    const navType = navEntries && navEntries[0] ? navEntries[0].type : 'navigate';
     const comingFromNav = sessionStorage.getItem('dennis_page_transition') === '1';
-    const introPlayed = sessionStorage.getItem('dennis_intro_done') === '1';
 
     function resetCurtain() {
       clearPrePaintClass();
-      container.classList.remove('is-active');
+      container.classList.remove('is-active', 'is-boot-mode', 'is-greeting-phase');
       window.gsap.set(screen, { yPercent: 120 });
       window.gsap.set([topCurve, bottomCurve], { height: 0 });
+      if (aiHud) window.gsap.set(aiHud, { clearProps: 'opacity,transform' });
     }
 
     // Handle bfcache back/forward restoration cleanly
@@ -82,7 +92,7 @@
       if (event.persisted) resetCurtain();
     });
 
-    // Entry animation (seamless from html.is-transitioning frame 0)
+    // 1. Internal route transition (e.g. Work -> Home, Home -> About)
     if (comingFromNav) {
       sessionStorage.removeItem('dennis_page_transition');
       const storedLabel = sessionStorage.getItem('dennis_page_label');
@@ -113,25 +123,70 @@
         },
         '<0.18'
       );
-    } else if (isHome && !introPlayed) {
-      sessionStorage.setItem('dennis_intro_done', '1');
-      const greetings = ['Hello', 'Xin chào', 'こんにちは', 'Willkommen', 'Kelvin Nguyen'];
-      container.classList.add('is-active');
+    } else if (isHome && navType !== 'back_forward' && aiHud) {
+      // 2. Home fresh load OR F5 / Cmd+R reload -> Full AI Model Weights Boot + Multilingual Greeting
+      container.classList.add('is-active', 'is-boot-mode');
       window.gsap.set(screen, { yPercent: 0 });
       window.gsap.set(topCurve, { height: 0 });
       window.gsap.set(bottomCurve, { height: '12vh' });
       clearPrePaintClass();
+
+      const heroImg = document.querySelector('.home-hero-media img');
+      if (heroImg) window.gsap.set(heroImg, { scale: 1.055 });
+
+      const state = { pct: 0 };
+      const greetings = ['Hello', 'Xin chào', 'こんにちは', 'Kelvin Nguyen'];
       if (wordEl) wordEl.textContent = greetings[0];
+
+      const updateHud = () => {
+        const p = Math.round(state.pct);
+        if (aiPercent) aiPercent.textContent = `${String(p).padStart(2, '0')}%`;
+        if (aiBar) aiBar.style.width = `${p}%`;
+
+        if (p < 35) {
+          if (aiLog) aiLog.textContent = 'loading weights · kelvin-v26';
+        } else if (p < 70) {
+          if (aiLog) aiLog.textContent = 'grounding sources · healthlab ✓';
+          chipWeights?.classList.add('is-done');
+        } else if (p < 96) {
+          if (aiLog) aiLog.textContent = 'guardrails verified · 368/368 ✓';
+          chipWeights?.classList.add('is-done');
+          chipSources?.classList.add('is-done');
+        } else {
+          if (aiLog) aiLog.textContent = 'inference online · ready ✓';
+          chipWeights?.classList.add('is-done');
+          chipSources?.classList.add('is-done');
+          chipGuardrails?.classList.add('is-done');
+        }
+      };
 
       const tl = window.gsap.timeline({
         onComplete: resetCurtain,
       });
 
+      // Phase 1: Model weights counter 00% -> 100% (non-linear feel)
+      tl.to(state, {
+        pct: 100,
+        duration: 1.08,
+        ease: 'power2.inOut',
+        onUpdate: updateHud,
+      })
+        // Phase 2: Fade out AI HUD completely BEFORE revealing multilingual Dennis greeting
+        .to(aiHud, {
+          opacity: 0,
+          y: -12,
+          duration: 0.2,
+          ease: 'power2.in',
+          onComplete: () => {
+            container.classList.add('is-greeting-phase');
+          },
+        });
+
       greetings.slice(1).forEach((greeting, idx) => {
         tl.to(
           {},
           {
-            duration: idx === greetings.length - 2 ? 0.22 : 0.16,
+            duration: idx === greetings.length - 2 ? 0.2 : 0.14,
             onComplete: () => {
               if (wordEl) wordEl.textContent = greeting;
             },
@@ -139,20 +194,35 @@
         );
       });
 
+      // Phase 3: Iconic Dennis curved upward reveal + subtle hero portrait settle
       tl.to(screen, {
         yPercent: -118,
-        duration: 0.84,
-        delay: 0.18,
+        duration: 0.82,
+        delay: 0.16,
         ease: 'power4.inOut',
-      }).to(
-        bottomCurve,
-        {
-          height: 0,
-          duration: 0.62,
-          ease: 'power4.inOut',
-        },
-        '<0.18'
-      );
+      })
+        .to(
+          bottomCurve,
+          {
+            height: 0,
+            duration: 0.6,
+            ease: 'power4.inOut',
+          },
+          '<0.18'
+        );
+
+      if (heroImg) {
+        tl.to(
+          heroImg,
+          {
+            scale: 1,
+            duration: 1.05,
+            ease: 'power3.out',
+            clearProps: 'scale',
+          },
+          '<0.06'
+        );
+      }
     } else {
       resetCurtain();
     }

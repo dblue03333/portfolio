@@ -17,15 +17,22 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/layout.css?v=3">
+  <link rel="stylesheet" href="css/sections.css?v=3">
   <link rel="stylesheet" href="css/responsive.css">
   <script>
     (function(){
       var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!reduced && (sessionStorage.getItem('dennis_page_transition') === '1' || sessionStorage.getItem('dennis_intro_done') !== '1')) {
+      if (reduced) return;
+      var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+      var navType = navEntries && navEntries[0] ? navEntries[0].type : 'navigate';
+      var fromInternal = sessionStorage.getItem('dennis_page_transition') === '1';
+      if (fromInternal) {
         document.documentElement.classList.add('is-transitioning');
         setTimeout(function(){ document.documentElement.classList.remove('is-transitioning'); }, 2600);
+      } else if (navType !== 'back_forward') {
+        document.documentElement.classList.add('is-transitioning', 'is-intro-boot');
+        setTimeout(function(){ document.documentElement.classList.remove('is-transitioning', 'is-intro-boot'); }, 3600);
       }
     })();
   </script>
@@ -33,14 +40,43 @@
 <body data-page="home" data-page-title="Home">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Curved Preloader & Page Transition Curtain -->
+  <!-- Curved AI Engineer Preloader & Page Transition Curtain -->
   <div class="loading-container" aria-hidden="true">
     <div class="loading-screen">
       <div class="rounded-div-wrap top"><div class="rounded-div"></div></div>
-      <div class="loading-words">
+
+      <!-- Route transition / Multilingual greeting center text -->
+      <div class="loading-words" data-loading-words>
         <span class="dot"></span>
         <span data-loading-word>Hello</span>
       </div>
+
+      <!-- AI Model Weights Boot HUD (shown on Home entry & F5 reload) -->
+      <div class="loading-ai-hud" data-loading-ai-hud>
+        <div class="loading-ai-center">
+          <div class="loading-ai-status">
+            <span class="loading-ai-pulse"></span>
+            <span data-ai-log>loading weights · kelvin-v26</span>
+            <span class="loading-ai-cursor" aria-hidden="true"></span>
+          </div>
+          <div class="loading-ai-bar">
+            <div class="loading-ai-bar-fill" data-ai-bar></div>
+          </div>
+          <div class="loading-ai-checks" data-ai-checks>
+            <span data-ai-chip="weights">weights</span>
+            <span data-ai-chip="sources">sources</span>
+            <span data-ai-chip="guardrails">368 tests</span>
+          </div>
+        </div>
+
+        <div class="loading-ai-meta">
+          <span>KELVIN.AI // RUNTIME</span>
+          <span>HCMC · GMT+7</span>
+        </div>
+
+        <div class="loading-ai-counter" data-ai-percent>00%</div>
+      </div>
+
       <div class="rounded-div-wrap bottom"><div class="rounded-div"></div></div>
     </div>
   </div>
@@ -495,7 +531,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
-  <script src="js/motion.js" defer></script>
-  <script src="js/work.js" defer></script>
+  <script src="js/motion.js?v=3" defer></script>
+  <script src="js/work.js?v=3" defer></script>
 </body>
 </html>
