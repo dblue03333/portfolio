@@ -39,6 +39,54 @@
   /* Typography */
   --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* Surface polish tokens */
+  --grain-opacity: 0.026;
+  --spotlight-color: rgba(211, 230, 235, 0.12);
+  --glow-mint: #7FE2B8;
+  --glow-amber: #FFC67A;
+}
+
+/* Sương Đêm (Twilight Mist Dark Theme) */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: #0D1E2E;
+  --color-surface: #142B40;
+  --color-ink: #ECF3F9;
+  --color-muted: #98B2C8;
+  --color-dark: #07131F;
+  --color-dark-deep: #040B13;
+  --color-hero-bg: #12283C;
+  --color-hero-deep: #0A1B2B;
+  --color-mist-soft: #1B3650;
+  --color-accent: #4C83B8;
+  --color-accent-hover: #5E97CE;
+  --color-accent-bright: #6BA5DC;
+  --color-line: rgba(211, 230, 235, 0.18);
+  --color-slate: #7FA3C0;
+
+  --color-text: var(--color-ink);
+  --color-border: rgba(211, 230, 235, 0.16);
+  --color-border-solid: #24405A;
+  --color-border-light: rgba(211, 230, 235, 0.2);
+  --grain-opacity: 0.036;
+  --spotlight-color: rgba(127, 226, 184, 0.09);
+}
+
+/* 120fps GPU Mist Wave overlay for Sương Xanh ⇄ Sương Đêm (zero DOM screenshot stall) */
+.theme-wave {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9500;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(0);
+  will-change: transform, opacity;
+  contain: strict;
 }
 
 html[data-lang="vi"] {

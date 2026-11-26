@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Selected AI engineering work by Kelvin Nguyen — AI agents, evidence-linked data pipelines, forecasting, and RAG systems.">
+  <meta name="description" content="Selected AI engineering work by Kelvin Nguyen — AI agents, evidence-linked data pipelines, forecasting, RAG systems, and upcoming experiments.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Work — Kelvin Nguyen">
   <meta property="og:description" content="Selected AI engineering work by Kelvin Nguyen — AI agents, evidence pipelines, forecasting, and RAG systems.">
@@ -14,11 +14,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/tokens.css?v=5">
-  <link rel="stylesheet" href="../css/base.css?v=5">
-  <link rel="stylesheet" href="../css/layout.css?v=6">
-  <link rel="stylesheet" href="../css/sections.css?v=7">
-  <link rel="stylesheet" href="../css/responsive.css?v=6">
+  <link rel="stylesheet" href="../css/tokens.css?v=17">
+  <link rel="stylesheet" href="../css/base.css?v=17">
+  <link rel="stylesheet" href="../css/layout.css?v=17">
+  <link rel="stylesheet" href="../css/sections.css?v=17">
+  <link rel="stylesheet" href="../css/responsive.css?v=17">
   <script>
     (function(){
       var p = new URLSearchParams(location.search).get('lang');
@@ -26,6 +26,9 @@
       if (l !== 'en' && l !== 'vi' && l !== 'ja') l = 'en';
       document.documentElement.dataset.lang = l;
       document.documentElement.lang = l;
+
+      var th = localStorage.getItem('portfolio_theme');
+      if (th === 'dark' || th === 'light') document.documentElement.dataset.theme = th;
 
       var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced && sessionStorage.getItem('dennis_page_transition') === '1') {
@@ -66,6 +69,7 @@
           <a href="../index.html" data-transition-label="Home" data-i18n="nav.home">Home</a>
           <a href="index.html" class="active" data-transition-label="Work" data-i18n="nav.work">Work</a>
           <a href="../about/index.html" data-transition-label="About" data-i18n="nav.about">About</a>
+          <a href="../blog/index.html" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span><span class="nav-soon-tag" data-i18n="nav.soon">Soon</span></a>
           <a href="../contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a>
         </nav>
 
@@ -95,39 +99,46 @@
     <div class="mouse-pos-list-image-reel">
       <div class="mouse-pos-list-image-slide art-bg-harness">
         <div class="art-card">
-          <div class="art-card-top"><span>APPROVAL GATE · #402</span><span class="art-pill">368 Tests ✓</span></div>
+          <div class="art-card-top"><span><span class="art-live-dot"></span>APPROVAL GATE · #402</span><span class="art-pill">368 Tests ✓</span></div>
           <div class="art-card-title">Propose create_incident on checkout?</div>
           <div class="art-checks"><span>schema ✓</span><span>retry 1/3</span><span>CLI + API</span></div>
           <div class="art-actions-mini"><span class="approve">Approve</span><span class="reject">Reject</span></div>
         </div>
       </div>
       <div class="mouse-pos-list-image-slide art-bg-healthlab">
-        <div class="art-card">
-          <div class="art-card-top"><span>HEALTHLAB PILOT</span><span class="art-pill">Source-Linked</span></div>
+        <div class="art-card is-live-scan">
+          <div class="art-card-top"><span><span class="art-live-dot"></span>HEALTHLAB PILOT</span><span class="art-pill">Source-Linked</span></div>
           <div class="art-sheet">Draft v2: Available <mark>nationwide</mark>.</div>
           <div class="art-sheet mist">Source: Piloted in <mark>one district</mark>.</div>
         </div>
       </div>
       <div class="mouse-pos-list-image-slide art-bg-harbormind">
         <div class="art-card dark-card">
-          <div class="art-card-top"><span>LONG BEACH · AIS</span><span class="art-pill">Gemma 4</span></div>
+          <div class="art-card-top"><span><span class="art-live-dot"></span>LONG BEACH · AIS</span><span class="art-pill">Gemma 4</span></div>
           <div class="art-card-title">Quantile Wait Forecast · P10–P90</div>
-          <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill" style="left:28%;width:58%;"></div></div></div>
+          <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill is-live-bar" style="left:28%;width:58%;"></div></div></div>
           <div class="art-checks"><span>LightGBM</span><span>→ Captain Handoff</span></div>
         </div>
       </div>
       <div class="mouse-pos-list-image-slide art-bg-rag">
         <div class="art-card">
-          <div class="art-card-top"><span>RAG PIPELINE</span><span class="art-pill">Cosine 0.94</span></div>
+          <div class="art-card-top"><span><span class="art-live-dot"></span>RAG PIPELINE</span><span class="art-pill">Cosine 0.94</span></div>
           <div class="art-card-title">Personal Knowledge Assistant</div>
-          <div class="art-flow"><div>Gemini<br>Embed</div><div>Atlas<br>Vector</div><div>FastAPI<br>Answer</div></div>
+          <div class="art-flow is-live-flow"><div>Gemini<br>Embed</div><div>Atlas<br>Vector</div><div>FastAPI<br>Answer</div></div>
         </div>
       </div>
       <div class="mouse-pos-list-image-slide art-bg-web">
         <div class="art-card dark-card">
-          <div class="art-card-top"><span>HEALTHLAB WEB</span><span class="art-pill">Astro + Figma</span></div>
+          <div class="art-card-top"><span><span class="art-live-dot"></span>HEALTHLAB WEB</span><span class="art-pill">Cloudflare Live ↗</span></div>
           <div class="art-card-title">Responsive typography &amp; Figma-aligned UI</div>
-          <div class="art-checks"><span>Design Tokens</span><span>Accessible Grid</span></div>
+          <div class="art-checks"><span>Astro Static</span><span>Workers Demo</span></div>
+        </div>
+      </div>
+      <div class="mouse-pos-list-image-slide art-bg-gaming">
+        <div class="art-card dark-card">
+          <div class="art-card-top"><span><span class="art-live-dot" style="background:#FFC67A;"></span>KAGGLE · 20 FPS</span><span class="art-pill">Upcoming</span></div>
+          <div class="art-card-title">Generalist Gaming Agent — Offline Visual Control</div>
+          <div class="art-checks"><span>Playwright</span><span>Pillow</span><span>VLM Planner</span></div>
         </div>
       </div>
     </div>
@@ -144,6 +155,7 @@
     <nav class="nav-links" aria-label="Main navigation">
       <div class="nav-link-item"><a class="btn-link active" href="index.html" data-transition-label="Work" data-i18n="nav.work">Work</a></div>
       <div class="nav-link-item"><a class="btn-link" href="../about/index.html" data-transition-label="About" data-i18n="nav.about">About</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../blog/index.html" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span><span class="nav-soon-tag" data-i18n="nav.soon">Soon</span></a></div>
       <div class="nav-link-item"><a class="btn-link" href="../contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a></div>
       <div class="lang-switch" role="group" aria-label="Switch language">
         <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
@@ -174,13 +186,13 @@
             <div class="btn">
               <button class="btn-click magnetic active" type="button" data-filter="all" data-strength="24" data-strength-text="12" aria-pressed="true">
                 <div class="btn-fill"></div>
-                <span class="btn-text" data-i18n="work.filter.all">All</span>
+                <span class="btn-text"><span data-i18n="work.filter.all">All</span> <span class="count-nr">6</span></span>
               </button>
             </div>
             <div class="btn">
               <button class="btn-click magnetic" type="button" data-filter="agents" data-strength="24" data-strength-text="12" aria-pressed="false">
                 <div class="btn-fill"></div>
-                <span class="btn-text"><span data-i18n="work.filter.agents">AI Agents</span> <span class="count-nr">2</span></span>
+                <span class="btn-text"><span data-i18n="work.filter.agents">AI Agents</span> <span class="count-nr">3</span></span>
               </button>
             </div>
             <div class="btn">
@@ -252,6 +264,15 @@
             </div>
 
             <ul class="work-list-table" data-list-container>
+              <li class="work-list-item is-upcoming-item" id="upcoming-gaming-agent" data-topics="agents" data-date="202611" data-preview-index="5" data-preview-label="Soon">
+                <a class="work-list-link" href="https://www.kaggle.com/competitions/generalist-gaming-agent" target="_blank" rel="noopener">
+                  <span class="col-title">Generalist Gaming Agent <span class="upcoming-pill" data-i18n="work.upcoming">Upcoming</span></span>
+                  <span class="col-domain" data-i18n="work.domain.gaming">Visual Game Agents</span>
+                  <span class="col-role" data-i18n="work.cap.gaming">Playwright Harness &amp; Offline VLM Control</span>
+                  <span class="col-year" data-i18n="work.date.upcoming">Nov 2026 – Upcoming</span>
+                </a>
+              </li>
+
               <li class="work-list-item" data-topics="data" data-date="202610.2" data-preview-index="1" data-preview-label="Demo">
                 <a class="work-list-link" href="healthlab/index.html" data-transition-label="HealthLab">
                   <span class="col-title">HealthLab Evidence Intelligence</span>
@@ -261,11 +282,11 @@
                 </a>
               </li>
 
-              <li class="work-list-item" data-topics="web" data-date="202610.1" data-preview-index="4" data-preview-label="About">
-                <a class="work-list-link" href="../about/index.html#experience" data-transition-label="HealthLab Website">
-                  <span class="col-title">HealthLab Website</span>
+              <li class="work-list-item" data-topics="web" data-date="202610.1" data-preview-index="4" data-preview-label="Live ↗">
+                <a class="work-list-link" href="https://healthlab-demo.snowy-auroraceratops.workers.dev/" target="_blank" rel="noopener">
+                  <span class="col-title">HealthLab Website ↗</span>
                   <span class="col-domain" data-i18n="work.domain.web">Editorial Web</span>
-                  <span class="col-role" data-i18n="work.cap.web">Astro Typography &amp; Figma Components</span>
+                  <span class="col-role" data-i18n="work.cap.web">Astro Typography &amp; Cloudflare Demo</span>
                   <span class="col-year" data-i18n="work.date.oct_present">Oct 2026 – Present</span>
                 </a>
               </li>
@@ -300,12 +321,32 @@
           </div>
 
           <div class="work-tiles-grid" data-grid-view data-grid-container hidden>
+            <article class="work-tile-card" data-topics="agents" data-date="202611">
+              <a href="https://www.kaggle.com/competitions/generalist-gaming-agent" target="_blank" rel="noopener">
+                <div class="work-tile-media">
+                  <div class="art-backdrop art-bg-gaming">
+                    <div class="art-card dark-card">
+                      <div class="art-card-top"><span><span class="art-live-dot" style="background:#FFC67A;"></span>KAGGLE · 20 FPS</span><span class="art-pill">Upcoming</span></div>
+                      <div class="art-card-title">Offline generalist agent for unseen browser games &amp; latency-aware VLM planning.</div>
+                      <div class="art-checks"><span>Playwright</span><span>Pillow</span><span>Offline Harness</span></div>
+                    </div>
+                  </div>
+                </div>
+                <h4>Generalist Gaming Agent <span class="upcoming-pill" data-i18n="work.upcoming">Upcoming</span></h4>
+                <div class="stripe"></div>
+                <div class="work-tile-meta">
+                  <span data-i18n="work.cap.gaming">Playwright Harness &amp; Offline VLM Control</span>
+                  <span data-i18n="work.date.upcoming">Nov 2026 – Upcoming</span>
+                </div>
+              </a>
+            </article>
+
             <article class="work-tile-card" data-topics="data" data-date="202610.2">
               <a href="healthlab/index.html" data-transition-label="HealthLab">
                 <div class="work-tile-media">
                   <div class="art-backdrop art-bg-healthlab">
-                    <div class="art-card">
-                      <div class="art-card-top"><span>HEALTHLAB PILOT</span><span class="art-pill">Versioned Evidence</span></div>
+                    <div class="art-card is-live-scan">
+                      <div class="art-card-top"><span><span class="art-live-dot"></span>HEALTHLAB PILOT</span><span class="art-pill">Versioned Evidence</span></div>
                       <div class="art-sheet">Draft v2: The programme is available <mark>nationwide</mark>.</div>
                       <div class="art-sheet mist">Source: Pilot is limited to <mark>one district</mark>.</div>
                     </div>
@@ -321,20 +362,20 @@
             </article>
 
             <article class="work-tile-card" data-topics="web" data-date="202610.1">
-              <a href="../about/index.html#experience" data-transition-label="HealthLab Website">
+              <a href="https://healthlab-demo.snowy-auroraceratops.workers.dev/" target="_blank" rel="noopener">
                 <div class="work-tile-media">
                   <div class="art-backdrop art-bg-web">
                     <div class="art-card dark-card">
-                      <div class="art-card-top"><span>HEALTHLAB WEB</span><span class="art-pill">Astro + Figma</span></div>
-                      <div class="art-card-title">Responsive typography and Figma-aligned UI components.</div>
-                      <div class="art-checks"><span>Editorial Grid</span><span>Private Repo</span></div>
+                      <div class="art-card-top"><span><span class="art-live-dot"></span>HEALTHLAB WEB</span><span class="art-pill">Cloudflare Live ↗</span></div>
+                      <div class="art-card-title">Responsive typography and Figma-aligned UI components deployed live.</div>
+                      <div class="art-checks"><span>Astro Static</span><span>Live Workers Demo</span></div>
                     </div>
                   </div>
                 </div>
-                <h4>HealthLab Website</h4>
+                <h4>HealthLab Website ↗</h4>
                 <div class="stripe"></div>
                 <div class="work-tile-meta">
-                  <span data-i18n="work.cap.web">Astro Typography &amp; Components</span>
+                  <span data-i18n="work.cap.web">Astro Typography &amp; Cloudflare Demo</span>
                   <span data-i18n="work.date.oct_present">Oct 2026 – Present</span>
                 </div>
               </a>
@@ -345,7 +386,7 @@
                 <div class="work-tile-media">
                   <div class="art-backdrop art-bg-harness">
                     <div class="art-card">
-                      <div class="art-card-top"><span>APPROVAL GATE · #402</span><span class="art-pill">368 Tests ✓</span></div>
+                      <div class="art-card-top"><span><span class="art-live-dot"></span>APPROVAL GATE · #402</span><span class="art-pill">368 Tests ✓</span></div>
                       <div class="art-card-title">An agent proposes. A human approves the exact action.</div>
                       <div class="art-checks"><span>Typed Tools</span><span>Bounded Retries</span><span>CLI + HTTP</span></div>
                       <div class="art-actions-mini"><span class="approve">Approve</span><span class="reject">Reject</span></div>
@@ -366,9 +407,9 @@
                 <div class="work-tile-media">
                   <div class="art-backdrop art-bg-harbormind">
                     <div class="art-card dark-card">
-                      <div class="art-card-top"><span>LONG BEACH · NOAA AIS</span><span class="art-pill">Gemma 4 + LightGBM</span></div>
+                      <div class="art-card-top"><span><span class="art-live-dot"></span>LONG BEACH · NOAA AIS</span><span class="art-pill">Gemma 4 + LightGBM</span></div>
                       <div class="art-card-title">Offline wait-time forecast with uncertainty handoff.</div>
-                      <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill" style="left:28%;width:58%;"></div></div></div>
+                      <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill is-live-bar" style="left:28%;width:58%;"></div></div></div>
                       <div class="art-checks"><span>P10–P90 Band</span><span>→ Captain Review</span></div>
                     </div>
                   </div>
@@ -387,9 +428,9 @@
                 <div class="work-tile-media">
                   <div class="art-backdrop art-bg-rag">
                     <div class="art-card">
-                      <div class="art-card-top"><span>RAG PIPELINE</span><span class="art-pill">FastAPI + Docker</span></div>
+                      <div class="art-card-top"><span><span class="art-live-dot"></span>RAG PIPELINE</span><span class="art-pill">FastAPI + Docker</span></div>
                       <div class="art-card-title">Personal knowledge ingestion, embedding &amp; semantic retrieval.</div>
-                      <div class="art-flow"><div>Gemini<br>Embed</div><div>Atlas<br>Vector</div><div>Grounded<br>Answer</div></div>
+                      <div class="art-flow is-live-flow"><div>Gemini<br>Embed</div><div>Atlas<br>Vector</div><div>Grounded<br>Answer</div></div>
                     </div>
                   </div>
                 </div>
@@ -419,7 +460,7 @@
   <div class="footer-rounded-div" aria-hidden="true">
     <div class="rounded-div-wrap"><div class="rounded-div"></div></div>
   </div>
-  <footer class="footer-wrap">
+  <footer class="footer-wrap" data-spotlight>
     <div class="container medium">
       <div class="footer-top">
         <h2 class="footer-headline">
@@ -486,9 +527,9 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
-  <script src="../js/i18n.js?v=6" defer></script>
-  <script src="../js/motion.js?v=6" defer></script>
-  <script src="../js/work.js?v=6" defer></script>
-  <script src="../js/delights.js?v=7" defer></script>
+  <script src="../js/i18n.js?v=17" defer></script>
+  <script src="../js/motion.js?v=17" defer></script>
+  <script src="../js/work.js?v=17" defer></script>
+  <script src="../js/delights.js?v=17" defer></script>
 </body>
 </html>

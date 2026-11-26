@@ -428,6 +428,7 @@
 
     window.addEventListener('scroll', updateBurgerVisibility, { passive: true });
     updateBurgerVisibility();
+    window.__closeNavDrawer = closeDrawer;
   }
 
   /* ---------- 4. Scroll-Direction Reversing Vinyl Marquee + Hero Delights ---------- */
@@ -725,6 +726,7 @@
 
     // Subtle editorial reveal for .once-in elements (trigger immediately upon entering bottom edge)
     document.querySelectorAll('.once-in').forEach((el) => {
+      if (el.classList.contains('home-intro-lead')) return;
       window.gsap.fromTo(
         el,
         { y: 18, opacity: 0 },
@@ -740,6 +742,263 @@
           },
         }
       );
+    });
+  }
+
+  /* ---------- 5B. Top Scroll Progress Thread ---------- */
+
+  function initScrollProgress() {
+    let bar = document.querySelector('.scroll-progress-bar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'scroll-progress-bar';
+      bar.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(bar);
+    }
+
+    const update = () => {
+      const doc = document.documentElement;
+      const maxScroll = Math.max(doc.scrollHeight - window.innerHeight, 1);
+      const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+      bar.style.transform = `scaleX(${progress.toFixed(4)})`;
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+
+  /* ---------- 5C. Scroll-Scrubbed Reading Highlight (Home Intro Lead) ---------- */
+
+  let wordScrubTween = null;
+
+  function initScrollScrubLead() {
+    const lead = document.querySelector('.home-intro-lead');
+    if (!lead) return;
+
+    const build = () => {
+      if (wordScrubTween) {
+        wordScrubTween.scrollTrigger?.kill();
+        wordScrubTween.kill();
+        wordScrubTween = null;
+      }
+
+      if (prefersReduced || !hasScrollTrigger) {
+        lead.style.opacity = '1';
+        return;
+      }
+      if (document.documentElement.classList.contains('is-xray-mode')) return;
+      if (lead.classList.contains('is-hallucinating')) return;
+
+      const rawText = lead.textContent.replace(/\s+/g, ' ').trim();
+      if (!rawText) return;
+
+      const parts = rawText.split(/(\s+)/);
+      const frag = document.createDocumentFragment();
+      parts.forEach((part) => {
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+        } else if (part) {
+          const span = document.createElement('span');
+          span.className = 'scrub-word';
+          span.textContent = part;
+          frag.appendChild(span);
+        }
+      });
+
+      lead.textContent = '';
+      lead.appendChild(frag);
+
+      const words = lead.querySelectorAll('.scrub-word');
+      if (!words.length) return;
+
+      wordScrubTween = window.gsap.fromTo(
+        words,
+        { opacity: 0.22 },
+        {
+          opacity: 1,
+          stagger: 0.04,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: lead,
+            start: 'top 88%',
+            end: 'bottom 54%',
+            scrub: 0.4,
+          },
+        }
+      );
+    };
+
+    window.__refreshWordScrub = build;
+    window.addEventListener('portfolio:langchange', () => {
+      requestAnimationFrame(build);
+    });
+    build();
+  }
+
+  /* ---------- 5D. Hero Subtle Atmospheric Mist Field Canvas ---------- */
+
+  function initHeroMistCanvas() {
+    const canvas = document.querySelector('.hero-mist-canvas');
+    const hero = document.querySelector('.home-header');
+    if (!canvas || !hero || prefersReduced) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let particles = [];
+    let rafId = null;
+    let isVisible = true;
+    const pointer = { x: -9999, y: -9999, active: false };
+
+    function resize() {
+      const rect = hero.getBoundingClientRect();
+      width = Math.max(rect.width, 1);
+      height = Math.max(rect.height, 1);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const targetCount = width < 640 ? 18 : 34;
+      if (particles.length !== targetCount) {
+        particles = Array.from({ length: targetCount }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.28,
+          vy: (Math.random() - 0.5) * 0.22,
+          r: Math.random() * 1.6 + 0.9,
+        }));
+      }
+    }
+
+    function draw() {
+      if (!isVisible || document.hidden) {
+        rafId = null;
+        return;
+      }
+      if (window.__vtPaused) {
+        rafId = requestAnimationFrame(draw);
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      const nodeRgb = isDark ? '127, 226, 184' : '211, 230, 235';
+      const lineRgb = isDark ? '127, 226, 184' : '235, 244, 250';
+      const maxDist = width < 640 ? 115 : 150;
+
+      for (let i = 0; i < particles.length; i += 1) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < -10) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
+        if (p.y < -10) p.y = height + 10;
+        if (p.y > height + 10) p.y = -10;
+
+        if (pointer.active) {
+          const dx = pointer.x - p.x;
+          const dy = pointer.y - p.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 180 && dist > 1) {
+            p.x += (dx / dist) * 0.14;
+            p.y += (dy / dist) * 0.14;
+          }
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${nodeRgb}, 0.45)`;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j += 1) {
+          const q = particles[j];
+          const d = Math.hypot(p.x - q.x, p.y - q.y);
+          if (d < maxDist) {
+            const alpha = (1 - d / maxDist) * 0.16;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(${lineRgb}, ${alpha.toFixed(3)})`;
+            ctx.lineWidth = 0.85;
+            ctx.stroke();
+          }
+        }
+
+        if (pointer.active) {
+          const dp = Math.hypot(p.x - pointer.x, p.y - pointer.y);
+          if (dp < 165) {
+            const alpha = (1 - dp / 165) * 0.28;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(pointer.x, pointer.y);
+            ctx.strokeStyle = `rgba(127, 226, 184, ${alpha.toFixed(3)})`;
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
+          }
+        }
+      }
+
+      rafId = requestAnimationFrame(draw);
+    }
+
+    function start() {
+      if (!rafId && isVisible && !document.hidden) {
+        rafId = requestAnimationFrame(draw);
+      }
+    }
+
+    if (finePointer) {
+      hero.addEventListener('pointermove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        pointer.x = e.clientX - rect.left;
+        pointer.y = e.clientY - rect.top;
+        pointer.active = true;
+      }, { passive: true });
+      hero.addEventListener('pointerleave', () => {
+        pointer.active = false;
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          isVisible = entries[0]?.isIntersecting ?? true;
+          if (isVisible) start();
+        },
+        { threshold: 0.02 }
+      );
+      io.observe(hero);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) start();
+    });
+    window.addEventListener('resize', resize, { passive: true });
+
+    resize();
+    start();
+  }
+
+  /* ---------- 5E. Ambient Cursor Spotlight on Dark Surfaces ---------- */
+
+  function initAmbientSpotlight() {
+    if (!finePointer || prefersReduced) return;
+    document.querySelectorAll('[data-spotlight]').forEach((surface) => {
+      surface.addEventListener('pointermove', (e) => {
+        const rect = surface.getBoundingClientRect();
+        surface.style.setProperty('--spot-x', `${(e.clientX - rect.left).toFixed(1)}px`);
+        surface.style.setProperty('--spot-y', `${(e.clientY - rect.top).toFixed(1)}px`);
+        surface.style.setProperty('--spot-opacity', '1');
+      }, { passive: true });
+      surface.addEventListener('pointerleave', () => {
+        surface.style.setProperty('--spot-opacity', '0');
+      });
     });
   }
 
@@ -777,6 +1036,10 @@
     initHeroMarquee();
     initHeroPlayfulDelights();
     initScrollChoreography();
+    initScrollProgress();
+    initScrollScrubLead();
+    initHeroMistCanvas();
+    initAmbientSpotlight();
     initLocalClock();
   });
 })();

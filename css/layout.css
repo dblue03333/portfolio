@@ -316,6 +316,39 @@ html[data-lang="vi"] .credits-top:hover .credit-track {
 .nav-links .btn-link {
   font-size: 0.96em;
   font-weight: 450;
+  gap: 0.42em;
+}
+
+/* Subtle "Soon" / "Upcoming" pill next to Blog in top bar & drawer */
+.nav-soon-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.16em 0.52em;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.58em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  border: 1px solid var(--color-border);
+  background: rgba(53, 93, 133, 0.1);
+  color: var(--color-accent);
+  vertical-align: middle;
+}
+
+.nav-bar.nav-light .nav-soon-tag,
+.theme-dark .nav-soon-tag,
+.fixed-nav .nav-soon-tag,
+html[data-theme="dark"] .nav-soon-tag {
+  border-color: rgba(127, 226, 184, 0.42);
+  background: rgba(127, 226, 184, 0.12);
+  color: #7FE2B8;
+}
+
+.fixed-nav-links .nav-soon-tag {
+  font-size: 0.34em;
+  margin-left: 0.65em;
+  transform: translateY(-0.12em);
 }
 
 /* Minimal Dennis-style EN / VI / JP Language Switcher */
@@ -357,9 +390,93 @@ html[data-lang="vi"] .credits-top:hover .credit-track {
 
 .nav-bar.nav-light .lang-switch button.is-active,
 .theme-dark .lang-switch button.is-active,
-.fixed-nav .lang-switch button.is-active {
+.fixed-nav .lang-switch button.is-active,
+html[data-theme="dark"] .lang-switch button.is-active {
   background-color: var(--color-mist);
-  color: var(--color-dark);
+  color: #17334D;
+}
+
+/* Compact tactile utility controls in navbar (Theme + SFX) */
+.nav-utility-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.nav-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.15em;
+  height: 2.15em;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.74em;
+  color: inherit;
+  opacity: 0.76;
+  transition: opacity 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, transform 0.25s var(--ease-primary), color 0.25s ease;
+}
+
+.nav-icon-btn svg {
+  width: 1.15em;
+  height: 1.15em;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-icon-btn:hover {
+  opacity: 1;
+  background-color: rgba(23, 51, 77, 0.08);
+  transform: translateY(-1px);
+}
+
+.nav-bar.nav-light .nav-icon-btn,
+.theme-dark .nav-icon-btn,
+.fixed-nav .nav-icon-btn,
+html[data-theme="dark"] .nav-icon-btn {
+  border-color: var(--color-border-light);
+}
+
+.nav-bar.nav-light .nav-icon-btn:hover,
+.theme-dark .nav-icon-btn:hover,
+.fixed-nav .nav-icon-btn:hover,
+html[data-theme="dark"] .nav-icon-btn:hover {
+  background-color: rgba(211, 230, 235, 0.14);
+}
+
+.nav-icon-btn.is-active {
+  opacity: 1;
+  border-color: rgba(127, 226, 184, 0.65);
+  background-color: rgba(127, 226, 184, 0.14);
+  color: var(--glow-mint, #7FE2B8);
+}
+
+html:not([data-theme="dark"]) .nav-bar:not(.nav-light) .nav-icon-btn.is-active {
+  border-color: var(--color-accent);
+  background-color: rgba(53, 93, 133, 0.12);
+  color: var(--color-accent);
+}
+
+.fixed-nav-utilities {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.fixed-nav-utilities h5 {
+  margin: 0;
+}
+
+.fixed-nav-util-btns {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
 }
 
 .fixed-nav-lang {

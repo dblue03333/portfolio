@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Blog (Upcoming) — Weekly AI engineering, paper notes, and build logs by Kelvin Nguyen.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog (Upcoming) — Kelvin Nguyen">
+  <meta property="og:description" content="Weekly AI engineering, paper notes, and build logs — launching soon.">
+  <meta property="og:image" content="../assets/og-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Blog — Kelvin Nguyen</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css?v=17">
+  <link rel="stylesheet" href="../css/base.css?v=17">
+  <link rel="stylesheet" href="../css/layout.css?v=17">
+  <link rel="stylesheet" href="../css/sections.css?v=17">
+  <link rel="stylesheet" href="../css/responsive.css?v=17">
+  <script>
+    (function(){
+      var p = new URLSearchParams(location.search).get('lang');
+      var l = (p === 'en' || p === 'vi' || p === 'ja') ? p : (localStorage.getItem('portfolio_lang') || 'en');
+      if (l !== 'en' && l !== 'vi' && l !== 'ja') l = 'en';
+      document.documentElement.dataset.lang = l;
+      document.documentElement.lang = l;
+
+      var th = localStorage.getItem('portfolio_theme');
+      if (th === 'dark' || th === 'light') document.documentElement.dataset.theme = th;
+
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && sessionStorage.getItem('dennis_page_transition') === '1') {
+        document.documentElement.classList.add('is-transitioning');
+        setTimeout(function(){ document.documentElement.classList.remove('is-transitioning'); }, 2200);
+      }
+    })();
+  </script>
+</head>
+<body data-page="blog" data-page-title="Blog">
+  <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+
+  <div class="loading-container" aria-hidden="true">
+    <div class="loading-screen">
+      <div class="rounded-div-wrap top"><div class="rounded-div"></div></div>
+      <div class="loading-words"><span class="dot"></span><span data-loading-word>Blog</span></div>
+      <div class="rounded-div-wrap bottom"><div class="rounded-div"></div></div>
+    </div>
+  </div>
+
+  <div class="btn-hamburger-wrap">
+    <div class="btn btn-hamburger">
+      <button class="btn-click magnetic" type="button" data-nav-toggle data-strength="32" data-strength-text="16" aria-label="Toggle navigation menu" aria-expanded="false">
+        <div class="btn-fill"></div>
+        <div class="btn-text"><div class="hamburger-bars" aria-hidden="true"><span></span><span></span></div></div>
+      </button>
+    </div>
+  </div>
+
+  <div class="fixed-nav-back" aria-hidden="true"></div>
+  <aside class="fixed-nav" aria-label="Full navigation">
+    <div class="fixed-nav-rounded-div" aria-hidden="true"><div class="rounded-curve"></div></div>
+    <div class="fixed-nav-inner">
+      <div class="nav-header">
+        <h5 data-i18n="nav.navigation">Navigation</h5>
+        <div class="stripe"></div>
+        <nav class="fixed-nav-links" aria-label="Primary drawer navigation">
+          <a href="../index.html" data-transition-label="Home" data-i18n="nav.home">Home</a>
+          <a href="../work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a>
+          <a href="../about/index.html" data-transition-label="About" data-i18n="nav.about">About</a>
+          <a href="index.html" class="active" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span><span class="nav-soon-tag" data-i18n="nav.soon">Soon</span></a>
+          <a href="../contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a>
+        </nav>
+
+        <div class="fixed-nav-lang">
+          <h5 data-i18n="nav.language">Language</h5>
+          <div class="lang-switch" role="group" aria-label="Switch language">
+            <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+            <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+            <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+          </div>
+        </div>
+      </div>
+      <div class="fixed-nav-socials">
+        <h5 data-i18n="nav.socials">Socials</h5>
+        <ul>
+          <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a class="btn-link" href="https://leetcode.com/u/NguyenDucTuanDat/" target="_blank" rel="noopener">LeetCode</a></li>
+          <li><a class="btn-link" href="mailto:ndtdat.data@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <header class="nav-bar">
+    <a href="../index.html" class="credits-top" data-transition-label="Home">
+      <span class="credit-symbol">©</span>
+      <span class="credit-copy">
+        <span class="credit-track" data-i18n-html="brand.credit"><span>Code by</span><span>Kelvin</span><span class="credit-extra">Nguyen</span></span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <div class="nav-link-item"><a class="btn-link" href="../work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../about/index.html" data-transition-label="About" data-i18n="nav.about">About</a></div>
+      <div class="nav-link-item"><a class="btn-link active" href="index.html" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span><span class="nav-soon-tag" data-i18n="nav.soon">Soon</span></a></div>
+      <div class="nav-link-item"><a class="btn-link" href="../contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a></div>
+      <div class="lang-switch" role="group" aria-label="Switch language">
+        <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+        <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+      </div>
+    </nav>
+    <div class="nav-mobile-right">
+      <div class="lang-switch" role="group" aria-label="Switch language">
+        <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="vi" aria-pressed="false">VI</button>
+        <button type="button" data-set-lang="ja" aria-pressed="false">JP</button>
+      </div>
+      <button class="nav-mobile-trigger" type="button" data-mobile-nav-open aria-label="Open menu">
+        <span class="dot"></span>
+        <span data-i18n="nav.menu">Menu</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section page-header">
+      <div class="container medium">
+        <div class="blog-hero-badge">
+          <span class="art-live-dot" style="margin-right:0;"></span>
+          <span data-i18n="blog.badge">UPCOMING · WEEKLY LEARNING NOTES</span>
+        </div>
+        <h1 data-i18n="blog.title">Weekly engineering &amp; paper notes — coming soon</h1>
+        <p class="blog-lead" data-i18n="blog.lead">
+          A quiet weekly log of what I am studying, building, and breaking across LLMs, AI agents, ML systems, and backend engineering. New notes will be published here every week.
+        </p>
+
+        <div class="blog-tracks-grid">
+          <article class="blog-track-card once-in">
+            <div>
+              <span class="blog-track-num">01 · UPCOMING</span>
+              <h3 style="margin-top:0.55em;" data-i18n="blog.t1.title">Paper Notes</h3>
+              <p style="margin-top:0.6em;" data-i18n="blog.t1.desc">
+                Distilling ML, LLM, and agent papers — focusing on assumptions, failure modes, ablations, and open questions rather than hype.
+              </p>
+            </div>
+            <div class="blog-track-cadence" data-i18n="blog.t1.cadence">Cadence: Weekly digest</div>
+          </article>
+
+          <article class="blog-track-card once-in">
+            <div>
+              <span class="blog-track-num">02 · UPCOMING</span>
+              <h3 style="margin-top:0.55em;" data-i18n="blog.t2.title">Build Logs</h3>
+              <p style="margin-top:0.6em;" data-i18n="blog.t2.desc">
+                Architecture trade-offs and live benchmarks from Generalist Gaming Agent, Reliable Agent Harness, and data pipelines.
+              </p>
+            </div>
+            <div class="blog-track-cadence" data-i18n="blog.t2.cadence">Cadence: As experiments ship</div>
+          </article>
+
+          <article class="blog-track-card once-in">
+            <div>
+              <span class="blog-track-num">03 · UPCOMING</span>
+              <h3 style="margin-top:0.55em;" data-i18n="blog.t3.title">Failure Post-Mortems</h3>
+              <p style="margin-top:0.6em;" data-i18n="blog.t3.desc">
+                Real edge cases caught in offline evals, guardrail tests, and latency profiling — and the deterministic checks that fixed them.
+              </p>
+            </div>
+            <div class="blog-track-cadence" data-i18n="blog.t3.cadence">Cadence: Field notes</div>
+          </article>
+        </div>
+
+        <div class="blog-actions once-in">
+          <div class="btn btn-dark">
+            <a class="btn-click magnetic" href="../work/index.html" data-strength="26" data-strength-text="13" data-transition-label="Work">
+              <div class="btn-fill"></div>
+              <span class="btn-text" data-i18n="blog.cta_work">Explore shipped work →</span>
+            </a>
+          </div>
+          <div class="btn">
+            <a class="btn-click magnetic" href="../contact/index.html" data-strength="26" data-strength-text="13" data-transition-label="Contact">
+              <div class="btn-fill"></div>
+              <span class="btn-text" data-i18n="blog.cta_contact">Suggest a topic</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer-rounded-div" aria-hidden="true">
+    <div class="rounded-div-wrap"><div class="rounded-div"></div></div>
+  </div>
+  <footer class="footer-wrap" data-spotlight>
+    <div class="container medium">
+      <div class="footer-top">
+        <h2 class="footer-headline">
+          <span class="footer-headline-line">
+            <span class="footer-avatar">
+              <img src="../assets/avatar.webp" alt="Kelvin Nguyen portrait" width="256" height="256" loading="lazy">
+            </span>
+            <span data-i18n="footer.lets_work">Let’s work</span>
+          </span>
+          <span data-i18n="footer.together">together</span>
+        </h2>
+        <span class="arrow-diag footer-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7v10H7"/></svg>
+        </span>
+      </div>
+
+      <div class="footer-divider-row">
+        <div class="stripe"></div>
+        <div class="footer-cta-wrap">
+          <div class="btn btn-round btn-accent">
+            <a class="btn-click magnetic" href="../contact/index.html" data-strength="50" data-strength-text="24" data-transition-label="Contact">
+              <div class="btn-fill"></div>
+              <span class="btn-text" data-i18n="footer.get_in_touch">Get in touch</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-pills">
+          <div class="btn btn-light-outline">
+            <a class="btn-click magnetic" href="mailto:ndtdat.data@gmail.com" data-strength="24" data-strength-text="12">
+              <div class="btn-fill"></div>
+              <span class="btn-text">ndtdat.data@gmail.com</span>
+            </a>
+          </div>
+          <div class="btn btn-light-outline">
+            <a class="btn-click magnetic" href="https://github.com/dblue03333" target="_blank" rel="noopener" data-strength="24" data-strength-text="12">
+              <div class="btn-fill"></div>
+              <span class="btn-text">GitHub ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-meta-group">
+          <div class="footer-meta-col"><h5 data-i18n="footer.version">Version</h5><p data-i18n="footer.edition">2026 © Edition</p></div>
+          <div class="footer-meta-col"><h5 data-i18n="footer.local_time">Local Time</h5><p data-local-time>09:30 PM GMT+7</p></div>
+        </div>
+        <div class="footer-socials">
+          <h5 data-i18n="nav.socials">Socials</h5>
+          <ul>
+            <li><a class="btn-link" href="https://github.com/dblue03333" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a class="btn-link" href="https://www.linkedin.com/in/dat-nguyen-duc-tuan-164293315/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a class="btn-link" href="https://leetcode.com/u/NguyenDucTuanDat/" target="_blank" rel="noopener">LeetCode</a></li>
+            <li><a class="btn-link" href="https://www.kaggle.com/datasets/nguyenductuandat/lalb-ais-port-congestion-62023-122025" target="_blank" rel="noopener">Kaggle</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+  <script src="../js/i18n.js?v=17" defer></script>
+  <script src="../js/motion.js?v=17" defer></script>
+  <script src="../js/delights.js?v=17" defer></script>
+</body>
+</html>

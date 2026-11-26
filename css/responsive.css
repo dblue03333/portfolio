@@ -258,9 +258,93 @@
   .demo-kv-list {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .sandbox-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sandbox-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .constellation-controls {
+    align-items: flex-start;
+  }
+
+  .constellation-dock {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1em;
+  }
+
+  .constellation-dock-side {
+    align-items: flex-start;
+  }
+
+  .constellation-tags {
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .constellation-stage-bleed {
+    height: auto;
+    padding: 1.15em var(--container-padding);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55em;
+  }
+
+  .constellation-stage-bleed::before,
+  .constellation-stage-bleed::after,
+  .constellation-svg {
+    display: none;
+  }
+
+  .constellation-node {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    font-size: 0.74em;
+    padding: 0.46em 0.84em;
+    cursor: pointer;
+  }
+
+  .constellation-node.is-pushed-out {
+    display: none;
+  }
+
+  .constellation-node:hover,
+  .constellation-node.is-selected {
+    transform: translateY(-1px) !important;
+  }
+
+  .blog-tracks-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mc-specs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mc-body-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media screen and (max-width: 540px) {
+  .sandbox-metrics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sandbox-pipeline {
+    gap: 0.4em;
+  }
+
+  .xray-tooltip {
+    display: none !important;
+  }
   .nav-bar {
     padding-left: 1.15em;
     padding-right: 1.15em;
