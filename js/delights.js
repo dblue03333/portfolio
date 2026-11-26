@@ -29,6 +29,7 @@
       consoleTitle: 'AI Console',
       askBtn: `${SHORTCUT_LABEL} Ask AI`,
       guardrailBtn: '⚡ Test Guardrail',
+      xrayBtn: '🔬 X-Ray',
       placeholder: 'Ask about Kelvin or jump to a command…',
       groupActions: 'Actions & Playground',
       groupPages: 'Navigate',
@@ -39,6 +40,11 @@
       askRowHint: 'Stream answer ↵',
       cmdGuardrail: 'Test Guardrail — Inject Hallucination',
       cmdGuardrailHint: 'Easter egg',
+      cmdXray: 'Toggle Token X-Ray Mode',
+      cmdXrayHint: 'Shift+X',
+      xrayHud: 'X-RAY · {n} tokens',
+      xrayOff: 'Off',
+      awayTitle: '⚡ weights still warm — come back',
       cmdBoot: 'Replay AI Model Weights Boot',
       cmdBootHint: '00% → 100%',
       cmdCopy: 'Copy Email (ndtdat.data@gmail.com)',
@@ -86,6 +92,7 @@
       consoleTitle: 'AI Console',
       askBtn: `${SHORTCUT_LABEL} Hỏi AI`,
       guardrailBtn: '⚡ Thử Guardrail',
+      xrayBtn: '🔬 Soi X-Ray',
       placeholder: 'Hỏi nhanh về Tuấn Đạt hoặc gõ tên trang, lệnh…',
       groupActions: 'Tương tác & Thử nghiệm',
       groupPages: 'Đi nhanh đến trang',
@@ -96,6 +103,11 @@
       askRowHint: 'Trả lời ngay ↵',
       cmdGuardrail: 'Thử Guardrail — Giả lập AI bị ảo giác',
       cmdGuardrailHint: 'Easter egg',
+      cmdXray: 'Bật / Tắt chế độ soi Token X-Ray',
+      cmdXrayHint: 'Shift+X',
+      xrayHud: 'X-RAY · {n} token',
+      xrayOff: 'Tắt',
+      awayTitle: '⚡ model vẫn đang ấm — quay lại nhé',
       cmdBoot: 'Chạy lại hiệu ứng khởi động AI Weights',
       cmdBootHint: '00% → 100%',
       cmdCopy: 'Sao chép email (ndtdat.data@gmail.com)',
@@ -143,6 +155,7 @@
       consoleTitle: 'AIコンソール',
       askBtn: `${SHORTCUT_LABEL} AIに質問`,
       guardrailBtn: '⚡ ガードレール実験',
+      xrayBtn: '🔬 X-Ray',
       placeholder: 'Kelvinについて質問、またはコマンド検索…',
       groupActions: 'アクション・実験',
       groupPages: 'ページ移動',
@@ -153,6 +166,11 @@
       askRowHint: '回答生成 ↵',
       cmdGuardrail: 'ガードレール実験 — ハルシネーション注入',
       cmdGuardrailHint: 'イースターエッグ',
+      cmdXray: 'トークンX-Rayモードを切替',
+      cmdXrayHint: 'Shift+X',
+      xrayHud: 'X-RAY · {n} トークン',
+      xrayOff: '終了',
+      awayTitle: '⚡ モデル待機中 — お待ちしています',
       cmdBoot: 'AIウェイト起動演出を再生',
       cmdBootHint: '00% → 100%',
       cmdCopy: 'メールをコピー (ndtdat.data@gmail.com)',
@@ -372,8 +390,10 @@
   const consoleTitleEls = [];
   const askPillEls = [];
   const guardrailPillEls = [];
+  const xrayPillEls = [];
+  const xrayBtnEls = [];
 
-  function mountChromeEnhancements(openPalette, triggerGuardrail) {
+  function mountChromeEnhancements(openPalette, triggerGuardrail, toggleXray) {
     // A. Desktop navbar subtle ⌘K trigger pill
     const desktopNav = document.querySelector('.nav-links');
     if (desktopNav && !desktopNav.querySelector('[data-cmdk-open]')) {
@@ -421,7 +441,7 @@
       }
     });
 
-    // D. Footer interactive AI Console column (⌘K Ask AI + ⚡ Test Guardrail)
+    // D. Footer interactive AI Console column (⌘K Ask AI + ⚡ Test Guardrail + 🔬 X-Ray)
     document.querySelectorAll('.footer-meta-group').forEach((group) => {
       if (group.querySelector('.footer-console-col')) return;
       const col = document.createElement('div');
@@ -431,13 +451,18 @@
         <div class="footer-console-actions">
           <button type="button" class="footer-console-pill" data-cmdk-open><span data-ask-pill-text></span></button>
           <button type="button" class="footer-console-pill is-guardrail" data-guardrail-trigger><span data-guardrail-pill-text></span></button>
+          <button type="button" class="footer-console-pill is-xray" data-xray-trigger><span data-xray-pill-text></span></button>
         </div>
       `;
       col.querySelector('[data-cmdk-open]').addEventListener('click', openPalette);
       col.querySelector('[data-guardrail-trigger]').addEventListener('click', triggerGuardrail);
+      const xrayBtn = col.querySelector('[data-xray-trigger]');
+      xrayBtn.addEventListener('click', toggleXray);
       consoleTitleEls.push(col.querySelector('[data-console-label]'));
       askPillEls.push(col.querySelector('[data-ask-pill-text]'));
       guardrailPillEls.push(col.querySelector('[data-guardrail-pill-text]'));
+      xrayPillEls.push(col.querySelector('[data-xray-pill-text]'));
+      xrayBtnEls.push(xrayBtn);
       group.appendChild(col);
     });
   }
@@ -450,10 +475,11 @@
     consoleTitleEls.forEach((el) => { if (el) el.textContent = u.consoleTitle; });
     askPillEls.forEach((el) => { if (el) el.textContent = u.askBtn; });
     guardrailPillEls.forEach((el) => { if (el) el.textContent = u.guardrailBtn; });
+    xrayPillEls.forEach((el) => { if (el) el.textContent = u.xrayBtn; });
   }
 
   /* ---------- 2. Easter Egg: Hallucination → Guardrail Intercept ---------- */
-  function createGuardrailSystem() {
+  function createGuardrailSystem(beforeTrigger) {
     const veil = document.createElement('div');
     veil.className = 'hallucination-veil';
     veil.setAttribute('aria-hidden', 'true');
@@ -525,6 +551,7 @@
 
     function trigger() {
       if (isRunning) return;
+      if (typeof beforeTrigger === 'function') beforeTrigger();
       isRunning = true;
       clearTimers();
       whisper.classList.remove('is-visible');
@@ -635,7 +662,7 @@
   }
 
   /* ---------- 3. ⌘K Mini RAG Terminal ---------- */
-  function createCommandPalette(triggerGuardrail) {
+  function createCommandPalette(triggerGuardrail, toggleXray) {
     const backdrop = document.createElement('div');
     backdrop.className = 'cmdk-backdrop';
     backdrop.setAttribute('role', 'dialog');
@@ -781,6 +808,17 @@
           run: () => {
             close();
             window.setTimeout(triggerGuardrail, 180);
+          },
+        },
+        {
+          group: 'actions',
+          icon: '🔬',
+          title: u.cmdXray,
+          hint: u.cmdXrayHint,
+          search: 'xray x-ray token inspect tiktoken blueprint soi',
+          run: () => {
+            close();
+            window.setTimeout(toggleXray, 160);
           },
         },
         {
@@ -1069,24 +1107,362 @@
       if (isOpen) syncPaletteCopy();
     });
 
-    return { open, close };
+    function ask(query) {
+      open();
+      if (query) {
+        input.value = query;
+        runRagQuery(query);
+        renderList();
+      }
+    }
+
+    return { open, close, ask, isOpen: () => isOpen };
+  }
+
+  /* ---------- 4. Token X-Ray Mode (Shift+X / ⌘K / Footer Pill) ---------- */
+  function createXraySystem(isPaletteOpen) {
+    const hud = document.createElement('div');
+    hud.className = 'xray-hud';
+    hud.setAttribute('role', 'status');
+    hud.setAttribute('aria-live', 'polite');
+    hud.innerHTML = `
+      <span class="xray-hud-dot" aria-hidden="true"></span>
+      <span data-xray-hud-text></span>
+      <button type="button" class="xray-hud-off" data-xray-off></button>
+    `;
+    document.body.appendChild(hud);
+
+    const hudTextEl = hud.querySelector('[data-xray-hud-text]');
+    const hudOffBtn = hud.querySelector('[data-xray-off]');
+
+    let active = false;
+    let tokenizedEls = [];
+    let badgedEls = [];
+    let totalTokens = 0;
+
+    function mockTokenId(tok) {
+      let h = 2166136261;
+      for (let i = 0; i < tok.length; i += 1) {
+        h ^= tok.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return (Math.abs(h) % 92000) + 1024;
+    }
+
+    function splitTokens(text) {
+      // Realistic subword-ish tokenization across Latin, Vietnamese, and Japanese
+      const raw = text.match(/[\u3040-\u30ff\u4e00-\u9faf]{1,2}|[^\s\u3040-\u30ff\u4e00-\u9faf]+|\s+/g) || [text];
+      const out = [];
+      raw.forEach((piece) => {
+        if (/^\s+$/.test(piece)) {
+          out.push({ text: piece, isSpace: true });
+        } else if (piece.length > 9 && /^[A-Za-zÀ-ỹ-]+$/.test(piece)) {
+          const mid = Math.ceil(piece.length * 0.58);
+          out.push({ text: piece.slice(0, mid), isSpace: false });
+          out.push({ text: piece.slice(mid), isSpace: false });
+        } else {
+          out.push({ text: piece, isSpace: false });
+        }
+      });
+      return out;
+    }
+
+    function clearDomAnnotations(restoreOriginalText) {
+      if (restoreOriginalText) {
+        tokenizedEls.forEach(({ el, orig }) => {
+          if (el.isConnected) el.textContent = orig;
+        });
+      }
+      tokenizedEls = [];
+      badgedEls.forEach((el) => el.removeAttribute('data-xray-badge'));
+      badgedEls = [];
+      totalTokens = 0;
+    }
+
+    function stampBadge(el, label) {
+      if (!el || el.hasAttribute('data-xray-badge')) return;
+      el.setAttribute('data-xray-badge', label);
+      badgedEls.push(el);
+    }
+
+    function applyAnnotations() {
+      clearDomAnnotations(false);
+      let tokCounter = 0;
+
+      const selectors = [
+        '.home-intro-lead',
+        '.about-intro-text p',
+        '.work-header h1',
+        '.case-narrative-body p',
+      ];
+
+      document.querySelectorAll(selectors.join(', ')).forEach((el) => {
+        // Only tokenize pure text containers so we never break inline links or marks
+        if (el.children.length > 0) return;
+        const orig = el.textContent;
+        if (!orig || !orig.trim()) return;
+
+        const parts = splitTokens(orig);
+        const frag = document.createDocumentFragment();
+        let colorIdx = 0;
+
+        parts.forEach((part) => {
+          if (part.isSpace) {
+            frag.appendChild(document.createTextNode(part.text));
+          } else {
+            tokCounter += 1;
+            const span = document.createElement('span');
+            span.className = `xray-tok xray-t${colorIdx % 5}`;
+            span.textContent = part.text;
+            span.title = `token #${tokCounter} · id:${mockTokenId(part.text)}`;
+            frag.appendChild(span);
+            colorIdx += 1;
+          }
+        });
+
+        tokenizedEls.push({ el, orig });
+        el.textContent = '';
+        el.appendChild(frag);
+      });
+
+      totalTokens = tokCounter;
+
+      // Stamp authentic technical telemetry badges on key components
+      stampBadge(document.querySelector('.home-hero-role'), 'guardrail: active · 0px shift');
+      const introGrid = document.querySelector('.home-intro-grid');
+      if (introGrid) stampBadge(introGrid, `tokenized: ${totalTokens} tok · grounded: true`);
+
+      document.querySelectorAll('.work-items-row, .work-tile').forEach((row) => {
+        const href = row.querySelector('a')?.getAttribute('href') || '';
+        if (href.includes('healthlab')) stampBadge(row, 'lineage: versioned · grounded');
+        else if (href.includes('harness')) stampBadge(row, 'tests: 368/368 offline pass');
+        else if (href.includes('harbormind')) stampBadge(row, 'offline: gemma-4 + quantile ML');
+        else if (href.includes('mini-llm-twin')) stampBadge(row, 'vector: atlas 768-dim · RAG');
+        else stampBadge(row, 'editorial: astro · static');
+      });
+
+      document.querySelectorAll('.capability-card').forEach((card, i) => {
+        const tags = ['schema + human gate', 'versioned datasets', 'vector + docker API'];
+        stampBadge(card, tags[i] || 'verified');
+      });
+
+      document.querySelectorAll('.case-demo-shell').forEach((shell) => {
+        stampBadge(shell, 'simulation: deterministic · 0ms');
+      });
+
+      syncHudCopy();
+    }
+
+    function syncHudCopy() {
+      const u = UI[getLang()] || UI.en;
+      hudTextEl.textContent = u.xrayHud.replace('{n}', String(totalTokens));
+      hudOffBtn.textContent = u.xrayOff;
+    }
+
+    function syncButtons() {
+      xrayBtnEls.forEach((btn) => btn.classList.toggle('is-active', active));
+    }
+
+    function enable() {
+      if (active) return;
+      active = true;
+      document.documentElement.classList.add('is-xray-mode');
+      applyAnnotations();
+      hud.classList.add('is-visible');
+      syncButtons();
+    }
+
+    function disable() {
+      if (!active) return;
+      active = false;
+      document.documentElement.classList.remove('is-xray-mode');
+      hud.classList.remove('is-visible');
+      clearDomAnnotations(true);
+      syncButtons();
+    }
+
+    function toggle() {
+      if (active) disable();
+      else enable();
+    }
+
+    hudOffBtn.addEventListener('click', disable);
+
+    // Keyboard shortcut: Shift+X (outside form inputs) + Esc turns off X-Ray if palette is closed
+    document.addEventListener('keydown', (e) => {
+      const tag = (e.target?.tagName || '').toLowerCase();
+      const typing = tag === 'input' || tag === 'textarea' || e.target?.isContentEditable;
+      if (typing) return;
+
+      if (e.shiftKey && !e.metaKey && !e.ctrlKey && !e.altKey && e.key.toLowerCase() === 'x') {
+        e.preventDefault();
+        toggle();
+      } else if (e.key === 'Escape' && active && !(typeof isPaletteOpen === 'function' && isPaletteOpen())) {
+        disable();
+      }
+    });
+
+    // Re-tokenize cleanly after i18n swaps language text
+    window.addEventListener('portfolio:langchange', () => {
+      if (active) {
+        applyAnnotations();
+      }
+    });
+
+    return { enable, disable, toggle, isActive: () => active };
+  }
+
+  /* ---------- 5. Playful Tab Title Swap When Switching Tabs or Windows ---------- */
+  function initTabTitleTrick() {
+    let savedTitle = document.title;
+    let awayTimer = null;
+    let isAway = false;
+
+    const setAway = () => {
+      if (isAway) return;
+      savedTitle = document.title;
+      isAway = true;
+      const u = UI[getLang()] || UI.en;
+      document.title = u.awayTitle;
+    };
+
+    const setBack = () => {
+      window.clearTimeout(awayTimer);
+      if (isAway) {
+        isAway = false;
+        document.title = savedTitle;
+      }
+    };
+
+    window.addEventListener('portfolio:langchange', () => {
+      if (!isAway) {
+        savedTitle = document.title;
+      } else {
+        const u = UI[getLang()] || UI.en;
+        document.title = u.awayTitle;
+      }
+    });
+
+    // Instant swap on tab switch (no throttled background setTimeout delay)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        window.clearTimeout(awayTimer);
+        setAway();
+      } else {
+        setBack();
+      }
+    });
+
+    // Also swap shortly after switching windows/panes so it works in IDE previews too
+    window.addEventListener('blur', () => {
+      window.clearTimeout(awayTimer);
+      awayTimer = window.setTimeout(setAway, 500);
+    });
+
+    window.addEventListener('focus', setBack);
+  }
+
+  /* ---------- 6. DevTools Console Secret Welcome Banner + Helpers ---------- */
+  function initDevToolsEasterEgg(api) {
+    const lang = getLang();
+    const isVi = lang === 'vi';
+    const badge = isVi ? ' TUANDAT.AI // INSPECTED ' : ' KELVIN.AI // INSPECTED ';
+    const intro = isVi
+      ? 'Ồ, bạn mở cả DevTools xem code luôn à — đúng gu người thích kiểm chứng tận gốc!\nThử gõ mấy lệnh ẩn này ngay trong Console xem nhé:'
+      : 'Nice — you actually opened DevTools! Curious engineers are my favorite people.\nTry running these hidden commands right here in the console:';
+
+    const badgeStyle =
+      'background:#17334D;color:#D3E6EB;border:1px solid #7FE2B8;padding:4px 10px;border-radius:999px;font-family:monospace;font-weight:700;font-size:12px;';
+    const textStyle = 'color:#8CABC4;font-family:monospace;font-size:12px;line-height:1.6;';
+    const cmdStyle = 'color:#7FE2B8;font-family:monospace;font-size:12px;font-weight:600;';
+
+    try {
+      const hireCmd = isVi ? 'hireDat()' : 'hireKelvin()';
+      // eslint-disable-next-line no-console
+      console.log(
+        `%c${badge}%c\n${intro}\n%c• ${hireCmd}%c             → view engineer spec card\n%c• testGuardrail()%c        → inject hallucination & watch guardrail intercept\n%c• toggleXray()%c           → toggle Tiktoken-style Token X-Ray mode\n%c• askAI("stack")%c         → open Mini RAG and stream grounded answer`,
+        badgeStyle,
+        textStyle,
+        cmdStyle,
+        textStyle,
+        cmdStyle,
+        textStyle,
+        cmdStyle,
+        textStyle,
+        cmdStyle,
+        textStyle
+      );
+    } catch {
+      // ignore console errors in restricted environments
+    }
+
+    const printSpecCard = () => {
+      const viMode = getLang() === 'vi';
+      const card = {
+        name: viMode ? 'Nguyễn Đức Tuấn Đạt' : 'Kelvin Nguyen (Nguyen Duc Tuan Dat)',
+        role: 'AI Engineer — LLMs, Agents, Backend & Data Pipelines',
+        location: 'Ho Chi Minh City, Vietnam (GMT+7)',
+        education: 'B.Sc. IT & Data Science · HCMUS',
+        email: 'ndtdat.data@gmail.com',
+        github: 'https://github.com/dblue03333',
+        offline_tests_passing: 368,
+        status: 'open_to_chat',
+        contact_page: `${window.location.origin}/contact/`,
+      };
+      // eslint-disable-next-line no-console
+      console.log('%c ✓ ENGINEER SPEC CARD ', badgeStyle);
+      // eslint-disable-next-line no-console
+      console.table(card);
+      return card;
+    };
+
+    window.hireDat = printSpecCard;
+    window.hireKelvin = printSpecCard;
+    window.testGuardrail = () => {
+      // eslint-disable-next-line no-console
+      console.log('%c ⚡ [GUARDRAIL] Injecting synthetic hallucination… ', 'background:#3d2b14;color:#FFC67A;padding:2px 8px;border-radius:4px;font-family:monospace;');
+      api.triggerGuardrail();
+    };
+    window.toggleXray = () => {
+      api.toggleXray();
+      return `X-Ray mode: ${api.isXrayActive() ? 'ON' : 'OFF'}`;
+    };
+    window.askAI = (query) => {
+      api.askAI(query);
+      return query ? `Streaming Mini RAG for: "${query}"` : 'Opened Mini RAG Terminal';
+    };
   }
 
   /* ---------- Bootstrap ---------- */
   document.addEventListener('DOMContentLoaded', () => {
-    const guardrail = createGuardrailSystem();
-    const palette = createCommandPalette(() => guardrail.trigger());
-    mountChromeEnhancements(() => palette.open(), () => guardrail.trigger());
+    let xray = null;
+    let palette = null;
+
+    const guardrail = createGuardrailSystem(() => xray?.disable());
+    xray = createXraySystem(() => palette?.isOpen());
+    palette = createCommandPalette(() => guardrail.trigger(), () => xray.toggle());
+
+    mountChromeEnhancements(
+      () => palette.open(),
+      () => guardrail.trigger(),
+      () => xray.toggle()
+    );
     syncChromeCopy();
+    initTabTitleTrick();
 
     window.addEventListener('portfolio:langchange', syncChromeCopy);
     window.setInterval(syncChromeCopy, 60000);
 
-    // Expose clean API for testing or future extensions
-    window.__portfolioDelights = {
+    const api = {
       openCommandPalette: () => palette.open(),
       closeCommandPalette: () => palette.close(),
+      askAI: (query) => palette.ask(query),
       triggerGuardrail: () => guardrail.trigger(),
+      toggleXray: () => xray.toggle(),
+      isXrayActive: () => xray.isActive(),
     };
+
+    window.__portfolioDelights = api;
+    initDevToolsEasterEgg(api);
   });
 })();

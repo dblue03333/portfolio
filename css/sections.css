@@ -2222,3 +2222,134 @@ html[data-lang="vi"] .big-name .marquee-text {
   transform: translate(-50%, 0);
   opacity: 1;
 }
+
+/* ==========================================================================
+   9. TOKEN X-RAY MODE (Shift+X / ⌘K / Footer Pill)
+   ========================================================================== */
+
+.footer-console-pill.is-xray.is-active {
+  background: rgba(127, 226, 184, 0.18);
+  border-color: rgba(127, 226, 184, 0.72);
+  color: #FFFFFF;
+}
+
+/* Tiktoken-style subword highlights tuned to Mist Blue palette */
+.xray-tok {
+  position: relative;
+  display: inline;
+  padding: 0.03em 0.12em;
+  margin: 0 0.02em;
+  border-radius: 0.22em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background-color 0.2s ease, outline-color 0.2s ease;
+}
+
+.xray-tok.xray-t0 { background: rgba(127, 226, 184, 0.24); }
+.xray-tok.xray-t1 { background: rgba(110, 175, 225, 0.24); }
+.xray-tok.xray-t2 { background: rgba(173, 152, 232, 0.22); }
+.xray-tok.xray-t3 { background: rgba(242, 196, 128, 0.25); }
+.xray-tok.xray-t4 { background: rgba(140, 171, 196, 0.26); }
+
+.xray-tok:hover {
+  outline: 1px solid rgba(23, 51, 77, 0.55);
+}
+
+.theme-dark .xray-tok:hover {
+  outline: 1px solid rgba(211, 230, 235, 0.75);
+}
+
+/* Blueprint outlines & micro-telemetry badges when X-Ray is active */
+html.is-xray-mode .home-intro-grid,
+html.is-xray-mode .work-items-row,
+html.is-xray-mode .work-tile,
+html.is-xray-mode .capability-card,
+html.is-xray-mode .editorial-row,
+html.is-xray-mode .case-demo-shell,
+html.is-xray-mode .home-hero-role {
+  outline: 1px dashed rgba(53, 93, 133, 0.45);
+  outline-offset: 4px;
+  border-radius: 0.35em;
+  position: relative;
+}
+
+html.is-xray-mode .home-hero-role {
+  outline-color: rgba(211, 230, 235, 0.55);
+}
+
+html.is-xray-mode [data-xray-badge]::after {
+  content: attr(data-xray-badge);
+  position: absolute;
+  top: -0.95em;
+  right: 0.6em;
+  z-index: 25;
+  padding: 0.22em 0.58em;
+  border-radius: 999px;
+  background: rgba(18, 38, 58, 0.94);
+  border: 1px solid rgba(127, 226, 184, 0.48);
+  color: #D3E6EB;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgba(7, 17, 29, 0.24);
+}
+
+/* Floating X-Ray HUD indicator pill at bottom-right */
+.xray-hud {
+  position: fixed;
+  right: 1.25em;
+  bottom: 1.25em;
+  z-index: 1180;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+  padding: 0.58em 0.85em 0.58em 1em;
+  border-radius: 999px;
+  background: rgba(18, 38, 58, 0.95);
+  border: 1px solid rgba(127, 226, 184, 0.52);
+  box-shadow: 0 18px 46px rgba(6, 15, 26, 0.42);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #F2F6FA;
+  font-family: var(--font-mono);
+  font-size: 0.74em;
+  letter-spacing: 0.03em;
+  transform: translateY(140%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.36s var(--ease-primary), opacity 0.26s ease;
+}
+
+.xray-hud.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.xray-hud-dot {
+  width: 0.52em;
+  height: 0.52em;
+  border-radius: 50%;
+  background: #7FE2B8;
+  box-shadow: 0 0 8px rgba(127, 226, 184, 0.8);
+}
+
+.xray-hud-off {
+  padding: 0.24em 0.62em;
+  border-radius: 999px;
+  border: 1px solid rgba(211, 230, 235, 0.25);
+  background: rgba(211, 230, 235, 0.08);
+  color: #D3E6EB;
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.xray-hud-off:hover {
+  background: rgba(211, 230, 235, 0.22);
+  color: #FFFFFF;
+}
