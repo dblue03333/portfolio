@@ -4,7 +4,7 @@ slug: "ml-geriatric-care-scoping-review"
 date: "2026-11-27"
 publish_at: "2026-11-27"
 track: "paper"
-status: "ready"
+status: "draft"
 lang: "en"
 summary: "Reading notes on Mangio et al. (2026): out of 40 ML studies using multidimensional geriatric assessment data, zero reported external validation, only 4 checked calibration, and none evaluated real-world care allocation impact."
 tags: [paper-notes, ml-evaluation, healthcare-ai, calibration]

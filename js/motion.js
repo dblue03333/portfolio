@@ -47,6 +47,23 @@
     window.__dennisLenis = lenis;
   }
 
+  function initSmoothAnchors() {
+    document.addEventListener('click', (event) => {
+      const anchor = event.target.closest('a[href^="#"]');
+      if (!anchor) return;
+      const hash = anchor.getAttribute('href');
+      if (!hash || hash === '#') return;
+      const target = document.querySelector(hash);
+      if (!target) return;
+      event.preventDefault();
+      if (lenis && !prefersReduced) {
+        lenis.scrollTo(target, { offset: -16, duration: 1.0 });
+      } else {
+        target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+      }
+    });
+  }
+
   /* ---------- 1. Curved Preloader & Multi-page Transition Curtain ---------- */
 
   function initCurtainTransitions() {
@@ -75,9 +92,8 @@
     const chipGuardrails = container.querySelector('[data-ai-chip="guardrails"]');
 
     const isHome = document.body.dataset.page === 'home';
-    const navEntries = performance.getEntriesByType?.('navigation');
-    const navType = navEntries && navEntries[0] ? navEntries[0].type : 'navigate';
     const comingFromNav = sessionStorage.getItem('dennis_page_transition') === '1';
+    const replayBoot = sessionStorage.getItem('dennis_replay_boot') === '1';
 
     function resetCurtain() {
       clearPrePaintClass();
@@ -125,8 +141,9 @@
         },
         '<0.18'
       );
-    } else if (isHome && navType !== 'back_forward' && aiHud) {
-      // 2. Home fresh load OR F5 / Cmd+R reload -> Full AI Model Weights Boot + Multilingual Greeting
+    } else if (isHome && replayBoot && aiHud) {
+      // 2. On-demand AI Model Weights Boot replay (via ⌘K)
+      sessionStorage.removeItem('dennis_replay_boot');
       container.classList.add('is-active', 'is-boot-mode');
       window.gsap.set(screen, { yPercent: 0 });
       window.gsap.set(topCurve, { height: 0 });
@@ -1030,6 +1047,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
+    initSmoothAnchors();
     initCurtainTransitions();
     initMagneticButtons();
     initNavigationDrawer();

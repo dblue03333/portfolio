@@ -214,16 +214,17 @@
   }
 }
 
-/* Right Role Block with Smooth Role Cycler */
+/* Right Role Block with Smooth Role Cycler + First-Fold Value & CTAs */
 .home-hero-role {
   position: absolute;
-  right: clamp(2em, 7.5vw, 8.5em);
-  top: 42%;
+  right: clamp(2em, 5.5vw, 7em);
+  top: 41%;
   transform: translateY(-50%);
   z-index: 6;
   display: flex;
   flex-direction: column;
-  gap: 2.2em;
+  gap: 1.35em;
+  max-width: min(26em, 42vw);
 }
 
 .home-hero-role .arrow-diag {
@@ -247,6 +248,7 @@
   display: block;
   overflow: hidden;
   height: 1.34em;
+  padding-right: 0.35em;
   text-align: left;
   cursor: pointer;
   color: rgba(251, 253, 255, 0.92);
@@ -289,6 +291,65 @@ html[data-lang="vi"] .role-cycler {
 .role-cycler-slot.is-leaving {
   transform: translateY(-115%);
   opacity: 0;
+}
+
+.hero-tagline {
+  font-size: clamp(0.88em, 1.05vw, 1em);
+  line-height: 1.45;
+  color: rgba(235, 244, 250, 0.84);
+  max-width: 28ch;
+  margin-top: -0.55em;
+}
+
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6em;
+  margin-top: -0.15em;
+}
+
+.hero-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.56em 1.08em;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.74em;
+  letter-spacing: 0.02em;
+  background: rgba(15, 35, 54, 0.52);
+  border: 1px solid rgba(211, 230, 235, 0.34);
+  color: #FBFDFF;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.28s var(--ease-primary), background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.hero-cta-pill.is-primary {
+  background: rgba(251, 253, 255, 0.92);
+  color: #17334D;
+  border-color: transparent;
+  font-weight: 500;
+}
+
+.hero-cta-pill.is-primary:hover {
+  background: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.hero-cta-pill:not(.is-primary):hover {
+  background: rgba(23, 51, 77, 0.78);
+  border-color: rgba(127, 226, 184, 0.65);
+  transform: translateY(-2px);
+}
+
+.hero-cta-dot {
+  width: 0.48em;
+  height: 0.48em;
+  border-radius: 50%;
+  background: #7FE2B8;
+  flex-shrink: 0;
 }
 
 /* Bottom Giant Reversing Vinyl Marquee */
@@ -344,8 +405,8 @@ html[data-lang="vi"] .big-name .marquee-text {
 /* ---------- 2. HOME INTRO SECTION ---------- */
 
 .home-intro {
-  padding-top: clamp(5.5em, 15vh, 10.5em);
-  padding-bottom: clamp(4.5em, 12vh, 8.5em);
+  padding-top: clamp(4.2em, 11vh, 7.5em);
+  padding-bottom: clamp(3.5em, 8vh, 6em);
 }
 
 .home-intro-grid {
@@ -381,6 +442,35 @@ html[data-lang="vi"] .big-name .marquee-text {
   align-items: center;
   flex-wrap: wrap;
   gap: 1.35em 1.8em;
+}
+
+.home-snapshot {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5em, 3vw, 2.8em);
+  margin-top: clamp(2.8em, 6vh, 4.2em);
+  padding-top: clamp(1.8em, 3.8vh, 2.6em);
+  border-top: 1px solid var(--color-border);
+}
+
+.home-snap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.42em;
+}
+
+.home-snap-title {
+  font-size: clamp(1.05em, 1.35vw, 1.24em);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  line-height: 1.25;
+}
+
+.home-snap-desc {
+  font-size: 0.86em;
+  line-height: 1.5;
+  color: var(--color-muted);
 }
 
 /* Whisper-quiet 30s Recruiter Model Card trigger tucked cleanly beside About me */

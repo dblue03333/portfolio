@@ -452,7 +452,8 @@ function renderSharedHead({
   </script>`;
 }
 
-function renderChromeTop({ prefix, blogHref, loadingWord }) {
+function renderChromeTop({ prefix, blogHref, loadingWord, isUpcoming = false }) {
+  const soonTag = isUpcoming ? '<span class="nav-soon-tag" data-i18n="nav.soon">Soon</span>' : '';
   return `  <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
 
   <div class="loading-container" aria-hidden="true">
@@ -483,7 +484,7 @@ function renderChromeTop({ prefix, blogHref, loadingWord }) {
           <a href="${prefix}index.html" data-transition-label="Home" data-i18n="nav.home">Home</a>
           <a href="${prefix}work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a>
           <a href="${prefix}about/index.html" data-transition-label="About" data-i18n="nav.about">About</a>
-          <a href="${blogHref}" class="active" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span></a>
+          <a href="${blogHref}" class="active" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span>${soonTag}</a>
           <a href="${prefix}contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a>
         </nav>
 
@@ -518,7 +519,7 @@ function renderChromeTop({ prefix, blogHref, loadingWord }) {
     <nav class="nav-links" aria-label="Main navigation">
       <div class="nav-link-item"><a class="btn-link" href="${prefix}work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a></div>
       <div class="nav-link-item"><a class="btn-link" href="${prefix}about/index.html" data-transition-label="About" data-i18n="nav.about">About</a></div>
-      <div class="nav-link-item"><a class="btn-link active" href="${blogHref}" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span></a></div>
+      <div class="nav-link-item"><a class="btn-link active" href="${blogHref}" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span>${soonTag}</a></div>
       <div class="nav-link-item"><a class="btn-link" href="${prefix}contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a></div>
       <div class="lang-switch" role="group" aria-label="Switch language">
         <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
@@ -611,12 +612,13 @@ function renderChromeFooter({ prefix, extraScripts = '' }) {
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
-  <script src="${prefix}js/i18n.js?v=19" defer></script>
+  <script src="${prefix}js/i18n.js?v=22" defer></script>
   <script src="${prefix}js/motion.js?v=18" defer></script>
-  <script src="${prefix}js/delights.js?v=19" defer></script>${extraScripts}`;
+  <script src="${prefix}js/delights.js?v=22" defer></script>${extraScripts}`;
 }
 
 function renderBlogIndexHtml(publishedPosts, scheduledCount) {
+  const isUpcoming = publishedPosts.length === 0;
   const counts = {
     all: publishedPosts.length,
     paper: publishedPosts.filter((p) => p.track === 'paper').length,
@@ -625,8 +627,19 @@ function renderBlogIndexHtml(publishedPosts, scheduledCount) {
   };
 
   const trackCardsHtml = Object.values(TRACKS)
-    .map(
-      (tr) => `          <button type="button" class="blog-track-card once-in" data-blog-track-card="${tr.key}">
+    .map((tr) =>
+      isUpcoming
+        ? `          <div class="blog-track-card once-in">
+            <div>
+              <span class="blog-track-num">${escapeHtml(tr.num)}</span>
+              <h3 style="margin-top:0.55em;" data-i18n="${tr.titleKey}">${escapeHtml(tr.title)}</h3>
+              <p style="margin-top:0.6em;" data-i18n="${tr.descKey}">
+                ${escapeHtml(tr.desc)}
+              </p>
+            </div>
+            <div class="blog-track-cadence" data-i18n="${tr.cadenceKey}">${escapeHtml(tr.cadence)}</div>
+          </div>`
+        : `          <button type="button" class="blog-track-card once-in" data-blog-track-card="${tr.key}">
             <div>
               <span class="blog-track-num">${escapeHtml(tr.num)} · ${counts[tr.key]}</span>
               <h3 style="margin-top:0.55em;" data-i18n="${tr.titleKey}">${escapeHtml(tr.title)}</h3>
@@ -721,14 +734,14 @@ ${renderSharedHead({
 })}
 </head>
 <body data-page="blog" data-page-title="Blog">
-${renderChromeTop({ prefix: '../', blogHref: 'index.html', loadingWord: 'Blog' })}
+${renderChromeTop({ prefix: '../', blogHref: 'index.html', loadingWord: 'Blog', isUpcoming })}
 
   <main id="main">
     <section class="section page-header">
       <div class="container medium">
         <div class="blog-hero-badge">
-          <span class="art-live-dot" style="margin-right:0;"></span>
-          <span data-i18n="blog.badge">FIELD LOG · ENGINEERING &amp; PAPER NOTES</span>
+          <span class="art-live-dot" style="margin-right:0;${isUpcoming ? 'background:#FFC67A;' : ''}"></span>
+          <span data-i18n="${isUpcoming ? 'blog.badge_soon' : 'blog.badge'}">${isUpcoming ? 'UPCOMING · FIELD NOTES' : 'FIELD LOG · ENGINEERING &amp; PAPER NOTES'}</span>
         </div>
         <h1 data-i18n="blog.title">Engineering notes, paper reviews &amp; build logs</h1>
         <p class="blog-lead" data-i18n="blog.lead">
@@ -738,7 +751,10 @@ ${renderChromeTop({ prefix: '../', blogHref: 'index.html', loadingWord: 'Blog' }
         <div class="blog-tracks-grid">
 ${trackCardsHtml}
         </div>
-
+${
+  isUpcoming
+    ? `\n        <p class="blog-queue-note" data-i18n="blog.upcoming_note">First notes are in draft — publishing soon.</p>`
+    : `
         <div class="blog-filter-bar" role="region" aria-label="Filter notes by track">
           <div class="blog-filter-pills" role="group" aria-label="Track filters">
             <button type="button" class="blog-filter-pill is-active" data-blog-filter="all" aria-pressed="true">
@@ -764,7 +780,8 @@ ${trackCardsHtml}
         <div class="blog-post-list">
 ${postRowsHtml || ''}
         </div>
-        <p class="blog-empty-state" data-blog-empty ${publishedPosts.length > 0 ? 'hidden' : ''} data-i18n="blog.empty">No notes in this track yet — check back soon.</p>${queueNoteHtml}
+        <p class="blog-empty-state" data-blog-empty ${publishedPosts.length > 0 ? 'hidden' : ''} data-i18n="blog.empty">No notes in this track yet — check back soon.</p>${queueNoteHtml}`
+}
 
         <div class="blog-actions once-in">
           <div class="btn btn-dark">
@@ -784,7 +801,7 @@ ${postRowsHtml || ''}
     </section>
   </main>
 
-${renderChromeFooter({ prefix: '../', extraScripts: filterScript })}
+${renderChromeFooter({ prefix: '../', extraScripts: isUpcoming ? '' : filterScript })}
 </body>
 </html>
 `;

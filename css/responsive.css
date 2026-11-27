@@ -65,6 +65,11 @@
   .demo-top-bar {
     padding-right: clamp(8.5em, 20vw, 13em);
   }
+
+  .home-hero-role {
+    right: clamp(1.5em, 4vw, 3em);
+    max-width: 44vw;
+  }
 }
 
 @media screen and (max-width: 720px) {
@@ -84,23 +89,35 @@
     object-position: 50% 18%;
   }
 
-  /* Keep Kelvin's face completely clear on mobile — place role over dark shirt above marquee */
+  /* Keep Kelvin's face clear on mobile — place hanger top-left and role+CTAs over dark shirt above marquee */
   .home-hero-role {
-    right: auto;
+    right: var(--container-padding);
     left: var(--container-padding);
     top: auto;
-    bottom: clamp(11.5em, 26vh, 14.5em);
+    bottom: clamp(6.6em, 14.5vh, 8.6em);
     transform: none;
-    gap: 0.8em;
+    gap: 0.75em;
+    max-width: none;
   }
 
   .home-hero-role h2 {
     font-size: clamp(1.12em, 4.9vw, 1.48em);
   }
 
+  .hero-tagline {
+    font-size: 0.84em;
+    margin-top: -0.2em;
+    max-width: 34ch;
+  }
+
+  .hero-cta-pill {
+    font-size: 0.7em;
+    padding: 0.48em 0.9em;
+  }
+
   .hanger {
-    top: auto;
-    bottom: clamp(6.6em, 15.5vh, 8.6em);
+    top: 4.9em;
+    bottom: auto;
     transform: none;
     padding: 0.45em 0.55em 0.45em 1.15em;
     gap: 0.75em;
@@ -189,6 +206,7 @@
   }
 
   .work-tiles-grid,
+  .home-snapshot,
   .capabilities-grid,
   .creds-grid,
   .demo-two-col,
@@ -372,11 +390,12 @@
   }
 
   .home-hero-role {
-    bottom: clamp(10.5em, 25vh, 13.5em);
+    bottom: clamp(6.1em, 14vh, 7.8em);
   }
 
   .hanger {
-    bottom: clamp(6em, 14.5vh, 7.8em);
+    top: 4.5em;
+    bottom: auto;
   }
 
   .form-col {

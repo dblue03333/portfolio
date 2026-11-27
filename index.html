@@ -15,11 +15,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/tokens.css?v=18">
-  <link rel="stylesheet" href="css/base.css?v=18">
-  <link rel="stylesheet" href="css/layout.css?v=18">
-  <link rel="stylesheet" href="css/sections.css?v=18">
-  <link rel="stylesheet" href="css/responsive.css?v=18">
+  <link rel="stylesheet" href="css/tokens.css?v=21">
+  <link rel="stylesheet" href="css/base.css?v=21">
+  <link rel="stylesheet" href="css/layout.css?v=21">
+  <link rel="stylesheet" href="css/sections.css?v=21">
+  <link rel="stylesheet" href="css/responsive.css?v=21">
   <script>
     (function(){
       var p = new URLSearchParams(location.search).get('lang');
@@ -33,13 +33,12 @@
 
       var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduced) return;
-      var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
-      var navType = navEntries && navEntries[0] ? navEntries[0].type : 'navigate';
       var fromInternal = sessionStorage.getItem('dennis_page_transition') === '1';
+      var replayBoot = sessionStorage.getItem('dennis_replay_boot') === '1';
       if (fromInternal) {
         document.documentElement.classList.add('is-transitioning');
         setTimeout(function(){ document.documentElement.classList.remove('is-transitioning'); }, 2600);
-      } else if (navType !== 'back_forward') {
+      } else if (replayBoot) {
         document.documentElement.classList.add('is-transitioning', 'is-intro-boot');
         setTimeout(function(){ document.documentElement.classList.remove('is-transitioning', 'is-intro-boot'); }, 3600);
       }
@@ -72,7 +71,7 @@
           <div class="loading-ai-checks" data-ai-checks>
             <span data-ai-chip="weights">weights</span>
             <span data-ai-chip="sources">sources</span>
-            <span data-ai-chip="guardrails">368 tests</span>
+            <span data-ai-chip="guardrails">verified</span>
           </div>
         </div>
         <div class="loading-ai-meta">
@@ -110,7 +109,7 @@
           <a href="index.html" class="active" data-transition-label="Home" data-i18n="nav.home">Home</a>
           <a href="work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a>
           <a href="about/index.html" data-transition-label="About" data-i18n="nav.about">About</a>
-          <a href="blog/index.html" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span></a>
+          <a href="blog/index.html" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span><span class="nav-soon-tag" data-i18n="nav.soon">Soon</span></a>
           <a href="contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a>
         </nav>
 
@@ -141,32 +140,32 @@
     <div class="mouse-pos-list-image-reel">
       <div class="mouse-pos-list-image-slide art-bg-harness">
         <div class="art-card">
-          <div class="art-card-top"><span><span class="art-live-dot"></span>APPROVAL GATE · #402</span><span class="art-pill">368 Tests ✓</span></div>
-          <div class="art-card-title">Propose create_incident on checkout?</div>
-          <div class="art-checks"><span>schema ✓</span><span>retry 1/3</span><span>audit log</span></div>
+          <div class="art-card-top"><span><span class="art-live-dot"></span>HUMAN APPROVAL</span><span class="art-pill">Safe Automation</span></div>
+          <div class="art-card-title">Ask a person before taking high-risk actions</div>
+          <div class="art-checks"><span>Checks inputs</span><span>Prevents loops</span><span>Full history</span></div>
           <div class="art-actions-mini"><span class="approve">Approve</span><span class="reject">Reject</span></div>
         </div>
       </div>
       <div class="mouse-pos-list-image-slide art-bg-healthlab">
         <div class="art-card is-live-scan">
-          <div class="art-card-top"><span><span class="art-live-dot"></span>HEALTHLAB PILOT</span><span class="art-pill">Source-Linked</span></div>
-          <div class="art-sheet">Draft v2: Available <mark>nationwide</mark>.</div>
-          <div class="art-sheet mist">Source: Piloted in <mark>one district</mark>.</div>
+          <div class="art-card-top"><span><span class="art-live-dot"></span>HEALTHLAB · LIVE PILOT</span><span class="art-pill">Fact-Checked</span></div>
+          <div class="art-sheet">AI Draft: Available <mark>nationwide</mark>.</div>
+          <div class="art-sheet mist">Verified Source: Piloted in <mark>one district</mark>.</div>
         </div>
       </div>
       <div class="mouse-pos-list-image-slide art-bg-harbormind">
         <div class="art-card dark-card">
-          <div class="art-card-top"><span><span class="art-live-dot"></span>LONG BEACH · AIS</span><span class="art-pill">Gemma 4</span></div>
-          <div class="art-card-title">Quantile Wait Forecast · P10–P90</div>
+          <div class="art-card-top"><span><span class="art-live-dot"></span>PORT OF LONG BEACH</span><span class="art-pill">Works Offline</span></div>
+          <div class="art-card-title">Ship Wait-Time Range · 11h – 38h</div>
           <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill is-live-bar" style="left:28%;width:58%;"></div></div></div>
-          <div class="art-checks"><span>High Spread</span><span>→ Captain Handoff</span></div>
+          <div class="art-checks"><span>Uncertain forecast</span><span>→ Hands off to Captain</span></div>
         </div>
       </div>
       <div class="mouse-pos-list-image-slide art-bg-rag">
         <div class="art-card">
-          <div class="art-card-top"><span><span class="art-live-dot"></span>RAG PIPELINE</span><span class="art-pill">Cosine 0.94</span></div>
-          <div class="art-card-title">Personal Knowledge Assistant</div>
-          <div class="art-flow is-live-flow"><div>Gemini<br>Embed</div><div>Atlas<br>Vector</div><div>FastAPI<br>Answer</div></div>
+          <div class="art-card-top"><span><span class="art-live-dot"></span>KNOWLEDGE ASSISTANT</span><span class="art-pill">Q&amp;A Over Notes</span></div>
+          <div class="art-card-title">Search and answer from personal documents</div>
+          <div class="art-flow is-live-flow"><div>Read<br>Notes</div><div>Find<br>Context</div><div>Clear<br>Answer</div></div>
         </div>
       </div>
     </div>
@@ -185,7 +184,7 @@
     <nav class="nav-links" aria-label="Main navigation">
       <div class="nav-link-item"><a class="btn-link" href="work/index.html" data-transition-label="Work" data-i18n="nav.work">Work</a></div>
       <div class="nav-link-item"><a class="btn-link" href="about/index.html" data-transition-label="About" data-i18n="nav.about">About</a></div>
-      <div class="nav-link-item"><a class="btn-link" href="blog/index.html" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span></a></div>
+      <div class="nav-link-item"><a class="btn-link" href="blog/index.html" data-transition-label="Blog"><span data-i18n="nav.blog">Blog</span><span class="nav-soon-tag" data-i18n="nav.soon">Soon</span></a></div>
       <div class="nav-link-item"><a class="btn-link" href="contact/index.html" data-transition-label="Contact" data-i18n="nav.contact">Contact</a></div>
       <div class="lang-switch" role="group" aria-label="Switch language">
         <button type="button" data-set-lang="en" class="is-active" aria-pressed="true">EN</button>
@@ -243,12 +242,20 @@
         <h2>
           <span data-i18n="home.role_title">AI Engineer</span>
           <button class="role-cycler" type="button" data-role-cycler aria-label="Switch engineering focus">
-            <span class="role-cycler-sizer" data-role-sizer aria-hidden="true">LLMs, Agents &amp; Backend</span>
-            <span class="role-cycler-slot is-active" data-i18n="home.role_1">LLMs, Agents &amp; Backend</span>
-            <span class="role-cycler-slot" data-i18n="home.role_2">Data &amp; RAG Pipelines</span>
-            <span class="role-cycler-slot" data-i18n="home.role_3">Applied AI Systems</span>
+            <span class="role-cycler-sizer" data-role-sizer aria-hidden="true">Practical AI Applications</span>
+            <span class="role-cycler-slot is-active" data-i18n="home.role_1">AI Products &amp; Backend</span>
+            <span class="role-cycler-slot" data-i18n="home.role_2">Automation &amp; Data Tools</span>
+            <span class="role-cycler-slot" data-i18n="home.role_3">Practical AI Applications</span>
           </button>
         </h2>
+        <p class="hero-tagline" data-i18n="home.hero_tagline">Building practical AI tools teams can trust and use every day.</p>
+        <div class="hero-cta-row">
+          <a class="hero-cta-pill is-primary" href="#selected-work" data-i18n="home.cta_work">Selected Work ↓</a>
+          <a class="hero-cta-pill" href="contact/index.html" data-transition-label="Contact">
+            <span class="hero-cta-dot" aria-hidden="true"></span>
+            <span data-i18n="home.cta_contact">Contact me</span>
+          </a>
+        </div>
       </div>
 
       <!-- Giant Reversing Vinyl Marquee -->
@@ -266,11 +273,11 @@
       <div class="container medium">
         <div class="home-intro-grid">
           <p class="home-intro-lead once-in" data-i18n="home.intro_lead">
-            Building reliable AI systems grounded in source evidence, bounded tool execution, and clear human oversight.
+            I turn AI into practical tools that save time, check facts, and keep people in control.
           </p>
           <div class="home-intro-side once-in">
             <p data-i18n="home.intro_body">
-              I’m Kelvin Nguyen — an AI Engineer based in Vietnam. I build LLM applications, agents, backend services, and data pipelines — testing where they fail and designing workflows people can inspect before acting.
+              IT &amp; Data Science graduate (HCMUS) with hands-on work in AI consulting, healthcare publishing tools, and logistics forecasting.
             </p>
             <div class="home-intro-cta">
               <div class="btn btn-round">
@@ -279,19 +286,32 @@
                   <span class="btn-text" data-i18n="home.about_me">About me</span>
                 </a>
               </div>
-              <button type="button" class="intro-modelcard-trigger" data-modelcard-open>
-                <span class="intro-mc-dot" aria-hidden="true"></span>
-                <span data-i18n="home.modelcard_cta">30s Model Card</span>
-                <span class="intro-mc-key" aria-hidden="true">↗</span>
-              </button>
             </div>
+          </div>
+        </div>
+
+        <div class="home-snapshot once-in" aria-label="Experience and capability summary">
+          <div class="home-snap-col">
+            <h5 data-i18n="home.snap_exp_label">01 · Experience</h5>
+            <p class="home-snap-title" data-i18n="home.snap_exp_title">AI Consultant &amp; Builder</p>
+            <p class="home-snap-desc" data-i18n="home.snap_exp_desc">Safiri Logistics · HealthLab · ADIMI (2026)</p>
+          </div>
+          <div class="home-snap-col">
+            <h5 data-i18n="home.snap_cap_label">02 · Capabilities</h5>
+            <p class="home-snap-title" data-i18n="home.snap_cap_title">End-to-End AI &amp; Backend</p>
+            <p class="home-snap-desc" data-i18n="home.snap_cap_desc">AI assistants, data workflows, web APIs &amp; reliable delivery</p>
+          </div>
+          <div class="home-snap-col">
+            <h5 data-i18n="home.snap_bg_label">03 · Background</h5>
+            <p class="home-snap-title" data-i18n="home.snap_bg_title">B.Sc. HCMUS · Certified</p>
+            <p class="home-snap-desc" data-i18n="home.snap_bg_desc">NVIDIA &amp; Google Certified · VN / EN (C1) / JP (N4)</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============ SELECTED WORK ============ -->
-    <section class="section work-grid-section" aria-labelledby="recent-work-heading">
+    <section id="selected-work" class="section work-grid-section" aria-labelledby="recent-work-heading">
       <div class="container">
         <div class="sub-title-row">
           <h5 id="recent-work-heading" data-i18n="home.selected_work">Selected Work</h5>
@@ -303,13 +323,13 @@
               <div class="work-mobile-thumb art-bg-healthlab">
                 <div class="art-backdrop">
                   <div class="art-card is-live-scan">
-                    <div class="art-card-top"><span><span class="art-live-dot"></span>HEALTHLAB PILOT</span><span class="art-pill">Source-Linked</span></div>
-                    <div class="art-card-title">Evidence-linked public health newsletter pipeline</div>
+                    <div class="art-card-top"><span><span class="art-live-dot"></span>HEALTHLAB · LIVE PILOT</span><span class="art-pill">Fact-Checked</span></div>
+                    <div class="art-card-title">Public health newsletter verified against real sources</div>
                   </div>
                 </div>
               </div>
               <span class="work-row-title">HealthLab Evidence</span>
-              <span class="work-row-meta" data-i18n="proj.healthlab.meta_home">Data Pipeline &amp; Editorial Review · Oct 2026 – Present</span>
+              <span class="work-row-meta" data-i18n="proj.healthlab.meta_home">Public Health Content Tool · Oct 2026 – Present</span>
             </a>
           </li>
 
@@ -318,13 +338,13 @@
               <div class="work-mobile-thumb art-bg-harness">
                 <div class="art-backdrop">
                   <div class="art-card">
-                    <div class="art-card-top"><span><span class="art-live-dot"></span>APPROVAL GATE</span><span class="art-pill">368 Tests ✓</span></div>
-                    <div class="art-card-title">Human approval before incident creation</div>
+                    <div class="art-card-top"><span><span class="art-live-dot"></span>HUMAN APPROVAL</span><span class="art-pill">Safe Automation</span></div>
+                    <div class="art-card-title">Ask a person before taking high-risk actions</div>
                   </div>
                 </div>
               </div>
               <span class="work-row-title">Reliable Agent Harness</span>
-              <span class="work-row-meta" data-i18n="proj.harness.meta_home">AI Agents &amp; Guardrails · Sep 2026</span>
+              <span class="work-row-meta" data-i18n="proj.harness.meta_home">Safe AI Operations Assistant · Sep 2026</span>
             </a>
           </li>
 
@@ -333,13 +353,13 @@
               <div class="work-mobile-thumb art-bg-harbormind">
                 <div class="art-backdrop">
                   <div class="art-card dark-card">
-                    <div class="art-card-top"><span><span class="art-live-dot"></span>LONG BEACH · AIS</span><span class="art-pill">Gemma 4</span></div>
-                    <div class="art-card-title">Offline wait-time forecasting &amp; captain handoff</div>
+                    <div class="art-card-top"><span><span class="art-live-dot"></span>PORT OF LONG BEACH</span><span class="art-pill">Works Offline</span></div>
+                    <div class="art-card-title">Ship wait-time forecasting &amp; captain handoff</div>
                   </div>
                 </div>
               </div>
               <span class="work-row-title">HarborMind</span>
-              <span class="work-row-meta" data-i18n="proj.harbormind.meta_home">Quantile ML &amp; Local Agents · Apr – May 2026</span>
+              <span class="work-row-meta" data-i18n="proj.harbormind.meta_home">Port Wait-Time Forecast · Apr – May 2026</span>
             </a>
           </li>
 
@@ -348,13 +368,13 @@
               <div class="work-mobile-thumb art-bg-rag">
                 <div class="art-backdrop">
                   <div class="art-card">
-                    <div class="art-card-top"><span><span class="art-live-dot"></span>RAG PIPELINE</span><span class="art-pill">MongoDB Atlas</span></div>
-                    <div class="art-card-title">Personal knowledge retrieval with Gemini &amp; FastAPI</div>
+                    <div class="art-card-top"><span><span class="art-live-dot"></span>KNOWLEDGE ASSISTANT</span><span class="art-pill">Q&amp;A Over Notes</span></div>
+                    <div class="art-card-title">Search and answer from personal documents</div>
                   </div>
                 </div>
               </div>
               <span class="work-row-title">mini-llm-twin</span>
-              <span class="work-row-meta" data-i18n="proj.rag.meta_home">Retrieval &amp; Vector Indexing · Dec 2025 – Apr 2026</span>
+              <span class="work-row-meta" data-i18n="proj.rag.meta_home">Personal AI Knowledge Search · Dec 2025 – Apr 2026</span>
             </a>
           </li>
         </ul>
@@ -367,187 +387,6 @@
             </a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ INTERACTIVE RELIABILITY SANDBOX ============ -->
-    <section class="section sandbox-section" aria-labelledby="sandbox-heading">
-      <div class="container">
-        <div class="sandbox-shell once-in" data-sandbox="reliability" data-spotlight>
-          <div class="sandbox-inner">
-            <div class="sandbox-header">
-              <div>
-                <div class="sandbox-eyebrow">
-                  <span class="art-live-dot" style="background:#7FE2B8;"></span>
-                  <span data-i18n="sb.eyebrow">INTERACTIVE AI LAB · STRESS-TEST MY PHILOSOPHY</span>
-                </div>
-                <h2 class="sandbox-title" id="sandbox-heading" data-i18n="sb.title">
-                  Toggle the guardrails and watch how reliability changes
-                </h2>
-              </div>
-              <div class="sandbox-presets" role="group" aria-label="Reliability presets">
-                <button type="button" class="sandbox-preset-btn is-danger" data-sb-preset="unsafe" data-i18n="sb.preset_unsafe">Raw LLM (Unsafe)</button>
-                <button type="button" class="sandbox-preset-btn" data-sb-preset="guarded" data-i18n="sb.preset_guarded">Production Guarded</button>
-              </div>
-            </div>
-
-            <div class="sandbox-pipeline" aria-label="Agent guardrail pipeline stages">
-              <span class="pipe-node" data-i18n="sb.pipe_prompt">Input</span>
-              <span class="pipe-arrow" aria-hidden="true">→</span>
-              <span class="pipe-node" data-i18n="sb.pipe_model">LLM</span>
-              <span class="pipe-arrow" aria-hidden="true">→</span>
-              <span class="pipe-node is-guarded" data-pipe-node="schema" data-i18n="sb.pipe_schema">Schema</span>
-              <span class="pipe-arrow" aria-hidden="true">→</span>
-              <span class="pipe-node is-guarded" data-pipe-node="lineage" data-i18n="sb.pipe_lineage">Lineage</span>
-              <span class="pipe-arrow" aria-hidden="true">→</span>
-              <span class="pipe-node is-guarded" data-pipe-node="human" data-i18n="sb.pipe_human">Human Gate</span>
-              <span class="pipe-arrow" aria-hidden="true">→</span>
-              <span class="pipe-node" data-i18n="sb.pipe_action">Action</span>
-            </div>
-
-            <div class="sandbox-layout">
-              <div class="sandbox-panel">
-                <div class="sandbox-slider-row">
-                  <div class="sandbox-slider-top">
-                    <label for="sb-temp-slider" data-i18n="sb.temp_label">Model Temperature / Hallucination Risk</label>
-                    <span class="sandbox-slider-val" data-sb-temp-val>0.7</span>
-                  </div>
-                  <input id="sb-temp-slider" class="sandbox-range" type="range" min="0.1" max="1.2" step="0.1" value="0.7" data-sb-temp>
-                </div>
-
-                <div class="sandbox-toggles">
-                  <button type="button" class="sandbox-toggle is-on" data-sb-toggle="schema" aria-pressed="true">
-                    <span class="sandbox-toggle-text">
-                      <span class="sandbox-toggle-name" data-i18n="sb.t_schema">01 · Typed Schema Validation</span>
-                      <span class="sandbox-toggle-desc" data-i18n="sb.t_schema_d">Enforce strict tool argument types + bounded retries</span>
-                    </span>
-                    <span class="sandbox-switch" aria-hidden="true"></span>
-                  </button>
-
-                  <button type="button" class="sandbox-toggle is-on" data-sb-toggle="lineage" aria-pressed="true">
-                    <span class="sandbox-toggle-text">
-                      <span class="sandbox-toggle-name" data-i18n="sb.t_lineage">02 · Source Evidence Lineage</span>
-                      <span class="sandbox-toggle-desc" data-i18n="sb.t_lineage_d">Anchor every factual claim to a versioned public source</span>
-                    </span>
-                    <span class="sandbox-switch" aria-hidden="true"></span>
-                  </button>
-
-                  <button type="button" class="sandbox-toggle is-on" data-sb-toggle="human" aria-pressed="true">
-                    <span class="sandbox-toggle-text">
-                      <span class="sandbox-toggle-name" data-i18n="sb.t_human">03 · Human Approval Gate</span>
-                      <span class="sandbox-toggle-desc" data-i18n="sb.t_human_d">Pause side effects until reviewer signs payload hash</span>
-                    </span>
-                    <span class="sandbox-switch" aria-hidden="true"></span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="sandbox-panel">
-                <div class="sandbox-metrics">
-                  <div class="sandbox-metric">
-                    <span class="sandbox-metric-label" data-i18n="sb.m_risk">Escape Risk</span>
-                    <span class="sandbox-metric-val" data-sb-risk>0.0%</span>
-                  </div>
-                  <div class="sandbox-metric">
-                    <span class="sandbox-metric-label" data-i18n="sb.m_effects">Side Effects</span>
-                    <span class="sandbox-metric-val" data-sb-effects>Gated ✓</span>
-                  </div>
-                  <div class="sandbox-metric">
-                    <span class="sandbox-metric-label" data-i18n="sb.m_latency">Guard Overhead</span>
-                    <span class="sandbox-metric-val" data-sb-latency>+48ms</span>
-                  </div>
-                </div>
-
-                <div class="sandbox-output-box" data-sb-outbox role="status" aria-live="polite">
-                  <div class="sandbox-output-head">
-                    <span data-sb-out-status>✓ INTERCEPTED &amp; GROUNDED</span>
-                    <span data-sb-out-badge>HASH #9F2C · 0 LEAKS</span>
-                  </div>
-                  <p class="sandbox-output-claim" data-sb-out-claim></p>
-                  <div class="sandbox-output-trace" data-sb-out-trace></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ DUAL-ROW HORIZONTAL PARALLAX SHOWCASE (LIVE & CLICKABLE) ============ -->
-    <section class="section horizontal-items" aria-label="Visual system highlights">
-      <div class="horizontal-row">
-        <a class="horizontal-tile art-bg-healthlab" href="work/healthlab/index.html" data-transition-label="HealthLab">
-          <div class="art-card is-live-scan">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>EVIDENCE TRACE</span><span class="art-pill">Draft v2 → v3</span></div>
-            <div class="art-sheet">Claim: available <mark>nationwide</mark></div>
-            <div class="art-sheet mist">Source: limited to <mark>one district</mark></div>
-          </div>
-        </a>
-        <a class="horizontal-tile art-bg-harness" href="work/reliable-agent-harness/index.html" data-transition-label="Reliable Agent Harness">
-          <div class="art-card">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>TOOL GUARDRAIL</span><span class="art-pill">CLI + HTTP</span></div>
-            <div class="art-card-title">Typed schema validation &amp; bounded retries</div>
-            <div class="art-checks"><span>368 tests ✓</span><span>human-in-the-loop</span></div>
-          </div>
-        </a>
-        <a class="horizontal-tile art-bg-harbormind" href="work/harbormind/index.html" data-transition-label="HarborMind">
-          <div class="art-card dark-card">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>NOAA AIS DATASET</span><span class="art-pill">Kaggle Public</span></div>
-            <div class="art-card-title">Long Beach vessel wait quantiles</div>
-            <div class="art-bar-chart"><div class="art-bar-track"><div class="art-bar-fill is-live-bar" style="left:22%;width:52%;"></div></div></div>
-          </div>
-        </a>
-        <a class="horizontal-tile art-bg-rag" href="work/mini-llm-twin/index.html" data-transition-label="mini-llm-twin">
-          <div class="art-card">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>VECTOR RETRIEVAL</span><span class="art-pill">Dockerized</span></div>
-            <div class="art-flow is-live-flow"><div>Chunk</div><div>Embed</div><div>Retrieve</div></div>
-          </div>
-        </a>
-        <a class="horizontal-tile art-bg-web" href="https://healthlab-demo.snowy-auroraceratops.workers.dev/" target="_blank" rel="noopener">
-          <div class="art-card dark-card">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>HEALTHLAB WEB</span><span class="art-pill">Cloudflare Live ↗</span></div>
-            <div class="art-card-title">Responsive typography &amp; editorial system</div>
-          </div>
-        </a>
-      </div>
-
-      <div class="horizontal-row">
-        <a class="horizontal-tile art-bg-gaming" href="work/index.html#upcoming-gaming-agent" data-transition-label="Work">
-          <div class="art-card dark-card">
-            <div class="art-card-top"><span><span class="art-live-dot" style="background:#FFC67A;"></span>GAMING AGENT</span><span class="art-pill">Upcoming</span></div>
-            <div class="art-card-title">Offline 20 FPS visual game agent · Kaggle harness</div>
-          </div>
-        </a>
-        <a class="horizontal-tile art-bg-adimi" href="about/index.html#experience" data-transition-label="About">
-          <div class="art-card">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>ADIMI · MULTIMODAL</span><span class="art-pill">VN / EN</span></div>
-            <div class="art-card-title">Bilingual prompt eval &amp; rule-based validator</div>
-          </div>
-        </a>
-        <a class="horizontal-tile art-bg-harbormind" href="work/harbormind/index.html" data-transition-label="HarborMind">
-          <div class="art-card dark-card">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>SAFETY HANDOFF</span><span class="art-pill">Offline Gemma 4</span></div>
-            <div class="art-card-title">High uncertainty → Captain review</div>
-          </div>
-        </a>
-        <a class="horizontal-tile art-bg-healthlab" href="work/healthlab/index.html" data-transition-label="HealthLab">
-          <div class="art-card is-live-scan">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>VERSIONED DATASET</span><span class="art-pill">Offline Audit</span></div>
-            <div class="art-card-title">Every draft sentence maps back to public source</div>
-          </div>
-        </a>
-        <a class="horizontal-tile art-bg-harness" href="work/reliable-agent-harness/index.html" data-transition-label="Reliable Agent Harness">
-          <div class="art-card">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>EXACT ACTION HASH</span><span class="art-pill">Approve / Reject</span></div>
-            <div class="art-actions-mini"><span class="approve">Approve #9f2c</span><span class="reject">Abort</span></div>
-          </div>
-        </a>
-        <a class="horizontal-tile art-bg-rag" href="about/index.html#experience" data-transition-label="About">
-          <div class="art-card">
-            <div class="art-card-top"><span><span class="art-live-dot"></span>SAFIRI · CONTRACT</span><span class="art-pill">May 2026 – Present</span></div>
-            <div class="art-card-title">AI Engineering Consultant · Logistics Tech</div>
-          </div>
-        </a>
       </div>
     </section>
   </main>
@@ -629,10 +468,10 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
-  <script src="js/i18n.js?v=18" defer></script>
-  <script src="js/motion.js?v=18" defer></script>
-  <script src="js/work.js?v=18" defer></script>
-  <script src="js/demos.js?v=18" defer></script>
-  <script src="js/delights.js?v=18" defer></script>
+  <script src="js/i18n.js?v=22" defer></script>
+  <script src="js/motion.js?v=21" defer></script>
+  <script src="js/work.js?v=21" defer></script>
+  <script src="js/demos.js?v=21" defer></script>
+  <script src="js/delights.js?v=22" defer></script>
 </body>
 </html>

@@ -103,7 +103,7 @@
         morning: 'Shipping AI pipelines · Open to chat',
         lunch: 'Lunch break in Saigon · Back soon',
         afternoon: 'Building LLMs & backend · Open to chat',
-        evening: 'Studying JLPT N2 · Tinkering on projects',
+        evening: 'Studying JLPT N3 · Tinkering on projects',
         night: 'Recharging (or midnight debugging)',
       },
     },
@@ -181,7 +181,7 @@
         morning: 'Đang code AI pipelines · Sẵn sàng trao đổi',
         lunch: 'Nghỉ trưa tại Sài Gòn · Sẽ sớm quay lại',
         afternoon: 'Đang build LLM & backend · Sẵn sàng trao đổi',
-        evening: 'Đang ôn tiếng Nhật N2 · Vọc side projects',
+        evening: 'Đang ôn tiếng Nhật N3 · Vọc side projects',
         night: 'Đang nạp pin (hoặc đang fix bug nửa đêm)',
       },
     },
@@ -259,7 +259,7 @@
         morning: 'AIパイプライン実装中 · ご相談歓迎',
         lunch: 'サイゴンでランチ休憩中',
         afternoon: 'LLM・バックエンド開発中 · ご相談歓迎',
-        evening: '日本語N2勉強中 · 個人開発',
+        evening: '日本語N3勉強中 · 個人開発',
         night: '充電中（または深夜デバッグ中）',
       },
     },
@@ -347,14 +347,14 @@
       chunkPath: 'kb/profile/bio-credentials.md',
       score: 0.92,
       keywords: [
-        'experience', 'exp', 'safiri', 'nvidia', 'credly', 'google', 'cert', 'credential', 'hcmus', 'degree', 'study', 'language', 'japanese', 'n2', 'german', 'education', 'who', 'bio', 'about',
+        'experience', 'exp', 'safiri', 'nvidia', 'credly', 'google', 'cert', 'credential', 'hcmus', 'degree', 'study', 'language', 'japanese', 'n3', 'n4', 'german', 'education', 'who', 'bio', 'about',
         'kinh nghiem', 'chung chi', 'hoc van', 'truong', 'ngoai ngu', 'tieng nhat', 'tieng anh', 'tieng duc', 'la ai', 'gioi thieu', 'ban than',
         '経歴', '資格', '学歴', '言語', '日本語', '自己紹介',
       ],
       answers: {
-        en: 'Kelvin Nguyen (Nguyen Duc Tuan Dat) is an AI Engineer in Ho Chi Minh City with a B.Sc. in IT & Data Science from HCMUS. His recent work spans HealthLab, independent AI consulting for Safiri Logistics, and Gemini multimodal evaluation. He holds the NVIDIA-Certified Associate: Generative AI LLMs credential and speaks Vietnamese (native), English (C1), plus Japanese (targeting N2) and German (A1).',
-        vi: 'Nguyễn Đức Tuấn Đạt là AI Engineer tại TP. Hồ Chí Minh, tốt nghiệp CNTT (chuyên ngành Khoa học Dữ liệu) tại ĐH Khoa học Tự nhiên — HCMUS. Gần đây Đạt tham gia HealthLab, tư vấn kỹ thuật AI độc lập cho Safiri Logistics và xây dựng nguyên mẫu đa phương thức Gemini. Đạt có chứng chỉ NVIDIA NCA-GENL, nói tiếng Việt bản ngữ, tiếng Anh C1, đang ôn tiếng Nhật mục tiêu N2 và tự học thêm tiếng Đức A1.',
-        ja: 'ホーチミン市拠点のAIエンジニア（HCMUS情報技術・データサイエンス専攻卒）。HealthLab、Safiri Logistics向けAIコンサルティング、Geminiマルチモーダル開発などを経験。NVIDIA NCA-GENL資格を保有し、ベトナム語・英語（C1）・日本語（N2目標）・ドイツ語（A1）を扱います。',
+        en: 'Kelvin Nguyen (Nguyen Duc Tuan Dat) is an AI Engineer in Ho Chi Minh City with a B.Sc. in IT & Data Science from HCMUS. His recent work spans HealthLab, independent AI consulting for Safiri Logistics, and Gemini multimodal evaluation. He holds the NVIDIA-Certified Associate: Generative AI LLMs credential and speaks Vietnamese (native), English (C1), plus Japanese (N4, targeting N3) and German (A1).',
+        vi: 'Nguyễn Đức Tuấn Đạt là AI Engineer tại TP. Hồ Chí Minh, tốt nghiệp CNTT (chuyên ngành Khoa học Dữ liệu) tại ĐH Khoa học Tự nhiên — HCMUS. Gần đây Đạt tham gia HealthLab, tư vấn kỹ thuật AI độc lập cho Safiri Logistics và xây dựng nguyên mẫu đa phương thức Gemini. Đạt có chứng chỉ NVIDIA NCA-GENL, nói tiếng Việt bản ngữ, tiếng Anh C1, tiếng Nhật hiện tại N4 (đang ôn mục tiêu N3) và tự học thêm tiếng Đức A1.',
+        ja: 'ホーチミン市拠点のAIエンジニア（HCMUS情報技術・データサイエンス専攻卒）。HealthLab、Safiri Logistics向けAIコンサルティング、Geminiマルチモーダル開発などを経験。NVIDIA NCA-GENL資格を保有し、ベトナム語・英語（C1）・日本語（N4、N3目標）・ドイツ語（A1）を扱います。',
       },
       sources: [
         { label: { en: 'About → Experience & Credentials', vi: 'Giới thiệu → Kinh nghiệm & Chứng chỉ', ja: '自己紹介 → 経歴・資格' }, path: 'about/index.html' },
@@ -407,9 +407,9 @@
         'コーヒー', '紅茶', 'こんにちは', '趣味',
       ],
       answers: {
-        en: 'Definitely Saigon iced milk coffee (cà phê sữa đá) in the morning — great fuel for hunting edge cases in agent pipelines and practicing Japanese JLPT N2 vocabulary in the evening!',
-        vi: 'Chắc chắn là một ly cà phê sữa đá Sài Gòn vào buổi sáng rồi — nhiên liệu chuẩn bài để đi săn edge-case trong các pipeline AI, còn buổi tối thì thong thả ôn thêm từ vựng tiếng Nhật N2!',
-        ja: '朝はやっぱりサイゴンの練乳入りアイスコーヒー（cà phê sữa đá）派です。AIパイプラインのエッジケース探しと、夜の日本語N2の勉強に欠かせない相棒です！',
+        en: 'Definitely Saigon iced milk coffee (cà phê sữa đá) in the morning — great fuel for hunting edge cases in agent pipelines and practicing Japanese JLPT N3 vocabulary in the evening!',
+        vi: 'Chắc chắn là một ly cà phê sữa đá Sài Gòn vào buổi sáng rồi — nhiên liệu chuẩn bài để đi săn edge-case trong các pipeline AI, còn buổi tối thì thong thả ôn thêm từ vựng tiếng Nhật N3!',
+        ja: '朝はやっぱりサイゴンの練乳入りアイスコーヒー（cà phê sữa đá）派です。AIパイプラインのエッジケース探しと、夜の日本語N3の勉強に欠かせない相棒です！',
       },
       sources: [
         { label: { en: 'About → Background', vi: 'Giới thiệu → Đôi nét cá nhân', ja: '自己紹介' }, path: 'about/index.html' },
@@ -650,6 +650,7 @@
   function replayAiBoot() {
     sessionStorage.removeItem('dennis_page_transition');
     sessionStorage.removeItem('dennis_page_label');
+    sessionStorage.setItem('dennis_replay_boot', '1');
     if (document.body?.dataset?.page === 'home') {
       window.location.reload();
     } else {
@@ -675,9 +676,8 @@
   const sfxBtnEls = [];
   const sfxPillTextEls = [];
   const drawerControlLabelEls = [];
-  const modelCardPillEls = [];
 
-  function mountChromeEnhancements(openPalette, triggerGuardrail, toggleXray, toggleTheme, toggleSfx, openModelCard) {
+  function mountChromeEnhancements(openPalette, triggerGuardrail, toggleXray, toggleTheme, toggleSfx) {
     // A. Desktop navbar compact Theme + SFX + ⌘K utility group
     const desktopNav = document.querySelector('.nav-links');
     if (desktopNav && !desktopNav.querySelector('.nav-utility-group')) {
@@ -770,18 +770,12 @@
         <h5 data-console-label>AI Console</h5>
         <div class="footer-console-actions">
           <button type="button" class="footer-console-pill" data-cmdk-open><span data-ask-pill-text></span></button>
-          <button type="button" class="footer-console-pill" data-mc-footer-open><span data-mc-pill-text></span></button>
-          <button type="button" class="footer-console-pill is-guardrail" data-guardrail-trigger><span data-guardrail-pill-text></span></button>
         </div>
       `;
       col.querySelector('[data-cmdk-open]').addEventListener('click', openPalette);
-      col.querySelector('[data-mc-footer-open]').addEventListener('click', openModelCard);
-      col.querySelector('[data-guardrail-trigger]').addEventListener('click', triggerGuardrail);
 
       consoleTitleEls.push(col.querySelector('[data-console-label]'));
       askPillEls.push(col.querySelector('[data-ask-pill-text]'));
-      modelCardPillEls.push(col.querySelector('[data-mc-pill-text]'));
-      guardrailPillEls.push(col.querySelector('[data-guardrail-pill-text]'));
       group.appendChild(col);
     });
   }
@@ -799,7 +793,6 @@
     askPillEls.forEach((el) => { if (el) el.textContent = u.askBtn; });
     guardrailPillEls.forEach((el) => { if (el) el.textContent = u.guardrailBtn; });
     xrayPillEls.forEach((el) => { if (el) el.textContent = u.xrayBtn; });
-    modelCardPillEls.forEach((el) => { if (el) el.textContent = u.modelCardBtn; });
 
     themeBtnEls.forEach((btn) => {
       btn.innerHTML = isDark ? ICON_SUN : ICON_MOON;
@@ -1008,7 +1001,7 @@
   }
 
   /* ---------- 3. ⌘K Inspectable Mini RAG Terminal ---------- */
-  function createCommandPalette(triggerGuardrail, toggleXray, toggleTheme, toggleSfx, openModelCard, sfx) {
+  function createCommandPalette(triggerGuardrail, toggleXray, toggleTheme, toggleSfx, sfx) {
     const backdrop = document.createElement('div');
     backdrop.className = 'cmdk-backdrop';
     backdrop.setAttribute('role', 'dialog');
@@ -1252,17 +1245,6 @@
       const lang = getLang();
       const u = UI[lang] || UI.en;
       return [
-        {
-          group: 'actions',
-          icon: '📄',
-          title: u.cmdModelCard,
-          hint: u.cmdModelCardHint,
-          search: 'model card tldr recruiter hr summary cv resume spec quick 30s tom tat nhanh',
-          run: () => {
-            close();
-            window.setTimeout(openModelCard, 120);
-          },
-        },
         {
           group: 'actions',
           icon: '◐',
@@ -1968,7 +1950,7 @@
           ['Offline Tests', '368 / 368 ✓'],
           ['Focus', 'LLMs · Agents · Data'],
           ['Credential', 'NVIDIA NCA-GENL'],
-          ['Languages', 'VN · EN C1 · JP N2*'],
+          ['Languages', 'VN · EN C1 · JP N4'],
         ],
         colSystems: 'Top 3 Shipped Systems',
         colExp: 'Recent Experience & Core Stack',
@@ -2013,7 +1995,7 @@
           ['Offline Tests', '368 / 368 ✓'],
           ['Trọng tâm', 'LLMs · Agents · Data'],
           ['Chứng chỉ', 'NVIDIA NCA-GENL'],
-          ['Ngoại ngữ', 'VN · EN C1 · JP N2*'],
+          ['Ngoại ngữ', 'VN · EN C1 · JP N4'],
         ],
         colSystems: '3 Hệ thống tiêu biểu',
         colExp: 'Kinh nghiệm & Công nghệ chính',
@@ -2058,7 +2040,7 @@
           ['オフラインテスト', '368 / 368 ✓'],
           ['専門領域', 'LLM · Agent · Data'],
           ['資格', 'NVIDIA NCA-GENL'],
-          ['言語', 'VN · EN C1 · JP N2*'],
+          ['言語', 'VN · EN C1 · JP N4'],
         ],
         colSystems: '代表システム 3選',
         colExp: '主な経歴・コアスタック',
@@ -2898,7 +2880,6 @@
     };
     window.toggleTheme = () => `Theme switched to: ${api.toggleTheme()}`;
     window.toggleSfx = () => `Tactile SFX: ${api.toggleSfx() ? 'ON' : 'OFF'}`;
-    window.openModelCard = () => { api.openModelCard(); return 'Opened 30s Engineer Model Card'; };
     window.latentRain = () => { api.startLatentRain(); return 'Latent Space Token Rain triggered'; };
     window.nyanCat = () => { api.launchNyanCat(); return '🌈🐱🚀 Nyan Cat rocket launched!'; };
     window.secrets = () => `${api.getEggCount()}/6 Easter eggs discovered: ${api.getFoundEggs().join(', ') || 'none yet — try typing "latent" or /secrets in ⌘K!'}`;
@@ -2916,7 +2897,6 @@
     let palette = null;
 
     const eggs = createSecretEasterEggs(sfx);
-    const modelCard = createModelCardSystem(sfx);
     const guardrail = createGuardrailSystem(() => xray?.disable(), sfx);
     xray = createXraySystem(() => palette?.isOpen(), sfx);
     palette = createCommandPalette(
@@ -2924,7 +2904,6 @@
       () => xray.toggle(),
       (e) => theme.toggle(e),
       () => sfx.toggle(),
-      () => modelCard.open(),
       sfx
     );
 
@@ -2933,8 +2912,7 @@
       () => guardrail.trigger(),
       () => xray.toggle(),
       (e) => theme.toggle(e),
-      () => sfx.toggle(),
-      () => modelCard.open()
+      () => sfx.toggle()
     );
 
     const refreshChrome = () => syncChromeCopy(theme, sfx);
@@ -2953,10 +2931,6 @@
       } else if (k === 'm') {
         e.preventDefault();
         sfx.toggle();
-      } else if (k === 'c') {
-        e.preventDefault();
-        if (modelCard.isOpen()) modelCard.close();
-        else modelCard.open();
       }
     });
 
@@ -2976,8 +2950,6 @@
       getTheme: () => theme.getTheme(),
       toggleSfx: () => sfx.toggle(),
       isSfxEnabled: () => sfx.isEnabled(),
-      openModelCard: () => modelCard.open(),
-      closeModelCard: () => modelCard.close(),
       startLatentRain: () => eggs.startLatentRain(),
       launchNyanCat: () => eggs.launchNyanCat(),
       getEggCount: () => eggs.getCount(),
