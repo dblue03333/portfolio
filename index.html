@@ -33,12 +33,14 @@
 
       var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduced) return;
+      var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+      var navType = navEntries && navEntries[0] ? navEntries[0].type : 'navigate';
       var fromInternal = sessionStorage.getItem('dennis_page_transition') === '1';
       var replayBoot = sessionStorage.getItem('dennis_replay_boot') === '1';
       if (fromInternal) {
         document.documentElement.classList.add('is-transitioning');
         setTimeout(function(){ document.documentElement.classList.remove('is-transitioning'); }, 2600);
-      } else if (replayBoot) {
+      } else if (navType !== 'back_forward' || replayBoot) {
         document.documentElement.classList.add('is-transitioning', 'is-intro-boot');
         setTimeout(function(){ document.documentElement.classList.remove('is-transitioning', 'is-intro-boot'); }, 3600);
       }
@@ -469,7 +471,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
   <script src="js/i18n.js?v=22" defer></script>
-  <script src="js/motion.js?v=21" defer></script>
+  <script src="js/motion.js?v=22" defer></script>
   <script src="js/work.js?v=21" defer></script>
   <script src="js/demos.js?v=21" defer></script>
   <script src="js/delights.js?v=22" defer></script>

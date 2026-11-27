@@ -92,6 +92,8 @@
     const chipGuardrails = container.querySelector('[data-ai-chip="guardrails"]');
 
     const isHome = document.body.dataset.page === 'home';
+    const navEntries = performance.getEntriesByType?.('navigation');
+    const navType = navEntries && navEntries[0] ? navEntries[0].type : 'navigate';
     const comingFromNav = sessionStorage.getItem('dennis_page_transition') === '1';
     const replayBoot = sessionStorage.getItem('dennis_replay_boot') === '1';
 
@@ -141,8 +143,8 @@
         },
         '<0.18'
       );
-    } else if (isHome && replayBoot && aiHud) {
-      // 2. On-demand AI Model Weights Boot replay (via ⌘K)
+    } else if (isHome && (navType !== 'back_forward' || replayBoot) && aiHud) {
+      // 2. Home fresh load / reload OR on-demand replay -> AI Boot + Multilingual Greeting
       sessionStorage.removeItem('dennis_replay_boot');
       container.classList.add('is-active', 'is-boot-mode');
       window.gsap.set(screen, { yPercent: 0 });
@@ -172,7 +174,7 @@
           if (aiLog) aiLog.textContent = 'grounding sources · healthlab ✓';
           chipWeights?.classList.add('is-done');
         } else if (p < 96) {
-          if (aiLog) aiLog.textContent = 'guardrails verified · 368/368 ✓';
+          if (aiLog) aiLog.textContent = 'system checks · passed ✓';
           chipWeights?.classList.add('is-done');
           chipSources?.classList.add('is-done');
         } else {
