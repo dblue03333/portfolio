@@ -1,0 +1,9 @@
+{
+  "name": "kelvinnguyen-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "blog:build": "node scripts/build-blog.mjs",
+    "blog:check": "node scripts/build-blog.mjs --check"
+  }
+}

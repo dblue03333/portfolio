@@ -287,41 +287,40 @@
 
 @media screen and (max-width: 720px) {
   .constellation-stage-bleed {
-    height: auto;
-    padding: 1.15em var(--container-padding);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.55em;
+    height: clamp(23em, 54vh, 30em);
+    margin: 0.5em 0 1.15em;
   }
 
   .constellation-stage-bleed::before,
-  .constellation-stage-bleed::after,
-  .constellation-svg {
-    display: none;
+  .constellation-stage-bleed::after {
+    width: 2.2em;
   }
 
   .constellation-node {
-    position: static !important;
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
-    font-size: 0.74em;
-    padding: 0.46em 0.84em;
+    font-size: 0.68em;
+    padding: 0.38em 0.76em;
     cursor: pointer;
-  }
-
-  .constellation-node.is-pushed-out {
-    display: none;
-  }
-
-  .constellation-node:hover,
-  .constellation-node.is-selected {
-    transform: translateY(-1px) !important;
   }
 
   .blog-tracks-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .blog-post-link {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.85em;
+  }
+
+  .blog-post-arrow {
+    display: none;
+  }
+
+  .blog-post-nav {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .blog-post-nav-card.is-next {
+    text-align: left;
   }
 
   .mc-specs-grid {

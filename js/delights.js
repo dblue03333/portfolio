@@ -394,7 +394,7 @@
       },
       sources: [
         { label: { en: 'Work → Upcoming Gaming Agent', vi: 'Dự án → Gaming Agent (Sắp mở)', ja: '実績 → Gaming Agent（近日公開）' }, path: 'work/index.html#upcoming-gaming-agent' },
-        { label: { en: 'Blog → Weekly Notes (Soon)', vi: 'Blog → Ghi chú hàng tuần', ja: 'ブログ → 準備中' }, path: 'blog/index.html' },
+        { label: { en: 'Blog → Notes & Build Logs', vi: 'Blog → Ghi chú & Build Logs', ja: 'ブログ → 技術・論文ノート' }, path: 'blog/index.html' },
       ],
     },
     {

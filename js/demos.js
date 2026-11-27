@@ -4,7 +4,7 @@
    2. Reliable Agent Harness (Approval Gate Approve/Reject + Action Log)
    3. HarborMind (Quantile Wait Forecast + Uncertainty Captain Handoff)
    4. mini-llm-twin (4-Stage RAG Pipeline Step Inspector)
-   5. Contact Form (Netlify Forms AJAX + Validation) & Copy Email Utility
+   5. Contact Form (Web3Forms AJAX + Validation) & Copy Email Utility
    ========================================================================== */
 
 (() => {
@@ -357,10 +357,18 @@
       if (fallbackLink) fallbackLink.href = mailtoHref;
 
       const isLocalPreview = /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname) || window.location.protocol === 'file:';
+      const accessKey = (form.dataset.web3formsKey || '').trim();
+      const hasWeb3Key = accessKey.length > 0 && accessKey !== 'YOUR_WEB3FORMS_ACCESS_KEY';
 
-      if (isLocalPreview) {
-        setFeedback(t('contact.local_msg', 'Local preview mode.'), 'success');
+      if (isLocalPreview || !hasWeb3Key) {
+        setFeedback(t('contact.local_msg', 'Preview mode: once configured with Web3Forms, messages are emailed directly to ndtdat.data@gmail.com.'), 'success');
         if (fallbackLink) fallbackLink.hidden = false;
+        return;
+      }
+
+      if (form.querySelector('[name="botcheck"]')?.checked) {
+        setFeedback(t('contact.ok_msg', 'Message sent — thank you!'), 'success');
+        form.reset();
         return;
       }
 
@@ -369,16 +377,29 @@
       setFeedback(t('contact.sending', 'Sending…'), null);
 
       try {
-        const formData = new FormData(form);
-        formData.set('form-name', 'contact');
-
-        const response = await fetch('/', {
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData).toString(),
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `[Portfolio] ${topic} — ${name}`,
+            from_name: name,
+            name,
+            email,
+            organization: org || '—',
+            topic,
+            message,
+            botcheck: false,
+          }),
         });
 
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || `HTTP ${response.status}`);
+        }
 
         setFeedback(t('contact.ok_msg', 'Message sent — thank you!'), 'success');
         if (submitLabel) submitLabel.textContent = t('contact.sent', 'Sent ✓');
@@ -969,6 +990,8 @@
     let activeId = 'guardrails';
     let activeFilter = 'all';
     let hoveredId = null;
+    let tappedId = null;
+    let tappedUntil = 0;
     let draggingItem = null;
     let dragMoved = false;
     let dragStartX = 0;
@@ -1020,14 +1043,17 @@
       const matched = state.filter((item) => item.node.group === activeFilter);
       const unmatched = state.filter((item) => item.node.group !== activeFilter);
 
-      const cols = Math.min(4, Math.max(2, Math.ceil(matched.length / 2)));
+      const isCompact = w < 720;
+      const cols = isCompact
+        ? Math.min(2, Math.max(1, matched.length))
+        : Math.min(4, Math.max(2, Math.ceil(matched.length / 2)));
       const rows = Math.ceil(matched.length / cols);
       matched.forEach((item, idx) => {
         const r = Math.floor(idx / cols);
         const rowItems = Math.min(cols, matched.length - r * cols);
         const c = idx - r * cols;
-        const xFrac = rowItems === 1 ? 0.5 : 0.2 + (c / (rowItems - 1)) * 0.6;
-        const yFrac = rows === 1 ? 0.5 : 0.3 + (r / (rows - 1)) * 0.4;
+        const xFrac = rowItems === 1 ? 0.5 : (isCompact ? 0.27 + (c / (rowItems - 1)) * 0.46 : 0.2 + (c / (rowItems - 1)) * 0.6);
+        const yFrac = rows === 1 ? 0.5 : (isCompact ? 0.16 + (r / (rows - 1)) * 0.68 : 0.3 + (r / (rows - 1)) * 0.4);
         item.tx = xFrac * w;
         item.ty = yFrac * h;
         item.pushedOut = false;
@@ -1128,9 +1154,9 @@
         if (hoveredId === node.id) hoveredId = null;
       });
 
-      // Drag & chill flick on desktop/tablet (> 720px)
+      // Drag & chill flick with mouse/pen (touch keeps native vertical page scroll + tap-to-pause!)
       btn.addEventListener('pointerdown', (e) => {
-        if (window.innerWidth <= 720 || e.button !== 0) return;
+        if (e.pointerType === 'touch' || e.button !== 0) return;
         draggingItem = item;
         dragMoved = false;
         dragStartX = e.clientX;
@@ -1174,6 +1200,8 @@
         if (item.pushedOut) {
           setFilter('all');
         }
+        tappedId = node.id;
+        tappedUntil = performance.now() + 2600;
         select(node.id, true);
       });
 
@@ -1221,26 +1249,43 @@
       pointer.inside = false;
     });
 
+    function getWrapBounds(w) {
+      const isCompact = w < 720;
+      const wrapPadX = isCompact ? Math.max(220, (920 - w) * 0.5) : 110;
+      const wrapPadY = isCompact ? 54 : 42;
+      return { isCompact, wrapPadX, wrapPadY };
+    }
+
     function initPositions(w, h) {
+      const { isCompact, wrapPadX } = getWrapBounds(w);
+      const minX = isCompact ? -wrapPadX + 48 : 0;
+      const spanX = isCompact ? w + wrapPadX * 2 - 96 : w;
       state.forEach((item) => {
-        item.curX = (item.node.x / 100) * w;
+        item.curX = minX + (item.node.x / 100) * spanX;
         item.curY = (item.node.y / 100) * h;
         item.initialized = true;
       });
+      // On narrow mobile screens, ensure the default active node starts right in view
+      if (isCompact) {
+        const active = nodeMap.get(activeId);
+        if (active) {
+          active.curX = w * 0.5;
+          active.curY = h * 0.48;
+        }
+      }
       computeClusterTargets(w, h);
     }
 
     function stepPhysics(now) {
       const rect = stage.getBoundingClientRect();
-      if (window.innerWidth <= 720 || rect.width < 10) {
+      if (rect.width < 10 || rect.height < 10) {
         rafId = null;
         return;
       }
 
       const w = rect.width;
       const h = rect.height;
-      const wrapPadX = 110; // glide off left/right misty edges & re-enter from opposite side
-      const wrapPadY = 42; // glide off top/bottom misty edges & re-enter from opposite side
+      const { isCompact, wrapPadX, wrapPadY } = getWrapBounds(w);
 
       if (!state[0].initialized) {
         initPositions(w, h);
@@ -1258,35 +1303,36 @@
           return;
         }
 
-        const isHovered = hoveredId === item.node.id;
+        const isHovered = hoveredId === item.node.id || (tappedId === item.node.id && now < tappedUntil);
 
         if (isHovered) {
-          // Gently brake right under the user's cursor for effortless reading/clicking
+          // Gently brake right under the user's cursor/tap for effortless reading/clicking
           item.vx *= 0.82;
           item.vy *= 0.82;
         } else if (activeFilter !== 'all' && !item.pushedOut) {
           // Focused cluster: gently gather into the spacious center while still floating lazily
-          const driftX = Math.sin(now * item.waveFreq + item.wavePhase) * 14;
-          const driftY = Math.cos(now * item.waveFreq * 0.9 + item.wavePhase) * 9;
+          const driftX = Math.sin(now * item.waveFreq + item.wavePhase) * (isCompact ? 8 : 14);
+          const driftY = Math.cos(now * item.waveFreq * 0.9 + item.wavePhase) * (isCompact ? 6 : 9);
           item.vx = (item.vx + (item.tx + driftX - item.curX) * 0.018) * 0.86;
           item.vy = (item.vy + (item.ty + driftY - item.curY) * 0.018) * 0.86;
         } else {
           // Free 360-degree chill drift across all 4 directions!
           const swayX = Math.cos(now * item.waveFreq * 0.85 + item.wavePhase) * 0.08;
           const swayY = Math.sin(now * item.waveFreq + item.wavePhase) * 0.08;
-          const speedScale = item.pushedOut ? 0.55 : 1;
+          const mobilePace = isCompact ? 0.86 : 1;
+          const speedScale = (item.pushedOut ? 0.55 : 1) * mobilePace;
           item.vx += ((item.cruiseVx + swayX) * speedScale - item.vx) * 0.025;
           item.vy += ((item.cruiseVy + swayY) * speedScale - item.vy) * 0.025;
 
           // If pushed out during a filter, gently steer away from the center band toward edges
-          if (item.pushedOut && item.curX > w * 0.16 && item.curX < w * 0.84) {
+          if (item.pushedOut && item.curX > w * 0.12 && item.curX < w * 0.88) {
             const awayDir = item.curX < w * 0.5 ? -1 : 1;
-            item.vx += awayDir * 0.18;
+            item.vx += awayDir * 0.22;
           }
         }
 
         // Soft pointer wake push when cursor sweeps through the drifting sky
-        if (pointer.inside && !draggingItem && !isHovered && !item.pushedOut) {
+        if (pointer.inside && !draggingItem && !isHovered && !item.pushedOut && !isCompact) {
           const dx = item.curX - pointer.x;
           const dy = item.curY - pointer.y;
           const d = Math.hypot(dx, dy);
@@ -1315,8 +1361,8 @@
           }
         } else {
           // Keep focused cluster nodes comfortably inside viewport
-          const halfW = (item.el.offsetWidth || 120) * 0.52 + 12;
-          const halfH = (item.el.offsetHeight || 30) * 0.54 + 14;
+          const halfW = (item.el.offsetWidth || 110) * 0.5 + (isCompact ? 6 : 12);
+          const halfH = (item.el.offsetHeight || 28) * 0.52 + (isCompact ? 10 : 14);
           if (item.curX < halfW) {
             item.curX = halfW;
             item.vx = Math.abs(item.vx) * 0.5;
@@ -1336,14 +1382,16 @@
 
       // Soft anti-stacking cushion so free-floating nodes weave gracefully around each other
       const activeNodes = state.filter((s) => !s.pushedOut);
+      const cushionFactor = isCompact ? 0.48 : 0.53;
+      const cushionPad = isCompact ? 5 : 8;
       for (let i = 0; i < activeNodes.length; i += 1) {
         const a = activeNodes[i];
-        const aw = (a.el.offsetWidth || 130) * 0.53 + 8;
-        const ah = (a.el.offsetHeight || 32) * 0.54 + 8;
+        const aw = (a.el.offsetWidth || 120) * cushionFactor + cushionPad;
+        const ah = (a.el.offsetHeight || 30) * cushionFactor + cushionPad;
         for (let j = i + 1; j < activeNodes.length; j += 1) {
           const b = activeNodes[j];
-          const bw = (b.el.offsetWidth || 130) * 0.53 + 8;
-          const bh = (b.el.offsetHeight || 32) * 0.54 + 8;
+          const bw = (b.el.offsetWidth || 120) * cushionFactor + cushionPad;
+          const bh = (b.el.offsetHeight || 30) * cushionFactor + cushionPad;
           const dx = b.curX - a.curX;
           const dy = b.curY - a.curY;
           const ox = aw + bw - Math.abs(dx);
@@ -1374,8 +1422,9 @@
       });
 
       // Update SVG filaments cleanly (auto-hide wrapped cross-screen edges on BOTH X and Y + proximity fade)
-      const maxSpanX = w * 0.68;
-      const maxSpanY = h * 0.68;
+      const maxSpanX = (w + wrapPadX * 2) * 0.54;
+      const maxSpanY = (h + wrapPadY * 2) * 0.62;
+      const proxSpan = isCompact ? 340 : 460;
       edgeObjs.forEach(({ a, b, el }) => {
         const na = nodeMap.get(a);
         const nb = nodeMap.get(b);
@@ -1402,14 +1451,14 @@
           el.style.opacity = '0.05';
         } else {
           // Organic proximity visibility so nearby drifting nodes subtly connect
-          const prox = Math.max(0, 1 - dist / 460);
+          const prox = Math.max(0, 1 - dist / proxSpan);
           el.style.opacity = (prox * 0.34).toFixed(3);
         }
       });
     }
 
     function tick(now) {
-      if (!isVisible || document.hidden || window.innerWidth <= 720) {
+      if (!isVisible || document.hidden) {
         rafId = null;
         return;
       }
@@ -1422,7 +1471,6 @@
     }
 
     function startLoop() {
-      if (window.innerWidth <= 720) return;
       if (prefersReduced) {
         stepPhysics(performance.now());
         return;
@@ -1443,13 +1491,14 @@
       io.observe(stage);
     }
 
+    let lastW = window.innerWidth;
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 720) {
-        const rect = stage.getBoundingClientRect();
-        initPositions(Math.max(rect.width, 1), Math.max(rect.height, 1));
-        stepPhysics(performance.now());
-        startLoop();
-      }
+      if (Math.abs(window.innerWidth - lastW) < 40) return;
+      lastW = window.innerWidth;
+      const rect = stage.getBoundingClientRect();
+      initPositions(Math.max(rect.width, 1), Math.max(rect.height, 1));
+      stepPhysics(performance.now());
+      startLoop();
     }, { passive: true });
 
     document.addEventListener('visibilitychange', () => {

@@ -148,7 +148,7 @@
       'contact.err_name': 'Please enter your name.',
       'contact.err_email': 'Please enter a valid email address so I can reply.',
       'contact.err_msg': 'Please write a short message before sending.',
-      'contact.local_msg': 'Local preview mode: Netlify Forms automatically emails ndtdat.data@gmail.com once deployed. You can also send via your mail app below.',
+      'contact.local_msg': 'Preview mode: once configured with Web3Forms, messages are emailed directly to ndtdat.data@gmail.com. You can also send via your mail app below.',
       'contact.ok_msg': 'Message sent — thank you! I will get back to you soon.',
       'contact.fail_msg': 'Could not submit right now — please open the pre-filled email draft below or copy ndtdat.data@gmail.com.',
 
@@ -350,9 +350,9 @@
       'cs.cta.gaming': 'View upcoming entry in Work →',
       'cs.cta.experience': 'Jump to Experience section →',
       'cs.cta.healthlab_web': 'Open live Cloudflare demo ↗',
-      'blog.badge': 'UPCOMING · WEEKLY LEARNING NOTES',
-      'blog.title': 'Weekly engineering & paper notes — coming soon',
-      'blog.lead': 'A quiet weekly log of what I am studying, building, and breaking across LLMs, AI agents, ML systems, and backend engineering. New notes will be published here every week.',
+      'blog.badge': 'FIELD LOG · ENGINEERING & PAPER NOTES',
+      'blog.title': 'Engineering notes, paper reviews & build logs',
+      'blog.lead': 'A quiet weekly log of what I am studying, building, and breaking across LLMs, AI agents, ML systems, and backend engineering.',
       'blog.t1.title': 'Paper Notes',
       'blog.t1.desc': 'Distilling ML, LLM, and agent papers — focusing on assumptions, failure modes, ablations, and open questions rather than hype.',
       'blog.t1.cadence': 'Cadence: Weekly digest',
@@ -364,6 +364,15 @@
       'blog.t3.cadence': 'Cadence: Field notes',
       'blog.cta_work': 'Explore shipped work →',
       'blog.cta_contact': 'Suggest a topic',
+      'blog.filter_all': 'All notes',
+      'blog.back': '← Back to Blog',
+      'blog.min_read': 'min read',
+      'blog.source': 'Primary source ↗',
+      'blog.related_work': 'Related case study →',
+      'blog.next_post': 'Next note',
+      'blog.prev_post': 'Previous note',
+      'blog.rss': 'RSS Feed ↗',
+      'blog.empty': 'No notes in this track yet — check back soon.',
     },
 
     vi: {
@@ -504,7 +513,7 @@
       'contact.err_name': 'Bạn nhập giúp mình tên của bạn nhé.',
       'contact.err_email': 'Bạn kiểm tra lại địa chỉ email giúp mình để mình có thể phản hồi lại nhé.',
       'contact.err_msg': 'Bạn viết thêm vài dòng lời nhắn trước khi gửi giúp mình nhé.',
-      'contact.local_msg': 'Đang ở bản xem thử trên máy: khi đưa lên mạng, Netlify Forms sẽ tự động gửi tin nhắn về ndtdat.data@gmail.com. Bạn cũng có thể mở ứng dụng Mail ở nút bên dưới.',
+      'contact.local_msg': 'Đang ở chế độ xem thử: khi gắn Web3Forms key, tin nhắn sẽ tự động gửi về ndtdat.data@gmail.com. Bạn cũng có thể mở ứng dụng Mail ở nút bên dưới.',
       'contact.ok_msg': 'Mình đã nhận được tin nhắn rồi — cảm ơn bạn nhiều nhé! Mình sẽ sớm phản hồi lại.',
       'contact.fail_msg': 'Hiện tại form chưa gửi được — bạn có thể mở nháp email ở bên dưới hoặc sao chép địa chỉ ndtdat.data@gmail.com giúp mình nhé.',
 
@@ -706,9 +715,9 @@
       'cs.cta.gaming': 'Xem mục sắp ra mắt ở Dự án →',
       'cs.cta.experience': 'Xem mục Kinh nghiệm làm việc →',
       'cs.cta.healthlab_web': 'Mở bản demo Cloudflare trực tiếp ↗',
-      'blog.badge': 'SẮP RA MẮT · GHI CHÚ HỌC TẬP HÀNG TUẦN',
-      'blog.title': 'Ghi chú học tập & kỹ thuật mỗi tuần — sắp ra mắt',
-      'blog.lead': 'Nhật ký nhỏ cập nhật định kỳ hàng tuần về những gì mình đang đọc, đang xây và đang thử nghiệm xoay quanh LLM, AI agents, ML và backend.',
+      'blog.badge': 'NHẬT KÝ HỌC TẬP · KỸ THUẬT & PAPER',
+      'blog.title': 'Ghi chú học tập, paper & nhật ký build',
+      'blog.lead': 'Nhật ký cập nhật định kỳ về những gì mình đang đọc, đang xây và đang kiểm chứng xoay quanh LLM, AI agents, ML systems và backend.',
       'blog.t1.title': 'Ghi chú Paper',
       'blog.t1.desc': 'Tóm lược các bài báo ML, LLM và agent — tập trung vào giả định, điểm yếu, thí nghiệm đối chứng và những câu hỏi còn mở.',
       'blog.t1.cadence': 'Nhịp đăng: Tổng hợp mỗi tuần',
@@ -720,6 +729,15 @@
       'blog.t3.cadence': 'Nhịp đăng: Ghi chép thực chiến',
       'blog.cta_work': 'Xem các dự án đã làm →',
       'blog.cta_contact': 'Gợi ý chủ đề viết',
+      'blog.filter_all': 'Tất cả',
+      'blog.back': '← Quay lại Blog',
+      'blog.min_read': 'phút đọc',
+      'blog.source': 'Bài báo gốc ↗',
+      'blog.related_work': 'Case study liên quan →',
+      'blog.next_post': 'Bài tiếp theo',
+      'blog.prev_post': 'Bài trước',
+      'blog.rss': 'RSS Feed ↗',
+      'blog.empty': 'Chưa có bài nào trong mục này — sẽ cập nhật sớm.',
     },
 
     ja: {
@@ -859,7 +877,7 @@
       'contact.err_name': 'お名前を入力してください。',
       'contact.err_email': '返信可能なメールアドレスを入力してください。',
       'contact.err_msg': 'メッセージを入力してください。',
-      'contact.local_msg': 'ローカルプレビュー中：デプロイ後はNetlify Forms経由でndtdat.data@gmail.comへ直接送信されます。下のリンクからメール作成も可能です。',
+      'contact.local_msg': 'プレビューモード：Web3Formsキー設定後はndtdat.data@gmail.comへ直接送信されます。下のリンクからメール作成も可能です。',
       'contact.ok_msg': '送信が完了しました。ご連絡ありがとうございます！折り返しご連絡いたします。',
       'contact.fail_msg': '送信できませんでした。下のメール作成リンクまたはndtdat.data@gmail.comへ直接ご連絡ください。',
 
@@ -1061,9 +1079,9 @@
       'cs.cta.gaming': '実績ページの公開予定項目を見る →',
       'cs.cta.experience': '経歴セクションを見る →',
       'cs.cta.healthlab_web': 'Cloudflareライブデモを開く ↗',
-      'blog.badge': '近日公開 · 週次の学習ノート',
-      'blog.title': '週次の技術・論文ノート — まもなく公開',
-      'blog.lead': 'LLM、AIエージェント、ML、バックエンド開発で毎週学んだことや実験の記録を少しずつ更新していくノートです。',
+      'blog.badge': '学習ログ · 技術・論文ノート',
+      'blog.title': '技術メモ・論文レビュー・開発ログ',
+      'blog.lead': 'LLM、AIエージェント、MLシステム、バックエンド開発で学んだことや実験の記録を少しずつ更新していくノートです。',
       'blog.t1.title': '論文ノート',
       'blog.t1.desc': 'ML・LLM・エージェント論文の前提、限界、アブレーション、未解決課題を整理した要点メモ。',
       'blog.t1.cadence': '更新予定: 毎週ダイジェスト',
@@ -1075,6 +1093,15 @@
       'blog.t3.cadence': '更新予定: フィールドメモ',
       'blog.cta_work': '公開中の実績を見る →',
       'blog.cta_contact': 'テーマを提案する',
+      'blog.filter_all': 'すべて',
+      'blog.back': '← ブログへ戻る',
+      'blog.min_read': '分で読了',
+      'blog.source': '原論文 ↗',
+      'blog.related_work': '関連ケーススタディ →',
+      'blog.next_post': '次の記事',
+      'blog.prev_post': '前の記事',
+      'blog.rss': 'RSS ↗',
+      'blog.empty': 'このカテゴリの記事はまだありません。',
     },
   };
 
@@ -1108,7 +1135,10 @@
     } else if (page === 'about') {
       document.title = `${t('nav.about', 'About')} — ${shortName}`;
     } else if (page === 'blog') {
-      document.title = `${t('nav.blog', 'Blog')} (${t('nav.soon', 'Soon')}) — ${shortName}`;
+      document.title = `${t('nav.blog', 'Blog')} — ${shortName}`;
+    } else if (page === 'blog-post') {
+      const prefix = INITIAL_TITLE.split(' — ')[0] || document.body?.dataset?.pageTitle || 'Blog';
+      document.title = `${prefix} — ${shortName}`;
     } else if (page === 'contact') {
       document.title = `${t('nav.contact', 'Contact')} — ${shortName}`;
     } else if (page === 'case') {

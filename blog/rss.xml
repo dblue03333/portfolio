@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kelvin Nguyen — Engineering &amp; Paper Notes</title>
+    <link>https://kelvinnguyen.is-a.dev/blog/</link>
+    <atom:link href="https://kelvinnguyen.is-a.dev/blog/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>Paper notes, build logs, and failure post-mortems on AI systems, LLMs, and ML engineering.</description>
+    <language>en-us</language>
+    <item>
+      <title>What 40 ML Studies in Geriatric Care Reveal About External Validation</title>
+      <link>https://kelvinnguyen.is-a.dev/blog/ml-geriatric-care-scoping-review/</link>
+      <guid isPermaLink="true">https://kelvinnguyen.is-a.dev/blog/ml-geriatric-care-scoping-review/</guid>
+      <pubDate>Fri, 27 Nov 2026 01:00:00 GMT</pubDate>
+      <description>Reading notes on Mangio et al. (2026): out of 40 ML studies using multidimensional geriatric assessment data, zero reported external validation, only 4 checked calibration, and none evaluated real-world care allocation impact.</description>
+    </item>
+  </channel>
+</rss>
